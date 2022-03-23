@@ -1,0 +1,10 @@
+require('./../bootstrap');
+require('../../resource/vendor/bootstrap/js/bootstrap.bundle.js')
+//require('../../assets/vendor/php-email-form/validate.js')
+//require('../../assets/vendor/quill/quill.min.js')
+require('../../resource/vendor/tinymce/tinymce.min.js')
+//require('../../assets/vendor/simple-datatables/simple-datatables.js')
+//require('../../assets/vendor/chart.js/chart.min.js')
+//require('../../assets/vendor/apexcharts/apexcharts.min.js')
+//require('../../assets/vendor/echarts/echarts.min.js')
+require('../../resource/js/main.js')
