@@ -98,7 +98,12 @@
                                            <div class="col-md-8 col-lg-9">
                                                <x-avatar :profile="$profile" width="120" height="120" class="" ></x-avatar>
                                                <div class="pt-2">
-                                                   <input type="file" name="avatar" class="btn btn-primary btn-sm">
+                                                   <div class="image-upload">
+                                                       <label for="file-input" class="btn btn-success btn-sm" style="padding-left: 36px;padding-right: 36px;">
+                                                           <i class="bi bi-upload text-white"></i>
+                                                       </label>
+                                                       <input id="file-input" type="file" />
+                                                   </div>
                                                    @error('avatar')
                                                     <span class="invalid-feedback d-block" role="alert">
                                                        <strong>{{ $message }}</strong>

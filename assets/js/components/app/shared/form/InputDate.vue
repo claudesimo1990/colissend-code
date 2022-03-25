@@ -2,13 +2,13 @@
     <div>
         <ValidationProvider rules="" v-slot="{ errors }">
             <datetime
-                type="datetime"
+                :type="type"
                 v-model="date"
-                placeholder="Date"
+                :placeholder="title"
                 input-class="form-control"
                 value-zone="Europe/Paris"
                 zone="Europe/Paris"
-                :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }"
+                :format="format"
                 :phrases="{ ok: 'Continue', cancel: 'Exit' }"
                 :min-datetime="minDate.toString()"
                 :week-start="7"
@@ -24,7 +24,7 @@
 
 <script lang="ts">
 
-import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import {Vue, Component, Watch} from 'vue-property-decorator';
 import { Datetime } from 'vue-datetime';
 import 'vue-datetime/dist/vue-datetime.css';
 import * as moment from 'moment';
@@ -39,7 +39,9 @@ import {ValidationObserver, ValidationProvider} from "vee-validate";
     props: {
         field: String,
         title: String,
-        fieldClass: String
+        fieldClass: String,
+        format: {},
+        type: String
     }
 })
 export default class InputDate extends Vue {

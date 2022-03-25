@@ -24,18 +24,22 @@ class PostController extends Controller
     public function travel()
     {
         $transportedObjects = config('users.transportedObjects');
+        $companies = config('users.flyCompnies');
 
         return view('app.post.travel.create', [
-            'transportedObjects' => $transportedObjects
+            'transportedObjects' => $transportedObjects,
+            'companies' => $companies
         ]);
     }
 
     public function coli(Request $request)
     {
         $transportedObjects = config('users.transportedObjects');
+        $companies = config('users.flyCompnies');
 
         return view('app.post.coli.create', [
-            'transportedObjects' => $transportedObjects
+            'transportedObjects' => $transportedObjects,
+            'companies' => $companies
         ]);
     }
 

@@ -53,7 +53,7 @@ if (! function_exists('formatDate')) {
      */
     function formatDate(string $date): string
     {
-        return Carbon::parse($date)->format('d.m.y à H:i');
+        return Carbon::parse($date)->format('d.m.y : H:i');
     }
 
 }

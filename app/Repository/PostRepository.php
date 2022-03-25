@@ -83,35 +83,31 @@ class PostRepository
 
             ->where(function (Builder $query) use ($request) {
 
-                if ($request->get('type')) {
-                    $query->Where('type', $request->get('type'));
+                if ($request->get('type') && $request->get('type') != 'ALL') {
+                    $query->where('type', $request->get('type'));
                 }
 
                 if ($request->get('from')) {
-                    $query->Where('from', $request->get('from'));
+                    $query->where('from', 'LIKE', '%'. $request->get('from') .'%');
                 }
 
                 if ($request->get('to')) {
-                    $query->Where('to', $request->get('to'));
+                    $query->where('to', 'LIKE', '%'. $request->get('to') .'%');
                 }
 
                 if ($request->get('dateFrom')) {
-                    $query->Where('dateFrom', $request->get('dateFrom'));
-                }
-
-                if ($request->get('dateTo')) {
-                    $query->Where('dateTo', $request->get('dateTo'));
+                    $query->where('dateFrom','<=', Carbon::parse($request->get('dateFrom')));
                 }
             })->get();
     }
 
-    public function getLastFourPosts()
+    public function getLastTreePosts()
     {
         return $this->post
             ->latest()
             ->where('status','ACCEPTED')
             ->with('user')
-            ->limit(4)
+            ->limit(3)
             ->get();
     }
 

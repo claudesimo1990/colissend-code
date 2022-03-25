@@ -6,35 +6,42 @@ return [
         [
             'name' => 'Ingrid Honka',
             'city' => 'Berlin',
-            'avatar' => 'images/testimonials/messages-1.jpg',
-            'message' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations",
+            'title' => 'Toujours à l écoute',
+            'avatar' => 'images/colissend/default.svg',
+            'message' => "J'adore la rapidité avec la quelle vous reagissez a nos plaintes",
         ],
         [
             'name' => 'Cecile Lore',
             'city' => 'Paris',
-            'avatar' => 'images/testimonials/messages-2.jpg',
-            'message' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations",
+            'title' => 'Colis bien reçu!',
+            'avatar' => 'images/colissend/default.svg',
+            'message' => "Exelent boulot!",
         ],
         [
             'name' => 'Pierre Salomon',
             'city' => 'Douala',
-            'avatar' => 'images/testimonials/messages-3.jpg',
-            'message' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations",
+            'title' => 'Paiement pontuel',
+            'avatar' => 'images/colissend/default.svg',
+            'message' => "Je suis tres contnt de l enorme boulot que vous abattez!",
         ]
     ],
 
     'destinations' => [
         [
-            'name' => 'Douala',
-            'image' => 'images/destinations/news-3.jpg',
+            'name' => 'PARIS',
+            'image' => 'images/destinations/paris.jpg',
         ],
         [
-            'name' => 'Berlin',
-            'image' => 'images/destinations/news-5.jpg',
+            'name' => 'BERLIN',
+            'image' => 'images/destinations/berlin.jpg',
         ],
         [
-            'name' => 'Yaounde',
-            'image' => 'images/destinations/news-2.jpg',
+            'name' => 'DOUALA',
+            'image' => 'images/destinations/douala.jpg',
+        ],
+        [
+            'name' => 'YAOUNDE',
+            'image' => 'images/destinations/yaounde.jpg',
         ]
     ],
 
@@ -137,8 +144,8 @@ return [
     'howItWorks' => [
         [
             'id' => 1,
-            'title' => 'Comment poster un voyage ?',
-            'text' => 'With supporting text below as a natural lead-in to additional content.',
+            'title' => 'Créer gratuitement votre compte',
+            'text' => "Pour créer son compte sur qui-go.com, rien de plus simple,que ce soit avec votre compte Facebook, Gmail ou via l'adresse mail de votre choix",
             'link' => "howItWorks",
             'steps' => [
                 ['step' => 'Etape 1', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
@@ -153,8 +160,8 @@ return [
         ],
         [
             'id' => 2,
-            'title' => 'Comment poster une annonce colis ?',
-            'text' => 'With supporting text below as a natural lead-in to additional content.',
+            'title' => 'Recevoir des propositions',
+            'text' => "Avec Qui-Go, lorsque vous publiez votre annonce, elle est visible par de potentiels expéditeurs qui pourront vous contacter directement.",
             'link' => "howItWorks",
             'steps' =>
                 [
@@ -170,8 +177,8 @@ return [
             ],
         [
             'id' => 3,
-            'title' => 'Comment reserver un voyage posté ?',
-            'text' => 'With supporting text below as a natural lead-in to additional content.',
+            'title' => 'Placer votre annonce',
+            'text' => "Vous souhaiter publier une annonce? cliquer sur publier une annonce",
             'link' => "howItWorks",
             'steps' => [
                 ['step' => 'Etape 1', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
@@ -186,8 +193,8 @@ return [
         ],
         [
             'id' => 4,
-            'title' => 'Comment se proposer sur une annonce de colis ?',
-            'text' => 'With supporting text below as a natural lead-in to additional content.',
+            'title' => 'Percevez votre commission',
+            'text' => "Pour plus de tranquilité pour le voyageur et l'expéditeur,les fonds sont débloqués à reception du colis",
             'link' => "howItWorks",
             'steps' => [
                 ['step' => 'Etape 1', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
@@ -199,6 +206,72 @@ return [
                 ['step' => 'Etape 7', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-warning'],
                 ['step' => 'Etape 8', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-muted'],
             ],
+        ]
+    ],
+
+    'flyCompnies' => [
+        [
+            'id' => 1,
+            'name' => "American airline"
+        ],
+        [
+            'id' => 2,
+            'name' => "Air Cote d'Ivoire"
+        ],
+        [
+            'id' => 3,
+            'name' => "Air France"
+        ],
+        [
+            'id' => 4,
+            'name' => "Brussel"
+        ],
+        [
+            'id' => 5,
+            'name' => "Camair-Co"
+        ],
+        [
+            'id' => 6,
+            'name' => "Delta Airlines"
+        ],
+        [
+            'id' => 7,
+            'name' => "Ethiopian"
+        ],
+        [
+            'id' => 8,
+            'name' => "Kenya Airways"
+        ],
+        [
+            'id' => 9,
+            'name' => "Turkish Airlines"
+        ],
+        [
+            'id' => 10,
+            'name' => "Royal air Maroc"
+        ],
+        [
+            'id' => 11,
+            'name' => "Rwandair"
+        ]
+    ],
+
+    'paymentMethods' => [
+        [
+            'id' => 1,
+            'name' => 'Paypal'
+        ],
+        [
+            'id' => 2,
+            'name' => 'Bank'
+        ],
+        [
+            'id' => 3,
+            'name' => 'Orange Money'
+        ],
+        [
+            'id' => 4,
+            'name' => 'MTN Money'
         ]
     ]
 

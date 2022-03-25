@@ -20,20 +20,20 @@
                             <InputLocation title="Ville de depart" :required="true" field="from" @location="setLocation"></InputLocation>
                         </div>
                         <div class="col-md-3">
-                            <input-date field="dateFrom" title="Date de depart" field-class="form-label" @dateValue="initFiled"></input-date>
+                            <input-date field="dateFrom" type="dateTime" :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }" title="Date de depart" field-class="form-label" @dateValue="initFiled"></input-date>
                         </div>
                         <div class="col-md-3">
                             <InputLocation title="Ville d'arrivé" :required="true" field="to" @location="setLocation"></InputLocation>
                         </div>
                         <div class="col-md-3">
-                            <input-date field="dateTo" title="Date d'arrivée" field-class="form-label" @dateValue="initFiled"></input-date>
+                            <input-date field="dateTo" type="dateTime" :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }" title="Date d'arrivée" field-class="form-label" @dateValue="initFiled"></input-date>
                         </div>
                     </div>
                     <div class="row py-2">
                         <div class="col-md-3">
                             <label for="kilo" class="form-label">Nombre de Kilo disponibles</label>
                             <ValidationProvider rules="required|integer" v-slot="{ errors }">
-                                <input type="text" name="kilo" v-model="form.kilo" class="form-control" id="kilo">
+                                <input type="text" name="kilo" v-model.number="form.kilo" class="form-control" id="kilo">
                                 <span class="invalid-feedback d-block" role="alert">
                                     <small>{{ errors[0] }}</small>
                                 </span>
@@ -42,20 +42,23 @@
                         <div class="col-md-3">
                             <label for="price" class="form-label">Prix du Kilo</label>
                             <ValidationProvider rules="required|numeric" v-slot="{ errors }">
-                                <input type="text" name="price" v-model="form.price" class="form-control" id="price">
+                                <input type="text" name="price" v-model.number="form.price" class="form-control" id="price">
                                 <span class="invalid-feedback d-block" role="alert">
                                     <small>{{ errors[0] }}</small>
                                 </span>
                             </ValidationProvider>
                         </div>
                         <div class="col-md-3">
-                            <label for="fly" class="form-label">Companie aerienne</label>
-                            <ValidationProvider rules="required" v-slot="{ errors }">
-                                <input type="text" name="fly" v-model="form.company" class="form-control" id="fly">
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <small>{{ errors[0] }}</small>
-                                </span>
-                            </ValidationProvider>
+                          <ValidationProvider rules="required" v-slot="{ errors }">
+                          <label for="fly" class="form-label">Companie aerienne</label>
+                            <select class="form-select" aria-label="Default select example" v-model="form.company" id="fly">
+                              <option value=""></option>
+                              <option :value="company.name" v-for="company in JSON.parse(companies)" :id="company.id">{{ company.name }}</option>
+                            </select>
+                            <span class="invalid-feedback d-block" role="alert">
+                                  <small>{{ errors[0] }}</small>
+                              </span>
+                          </ValidationProvider>
                         </div>
                         <div class="col-md-3">
                             <label for="ticket" class="col-form-label">Image du billet d'avion</label>
@@ -90,10 +93,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-3 text-center">
-                        <button type="submit" class="btn btn-success btn-lg">Poster votre voyage</button>
-                    </div>
-                </form>
+                      <input type="submit" class="btn btn-success d-flex justify-content-center align-items-center" value="Poster votre voyage">
+                    </form>
                 </ValidationObserver>
             </div>
         </div>
@@ -117,7 +118,8 @@ import axios from "axios";
         ValidationObserver: ValidationObserver
     },
   props: {
-      objects: String
+      objects: String,
+      companies: String
   }
 })
 export default class TravelComponent extends Vue {

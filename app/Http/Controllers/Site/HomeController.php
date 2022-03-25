@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Repository\PostRepository;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +13,7 @@ class HomeController extends Controller
 {
     public function home(PostRepository $postRepository)
     {
-        $latestPosts = $postRepository->getLastFourPosts();
+        $latestPosts = $postRepository->getLastTreePosts();
         $testimonials = config('users.testimonials');
         $destinations = config('users.destinations');
         $howItWorks = config('users.howItWorks');

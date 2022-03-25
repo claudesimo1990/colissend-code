@@ -3,7 +3,7 @@
     <div id="about" class="">
       <div class="row">
         <div class="col-lg-12 text-center my-4">
-          <h2 class="fw-bold">Proposer un trajet</h2>
+          <h2 class="fw-bold">Rechercher un transporter pour votre Coli</h2>
         </div>
       </div>
     </div>
@@ -20,56 +20,56 @@
                 <InputLocation title="Ville de depart" :required="true" field="from" @location="setLocation"></InputLocation>
               </div>
               <div class="col-md-3">
-                <input-date field="dateFrom" title="Date de depart" field-class="form-label" @dateValue="initFiled"></input-date>
+                <input-date field="dateFrom" type="dateTime" :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }" title="Date de depart" field-class="form-label" @dateValue="initFiled"></input-date>
               </div>
               <div class="col-md-3">
                 <InputLocation title="Ville d'arrivé" :required="true" field="to" @location="setLocation"></InputLocation>
               </div>
               <div class="col-md-3">
-                <input-date field="dateTo" title="Date d'arrivée" field-class="form-label" @dateValue="initFiled"></input-date>
+                <input-date field="dateTo" type="dateTime" :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }" title="Date d'arrivée" field-class="form-label" @dateValue="initFiled"></input-date>
               </div>
             </div>
            <div class="row mt-4 mb-3">
-             <div class="col-md-6">
-               <label for="kilo" class="form-label">Estimation du poids</label>
-               <ValidationProvider rules="required|numeric" v-slot="{ errors }">
-                 <input type="text" name="price" v-model="form.kilo" class="form-control" id="kilo">
-                 <span class="invalid-feedback d-block" role="alert"><small>{{ errors[0] }}</small></span>
-               </ValidationProvider>
+             <div class="col-md-7 border">
+               <div><label class="form-label">Que voulez-vous envoyer ?</label></div>
+               <div class="form-check form-check-inline" v-for="obj in form.transportedObjects">
+                 <div class="align-center">
+                   <label class="form-check-label" :for="obj.name">{{ obj.name }}</label>
+                   <input class="form-check-input" v-model="obj.value" type="checkbox" :id="obj.name">
+                 </div>
+                 <input class="form-check-inline" v-if="obj.value" v-model="obj.count" type="text" :id="obj.count" placeholder="Quantité ?">
+               </div>
              </div>
-              <div class="col-md-6">
-                <label for="coli" class="col-form-label">Ajoutez une image sur votre post</label>
-                <div class="">
-                  <ValidationProvider rules="" v-slot="{ errors }">
-                    <input class="form-control" name="ticket" ref="file"  @change="handleFileUpload( $event )" type="file" id="coli">
-                    <span class="invalid-feedback d-block" role="alert"><small>{{ errors[0] }}</small></span>
-                  </ValidationProvider>
-                </div>
-              </div>
+             <div class="col-md-5">
+               <div class="row border">
+                 <div class="col-md-4">
+                   <label for="kilo" class="form-label">Estimation du poids</label>
+                   <ValidationProvider rules="required|numeric" v-slot="{ errors }">
+                     <input type="text" name="price" v-model="form.kilo" class="form-control" id="kilo">
+                     <span class="invalid-feedback d-block" role="alert"><small>{{ errors[0] }}</small></span>
+                   </ValidationProvider>
+                 </div>
+                 <div class="col-md-8">
+                   <label for="coli" class="col-form-label">Ajoutez une image sur votre post</label>
+                   <div class="">
+                     <ValidationProvider rules="" v-slot="{ errors }">
+                       <input class="form-control" name="ticket" ref="file"  @change="handleFileUpload( $event )" type="file" id="coli">
+                       <span class="invalid-feedback d-block" role="alert"><small>{{ errors[0] }}</small></span>
+                     </ValidationProvider>
+                   </div>
+                 </div>
+               </div>
+             </div>
             </div>
             <div class="row">
-              <label class="col-form-label">Que voulez-vous envoyer ?</label>
-              <div class="col-md-12">
-                <div class="form-check form-check-inline" v-for="obj in form.transportedObjects">
-                  <div class="align-center">
-                    <label class="form-check-label" :for="obj.name">{{ obj.name }}</label>
-                    <input class="form-check-input" v-model="obj.value" type="checkbox" :id="obj.name">
-                  </div>
-                  <input class="form-control" v-if="obj.value" v-model="obj.count" type="text" :id="obj.count">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 m-3">
+              <div class="col-md-12 my-3">
                 <ValidationProvider rules="required" v-slot="{ errors }">
                   <textarea class="form-control" v-model="form.message" placeholder="Laissez un message..." id="exampleFormControlTextarea1" rows="3"></textarea>
                   <span class="invalid-feedback d-block" role="alert"><small>{{ errors[0] }}</small></span>
                 </ValidationProvider>
               </div>
             </div>
-            <div class="mt-3 text-center">
-              <button type="submit" class="btn btn-success btn-lg">Poster votre annonce</button>
-            </div>
+            <input type="submit" class="btn btn-success d-flex justify-content-center align-items-center" value="Poster votre annonce">
           </form>
         </ValidationObserver>
       </div>

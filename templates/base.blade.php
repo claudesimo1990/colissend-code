@@ -9,7 +9,9 @@
     <meta name="description" content="@yield('meta_description','my custom homepage')">
     <link rel="canonical" href="{{ url()->current() }}"/>
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('/images/flavicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('/images/colissend/flavicon.png') }}">
+
+    <link rel="apple-touch-icon" href="{{ asset('/images/colissend/apple-touch-icon.png') }}">
 
     <title>@yield('title','Colissend votre site de reservation et de publication de voyages')</title>
 

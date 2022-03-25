@@ -4,7 +4,7 @@
 @section('app')
 
     <div class="container py-5">
-        <travel-component objects="{{ json_encode($transportedObjects) }}"></travel-component>
+        <travel-component objects="{{ json_encode($transportedObjects) }}" companies="{{ json_encode($companies) }}"></travel-component>
     </div>
 
 @endsection

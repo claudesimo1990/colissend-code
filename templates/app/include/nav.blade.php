@@ -17,28 +17,28 @@
             <ul class="d-flex align-items-center ms-auto nav-list-item">
 
                 <li class="nav-item">
-                    <a class="nav-link nav-item active" aria-current="page" href="{{ route('welcome') }}">
+                    <a class="nav-link nav-item {{ (request()->routeIs('welcome')) ? 'active' : '' }}" aria-current="page" href="{{ route('welcome') }}">
                         <i class="bi bi-house"></i>
                         Accueil
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link nav-item active" aria-current="page" href="{{ route('posts.index') }}">
+                    <a class="nav-link nav-item {{ (request()->routeIs('posts.index')) ? 'active' : '' }}" aria-current="page" href="{{ route('posts.index') }}">
                         <i class="bi bi-search"></i>
                         Voir les annonces
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link nav-item active" aria-current="page" href="{{ route('posts.travel.create') }}">
+                    <a class="nav-link nav-item {{ (request()->routeIs('posts.travel.create')) ? 'active' : '' }}" aria-current="page" href="{{ route('posts.travel.create') }}">
                         <i class="bi bi-pencil-square"></i>
                         Proposer un trajet
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link nav-item active" aria-current="page" href="{{ route('posts.coli.create') }}">
+                    <a class="nav-link nav-item {{ (request()->routeIs('posts.coli.create')) ? 'active' : '' }}" aria-current="page" href="{{ route('posts.coli.create') }}">
                         <i class="bi bi-box-seam"></i>
                         Expedier un colis
                     </a>
@@ -47,21 +47,20 @@
                 @guest()
 
                     <li class="nav-item">
-                        <a class="nav-link nav-item active" aria-current="page" href="{{ route('register') }}">
+                        <a class="nav-link nav-item {{ (request()->routeIs('register')) ? 'active' : '' }}" aria-current="page" href="{{ route('register') }}">
                             <i class="bi bi-box-arrow-in-right"></i>
                             Inscription
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link nav-item active" aria-current="page" href="{{ route('login') }}">
+                        <a class="nav-link nav-item {{ (request()->routeIs('login')) ? 'active' : '' }}" aria-current="page" href="{{ route('login') }}">
                             <i class="bi bi-people"></i>
                             Connexion
                         </a>
                     </li>
 
                 @else
-
 
                     <li class="nav-item dropdown pe-3">
 
@@ -140,7 +139,7 @@
                 @endguest
 
                 <li class="nav-item">
-                    <a class="nav-link nav-item active" aria-current="page" href="{{ route('contact') }}">
+                    <a class="nav-link nav-item {{ (request()->routeIs('contact')) ? 'active' : '' }}" aria-current="page" href="{{ route('contact') }}">
                         <i class="bi bi-envelope"></i>
                         Contact
                     </a>
