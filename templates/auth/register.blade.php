@@ -81,11 +81,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row my-4">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Inscription') }}
                                 </button>
+
+                                <a class="btn btn-link text-success" href="{{ route('login') }}">
+                                    Je suis deja menbre
+                                </a>
+
                             </div>
                         </div>
                     </form>

@@ -24,7 +24,7 @@
 
         @include('app.include.nav')
 
-        <div class="container text-center">
+        <div class="container text-center mt-4">
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}

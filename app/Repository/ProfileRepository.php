@@ -24,7 +24,7 @@ class ProfileRepository
         }
 
         $profile->update([
-            'avatar' => $data['profile_image'] ?? 'default.jpg',
+            'avatar' => $data['profile_image'] ?? '/images/colissend/default.svg',
             'about' => $data['about'],
             'country' => $data['country'],
             'city' => $data['city'],

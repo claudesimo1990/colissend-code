@@ -62,7 +62,7 @@ class RegisterController extends Controller
             $data,
             [
             'name' => ['required', 'string', 'max:255'],
-            'avatar' => ['required', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=200'],
+//            'avatar' => ['required', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=200'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]
@@ -91,7 +91,7 @@ class RegisterController extends Controller
         }
 
         $user->profile()->create([
-            'avatar' => 'default.png',
+            'avatar' => '/images/colissend/default.svg',
             'full_name' => $user->name
         ])->save();
 

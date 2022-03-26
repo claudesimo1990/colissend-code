@@ -102,7 +102,7 @@
                                                        <label for="file-input" class="btn btn-success btn-sm" style="padding-left: 36px;padding-right: 36px;">
                                                            <i class="bi bi-upload text-white"></i>
                                                        </label>
-                                                       <input id="file-input" type="file" />
+                                                       <input id="file-input" name="avatar" type="file" />
                                                    </div>
                                                    @error('avatar')
                                                     <span class="invalid-feedback d-block" role="alert">
