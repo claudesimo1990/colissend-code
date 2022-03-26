@@ -1,1 +1,1 @@
-<img src="{{ Auth::user()->getFirstMediaUrl('avatar', 'thumb') }}" width="{{ $width }}" height="{{ $height }}" alt="Profile" class="{{ $class }}">
+<img src="{{ !empty(Auth::user()->getFirstMediaUrl('avatar', 'thumb')) ? Auth::user()->getFirstMediaUrl('avatar', 'thumb') : Auth::user()->profile->avatar }}" width="{{ $width }}" height="{{ $height }}" alt="Profile" class="{{ $class }}">

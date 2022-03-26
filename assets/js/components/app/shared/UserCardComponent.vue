@@ -1,9 +1,20 @@
 <template>
     <div>
-      <img :src="user.avatar" alt="user avatar">
+      <img v-if="user.avatar" :src="user.avatar" alt="user avatar">
+      <img v-else :src="user.info.avatar" alt="user avatar">
       <h4>{{ user.name }}</h4>
-      <h4><i class="bi bi-pin-map-fill"></i> {{ user.info.street }}</h4>
-      <h4 class="text-success small"><i class="bi bi-lock text-success"></i>Membre verifié</h4>
+      <h4>
+        <i class="bi bi-pin-map-fill mr-2"></i>
+        {{ user.info.street !== null ? user.info.street : 'Pas encore été indiqué' }}
+      </h4>
+      <h4>
+        <i class="bi bi-people-fill text-black mr-2"></i>
+        Membre {{ user.created_at | ago }}
+      </h4>
+      <h4 class="text-success">
+        <i class="bi bi-lock text-success mr-2"></i>
+        Compte verifié
+      </h4>
     </div>
 </template>
 

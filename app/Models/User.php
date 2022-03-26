@@ -45,7 +45,7 @@ class User extends Authenticatable implements HasMedia
 
     public function getAvatarAttribute(): string
     {
-        return $this->getFirstMediaUrl('avatar', 'thumb');
+        return $this->getFirstMediaUrl('avatar', 'thumb') ?? '/images/colissend/default.svg';
     }
 
     public function getInfoAttribute()
