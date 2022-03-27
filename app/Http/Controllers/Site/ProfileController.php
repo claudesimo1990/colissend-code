@@ -70,7 +70,7 @@ class ProfileController extends Controller
         $this->profileRepository->update($request, $profile);
         request()->attributes->add(['active' => 'edit']);
 
-        return redirect()->back()->with('success', 'success profile updated');
+        return redirect()->back()->with('success', 'Votre compte à été modifier avec success');
     }
 
     public function changePassword(PasswordRequest $request, PasswordChange $passwordChange): RedirectResponse

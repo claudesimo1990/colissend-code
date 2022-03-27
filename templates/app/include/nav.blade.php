@@ -2,15 +2,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container px-5">
         <a class="navbar-brand" href="{{ route('welcome') }}">
-            <img src="{{ asset('images/colissend/logo.png') }}" width="150px" alt="logo">
+            <img src="{{ asset('images/colissend/logo.png') }}" width="150px" alt="colissend-logo">
         </a>
         <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="true"
-                aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="true"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse header-nav navbar-collapse" id="navbarSupportedContent">
             <ul class="d-flex align-items-center ms-auto nav-list-item">
@@ -64,7 +64,7 @@
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <x-avatar profile="{{ auth()->user()->profile }}" width="36" height="36" class="rounded-circle"></x-avatar>
+                            <x-avatar profile="{{ auth()->user()->profile }}" width="36" height="36" class="rounded-circle d-none d-sm-block"></x-avatar>
                             <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
                         </a>
 

@@ -7,11 +7,10 @@
             <div class="card">
                 <div class="card-header text-center">
                     <div class="login-card-footer-nav block-media-login my-4">
-                        <a href="#"
-                           class="btn btn-success">
+                        <a href="{{ route('facebook') }}" class="btn btn-success">
                             <span class="bi bi-facebook text-white"></span> Continuer avec facebook
                         </a>
-                        <a href="#" class="btn btn-success">
+                        <a href="{{ route('google') }}" class="btn btn-success">
                             <span class="bi bi-google text-white"></span> Continuer avec google
                         </a>
                     </div>
