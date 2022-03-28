@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginController
 {
@@ -27,7 +28,7 @@ class LoginController
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function googleCallBack()
+    public function googleCallBack(Request $request)
     {
         try {
             $user = Socialite::driver('google')->user();
@@ -53,7 +54,9 @@ class LoginController
 
                 Auth::login($createUser);
 
-                return redirect('/')->with(['success' => 'Votre compte à été enregistrer avec success']);
+                $request->attributes->add(['active' => 'edit']);
+
+                return redirect('/user/profile/' . $createUser->id)->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
             }
 
         } catch (Exception $exception) {
@@ -63,7 +66,7 @@ class LoginController
         return back();
     }
 
-    public function facebookCallBack()
+    public function facebookCallBack(Request $request)
     {
         try {
             $user = Socialite::driver('facebook')->user();
@@ -87,7 +90,9 @@ class LoginController
 
                 Auth::login($createUser);
 
-                return redirect('/')->with(['success' => 'Votre compte à été enregistrer avec success']);
+                $request->attributes->add(['active' => 'edit']);
+
+                return redirect('/user/profile/' . $createUser->id)->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
             }
 
         } catch (Exception $exception) {
