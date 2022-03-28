@@ -1,4 +1,4 @@
-@php($logo = asset('images/logo.png'))
+@php($logo = asset('images/logo.svg'))
 <tr>
 <td class="header">
 <a href="{{ $url }}" style="display: inline-block;">
