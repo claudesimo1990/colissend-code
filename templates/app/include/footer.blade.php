@@ -21,7 +21,7 @@
                 <div class="text-uppercase bg__title">Support</div>
                 <ul class="list-unstyled">
                     <li><a class="text-success" href="{{ route('welcome') }}">Blog</a></li>
-                    <li><a class="text-success" href="{{ route('welcome') }}">Contact</a></li>
+                    <li><a class="text-success" href="{{ route('contact') }}">Contact</a></li>
                     <li><a class="text-success" href="{{ route('faq') }}">Faq</a></li>
                 </ul>
             </div>
