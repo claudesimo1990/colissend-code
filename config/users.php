@@ -145,7 +145,7 @@ return [
         [
             'id' => 1,
             'title' => 'Créer gratuitement votre compte',
-            'text' => "Pour créer son compte sur qui-go.com, rien de plus simple,que ce soit avec votre compte Facebook, Gmail ou via l'adresse mail de votre choix",
+            'text' => "Pour créer son compte sur Colissend.com, rien de plus simple,que ce soit avec votre compte Facebook, Gmail ou via l'adresse mail de votre choix",
             'link' => "howItWorks",
             'steps' => [
                 ['step' => 'Etape 1', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
@@ -161,7 +161,7 @@ return [
         [
             'id' => 2,
             'title' => 'Recevoir des propositions',
-            'text' => "Avec Qui-Go, lorsque vous publiez votre annonce, elle est visible par de potentiels expéditeurs qui pourront vous contacter directement.",
+            'text' => "Avec Colissend, lorsque vous publiez votre annonce, elle est visible par de potentiels expéditeurs qui pourront vous contacter directement.",
             'link' => "howItWorks",
             'steps' =>
                 [

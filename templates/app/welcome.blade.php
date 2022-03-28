@@ -37,7 +37,7 @@
                                 <div class="post-item clearfix">
                                     <i class="bi bi-file-lock2-fill" style="font-size: 50px;color: green;"></i>
                                     <h2 class="mb-2">Livraison rapide</h2>
-                                    <p>Utiliser Qui-Go, c'est la garantie que votre colis ou courrier arrive à destination en 1 ou 2 jours après son départ du pays d'expédition.</p>
+                                    <p>Utiliser Colissend, c'est la garantie que votre colis ou courrier arrive à destination en 1 ou 2 jours après son départ du pays d'expédition.</p>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 <div class="post-item clearfix">
                                     <i class="bi bi-person-check-fill" style="font-size: 50px;color: green;"></i>
                                     <h2 class="mb-2">Une équipe à votre service</h2>
-                                    <p>Qui-Go, c'est vous , et c'est aussi une équipe disponible pour simplifier au maximum vos transactions</p>
+                                    <p>Colissend, c'est vous , et c'est aussi une équipe disponible pour simplifier au maximum vos transactions</p>
                                 </div>
                             </div>
                         </div>
