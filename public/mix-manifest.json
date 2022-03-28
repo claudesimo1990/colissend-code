@@ -4,5 +4,10 @@
     "/js/baseController.js": "/js/baseController.js",
     "/css/baseController.css": "/css/baseController.css",
     "/css/adminController.css": "/css/adminController.css",
-    "/css/appController.css": "/css/appController.css"
+    "/css/appController.css": "/css/appController.css",
+    "/images/news-1.jpg": "/images/news-1.jpg",
+    "/images/news-2.jpg": "/images/news-2.jpg",
+    "/images/news-3.jpg": "/images/news-3.jpg",
+    "/images/news-4.jpg": "/images/news-4.jpg",
+    "/images/news-5.jpg": "/images/news-5.jpg"
 }
