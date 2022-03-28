@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container px-5">
         <a class="navbar-brand" href="{{ route('welcome') }}">
-            <img src="{{ asset('images/colissend/logo.png') }}" width="150px" alt="colissend-logo">
+            <img src="{{ asset('images/colissend/logo.svg') }}" width="150px" alt="colissend-logo">
         </a>
         <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
