@@ -3,7 +3,11 @@
     <div class="container-fluid text-center text-md-left">
         <div class="row">
             <div class="col-md-3 mt-md-0 mt-3">
-                <div class="text-uppercase bg__title">Colissend</div>
+                <div class="text-uppercase bg__title">
+                    <a class="navbar-brand" href="{{ route('welcome') }}">
+                        <img src="{{ asset('images/colissend/logo.svg') }}" width="150px" alt="colissend-logo">
+                    </a>
+                </div>
                 <p>Votre services d'echange, d'envoie de Packets et achat de Kilos entre Particuliers</p>
             </div>
             <div class="col-md-3 mt-md-0 mt-3">
