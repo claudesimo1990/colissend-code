@@ -53,7 +53,7 @@ class LoginController
 
                 Auth::login($createUser);
 
-                return redirect('/')->with(['succes' => 'Votre compte à été enregistrer avec success']);
+                return redirect('/')->with(['success' => 'Votre compte à été enregistrer avec success']);
             }
 
         } catch (Exception $exception) {
@@ -67,7 +67,7 @@ class LoginController
     {
         try {
             $user = Socialite::driver('facebook')->user();
-            $isUser = User::where('facebook_id', $user->id)->first();
+            $isUser = User::where('email', $user->email)->first();
 
             if($isUser){
                 Auth::login($isUser);
@@ -87,7 +87,7 @@ class LoginController
 
                 Auth::login($createUser);
 
-                return redirect('/')->with(['succes' => 'Votre compte à été enregistrer avec success']);
+                return redirect('/')->with(['success' => 'Votre compte à été enregistrer avec success']);
             }
 
         } catch (Exception $exception) {
