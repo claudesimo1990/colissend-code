@@ -13,7 +13,7 @@
                <post-component></post-component>
 
            </div>
-           <div class="col-sm-12 col-md-3">
+           <div class="col-sm-12 col-md-3 mt-4">
                @foreach($pubs as $pub)
                    <div class="card">
                        <div class="card-body pb-0">
