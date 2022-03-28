@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="user-image mt-2">
-                                <img src="{{ $post->user->avatar }}" class="rounded-circle" width="36" height="36" alt="{{ $post->user->name }} - avatar">
+                                <img src="{{ $post->user->avatar }}" class="rounded-circle" width="50" height="50" alt="{{ $post->user->name }} - avatar">
                             </div>
                             <div class="user-content">
                                 <h5 class="mb-0">{{ $post->user->name }}</h5> <span>{{ $post->user->email }}</span>
