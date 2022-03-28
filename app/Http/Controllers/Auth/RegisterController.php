@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\Hallo;
 use App\Http\Controllers\Controller;
 use App\Notifications\User\UserVerifyEmail;
-use App\Notifications\User\WelcomeNotification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -110,8 +108,6 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-
-        //$this->guard()->login($user);
 
         Notification::send($user, new UserVerifyEmail());
 

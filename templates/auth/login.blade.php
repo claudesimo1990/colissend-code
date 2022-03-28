@@ -21,7 +21,7 @@
                         @method('post')
                         @csrf
 
-                        <div class="form-group row my-2">
+                        <div class="form-group row my-2 text-center">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Adresse mail</label>
 
                             <div class="col-md-6">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row my-2">
+                        <div class="form-group row my-2 text-center">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
 
                             <div class="col-md-6">
@@ -74,7 +74,7 @@
                                 @endif
 
                                 <a class="btn btn-link text-success" href="{{ route('register') }}">
-                                    Je ne suis pas encore menbre
+                                    Creer un compte
                                 </a>
 
                             </div>
