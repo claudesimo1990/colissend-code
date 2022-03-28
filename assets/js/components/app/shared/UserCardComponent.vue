@@ -1,7 +1,7 @@
 <template>
     <div>
-      <img v-if="user.avatar" :src="user.avatar" alt="user avatar">
-      <img v-else :src="user.info.avatar" alt="user avatar">
+      <img v-if="user.avatar" :src="user.avatar" width="50" height="50" alt="user avatar">
+      <img v-else :src="user.info.avatar" width="50" height="50" alt="user avatar">
       <h4>{{ user.name }}</h4>
       <h4>
         <i class="bi bi-pin-map-fill mr-2"></i>
