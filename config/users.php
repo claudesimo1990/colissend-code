@@ -29,19 +29,15 @@ return [
     'destinations' => [
         [
             'name' => 'PARIS',
-            'image' => 'images/destinations/paris.jpg',
+            'image' => 'images/destinations/paris.jpeg',
         ],
         [
             'name' => 'BERLIN',
-            'image' => 'images/destinations/berlin.jpg',
+            'image' => 'images/destinations/berlin.jpeg',
         ],
         [
             'name' => 'DOUALA',
-            'image' => 'images/destinations/douala.jpg',
-        ],
-        [
-            'name' => 'YAOUNDE',
-            'image' => 'images/destinations/yaounde.jpg',
+            'image' => 'images/destinations/douala.jpeg',
         ]
     ],
 

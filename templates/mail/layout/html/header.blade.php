@@ -1,4 +1,4 @@
-@php($logo = asset('images/logo.svg'))
+@php($logo = asset('images/colissend/logo.svg'))
 <tr>
 <td class="header">
 <a href="{{ $url }}" style="display: inline-block;">
