@@ -8,7 +8,7 @@
 
     <section class="py-4">
 
-        <div class="container-fluid">
+        <div class="container">
 
             <div class="title text-center mb-5">
                 <h2>Pourquoi choisir Colissend ?</h2>
@@ -66,7 +66,7 @@
 
     <section class="py-4 bg-success-light">
 
-        <div class="container-fluid" id="carouselExampleIndicators">
+        <div class="container" id="carouselExampleIndicators">
 
             <div class="title text-center mb-5">
                 <h2>Les dernieres annonces</h2>
@@ -149,7 +149,7 @@
     </section>
 
     <section class="my-4 py-4">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="title text-center mb-5">
                     <h2>Ce que pensent nos utilisateurs</h2>
                 </div>
@@ -174,7 +174,7 @@
 
     <section class="my-4 py-4 bg-success-light">
 
-        <div class="container-fluid">
+        <div class="container">
 
             <div class="title text-center mb-5">
                 <h2>Comment ça marche ?</h2>
