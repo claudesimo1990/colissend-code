@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\social\LoginController;
 use App\Http\Controllers\Pub\PubController;
+use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,12 @@ Route::get('/impressum', [HomeController::class, 'impressum'])->name('impressum'
 Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact-us', [HomeController::class, 'sendMessage']);
+Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/how-it-works/{id}', [HomeController::class, 'howItWorks'])->name('howItWorks');
+
+//Blog
+Route::get('blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('blog/show/{blog}', [BlogController::class, 'show'])->name('blog.show');
 
 //PUBS
 Route::get('pubs/index', [PubController::class, 'index'])->name('pub.index');

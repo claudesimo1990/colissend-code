@@ -13,7 +13,7 @@
 
     <link rel="apple-touch-icon" href="{{ asset('/images/colissend/apple-touch-icon.png') }}">
 
-    <title>@yield('title','Colissend votre site de reservation et de publication de voyages')</title>
+    <title>@yield('title','Avec Colissend, Cheminer vos colis en toute sécurité et rentabiliser vos voyages en vendant vos kilos')</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -25,8 +25,10 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
+
          @yield('content')
-            <script src="{{ mix('js/baseController.js') }}"></script>
+
+        <script src="{{ mix('js/baseController.js') }}"></script>
         @yield('scripts')
     </div>
 </body>

@@ -47,7 +47,7 @@
 
                                    <div class="row">
                                        <div class="col-md-4">
-                                           <x-avatar :profile="$profile" width="120" height="120" class="rounded-circle text-center w-full"></x-avatar>
+                                           <img src="{{ Auth::user()->getFirstMedia('avatar')->getUrl('thumb') }}" class="rounded-circle text-center w-full" alt="{{ Auth::user()->name }}">
                                            <h3 class="mt-2 fw-bolder">{{ $profile->user->name }}</h3>
                                           <p>{{ $profile->user->email }}</p>
                                           <div class="social-links mt-2">
@@ -96,7 +96,7 @@
                                        <div class="row mb-3">
                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                            <div class="col-md-8 col-lg-9">
-                                               <x-avatar :profile="$profile" width="120" height="120" class="" ></x-avatar>
+                                               <img src="{{ Auth::user()->getFirstMedia('avatar')->getUrl('thumb') }}" alt="{{ Auth::user()->name }}">
                                                <div class="pt-2">
                                                    <div class="image-upload">
                                                        <label for="file-input" class="btn btn-success btn-sm" style="padding-left: 36px;padding-right: 36px;">
@@ -239,9 +239,10 @@
                                            </div>
                                        </div>
 
-                                       <div class="text-center">
-                                           <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                       <div class="row">
+                                           <input type="submit" class="btn btn-success d-flex align-items-center justify-content-center" value="Enregistrer">
                                        </div>
+
                                    </form>
                                </div>
 

@@ -6,7 +6,7 @@
         <div class="pub">
           <div class="row">
             <div class="col-md-4">
-              <user-card-component :user="post.user"></user-card-component>
+              <user-card-component :user="post.user" :thumb="false"></user-card-component>
             </div>
             <div class="col-md-8">
               <travel v-if="post.type === 'TRAVEL'" :post="post" :auth="auth"></travel>

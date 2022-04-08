@@ -7,7 +7,7 @@
 
 @section('app')
 
-    <x-header page="page-howItWork" title="Impressum"/>
+    <x-header page="page-howItWork" img="" title="Impressum"/>
 
     <div class="card-section">
         <div class="container">
@@ -23,14 +23,13 @@
                                 <h4>E-Mail: colissend@gmail.com</h4>
                             </div>
                             <div class="row border py-2">
-                                <h3 class="fw-bold">Vertreten durch:</h3>
-                                <h4>Geschäftsführer: Claude Simo</h4>
-                                <h4>Registereintrag: </h4>
-                                <h4>Eingetragen im Handelsregister.</h4>
-                                <h4>Registergericht: 69869569023</h4>
-                                <h4>Umsatzsteuer-ID:</h4>
-                                <h4>Umsatzsteuer-Identifikationsnummer nach §27a Umsatzsteuergesetz:</h4>
-                                <h4>3743840975683</h4>
+                                <h3 class="fw-bold">Représenté par:</h3>
+                                <h4>Directeur général: Claude Simo</h4>
+                                <h4>Inscription au registre: </h4>
+                                <h4>Inscrit au registre du commerce.</h4>
+                                <h4>Tribunal d'enregistrement: 69869569023</h4>
+                                <h4>Numéro d'identification de la taxe sur le chiffre d'affaires:</h4>
+                                <h4>Numéro d'identification de la taxe sur le chiffre d'affaires conformément au §27a de la loi sur la taxe sur le chiffre d'affaires: 3743840975683</h4>
                             </div>
                             <div class="row border py-2 mb-2">
                                 <h3 class="fw-bold">Remarque conformément à l'ordonnance sur le règlement en ligne des litiges</h3>
@@ -56,7 +55,9 @@
                             </div>
                             <div class="row border py-2 mb-2">
                                 <h3 class="fw-bold">§ 4 Conditions d'utilisation particulières</h3>
-                                <p>Soweit besondere Bedingungen für einzelne Nutzungen dieser Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen.</p>
+                                <p>
+                                    Dans la mesure où des conditions particulières pour certaines utilisations de ce site web diffèrent des paragraphes susmentionnés, il en est fait expressément mention à l'endroit correspondant. Dans ce cas, les conditions d'utilisation particulières s'appliquent au cas par cas.
+                                </p>
                             </div>
                         </div>
                     </div>

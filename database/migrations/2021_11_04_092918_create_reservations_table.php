@@ -15,8 +15,8 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained('posts');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');;
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->text('message');
             $table->text('kilo');
             $table->enum('status', ['PROGRESS', 'ACCEPTED', 'REJECTED']);

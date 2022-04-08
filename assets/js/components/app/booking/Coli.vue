@@ -82,9 +82,8 @@
 
 <script lang="ts">
 
-import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
+import {Vue, Component} from 'vue-property-decorator'
 import ContactComponent from "../shared/ContactComponent.vue";
-import {isNumeric} from "jquery";
 import axios from "axios";
 import {ValidationProvider, ValidationObserver} from 'vee-validate';
 
@@ -97,46 +96,46 @@ import {ValidationProvider, ValidationObserver} from 'vee-validate';
 })
 export default class Coli extends Vue {
 
-  error: boolean = false;
-  show: boolean = false;
-  errors: any = [];
-  objects: any = [];
+    error: boolean = false;
+    show: boolean = false;
+    errors: any = [];
+    objects: any = [];
 
-  objs: any = this.trueSelectedObjects();
+    objs: any = this.trueSelectedObjects();
 
-  booking: any = {
-    message: '',
-    objects: {},
-    price: '',
-    kilo: '',
-    travel: ''
+    booking: any = {
+      message: '',
+      objects: {},
+      price: '',
+      kilo: '',
+      travel: ''
+    }
+
+    trueSelectedObjects() {
+      return this.$props.post.objects.filter(function (obj){ return obj.value === true });
+    }
+
+    send(): void {
+
+      this.show = true;
+
+      this.booking.objects = JSON.stringify(this.objs);
+
+      axios.post('/post/booking/' + this.$props.post.id, this.booking).then((response) => {
+
+        location.reload();
+
+        this.show = false;
+
+      }).catch((error) => {
+        this.errors = error.response.data.errors;
+        this.show = false;
+      })
+    }
+
+    mounted(): void {
+      this.objects = this.trueSelectedObjects();
+    }
+
   }
-
-  trueSelectedObjects() {
-    return this.$props.post.objects.filter(function (obj){ return obj.value === true });
-  }
-
-  send(): void {
-
-    this.show = true;
-
-    this.booking.objects = JSON.stringify(this.objs);
-
-    axios.post('/post/booking/' + this.$props.post.id, this.booking).then((response) => {
-
-      //location.reload();
-
-      this.show = false;
-
-    }).catch((error) => {
-      this.errors = error.response.data.errors;
-      this.show = false;
-    })
-  }
-
-  mounted(): void {
-    this.objects = this.trueSelectedObjects();
-  }
-
-}
 </script>

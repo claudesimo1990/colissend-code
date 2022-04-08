@@ -1,7 +1,6 @@
 <template>
     <div>
-      <img v-if="user.avatar" :src="user.avatar" class="rounded-circle" width="50" height="50" alt="user avatar">
-      <img v-else :src="user.info.avatar" class="rounded-circle" width="50" height="50" alt="user avatar">
+      <img :src="thumb ? user.thumb : user.avatar" class="rounded-circle" alt="user avatar">
       <h4>{{ user.name }}</h4>
       <h4>
         <i class="bi bi-pin-map-fill mr-2"></i>
@@ -27,5 +26,7 @@
       user: {}
     }
   })
-  export default class UserCardComponent extends Vue {}
+  export default class UserCardComponent extends Vue {
+    @Prop({ default: false }) thumb;
+  }
 </script>

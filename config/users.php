@@ -130,11 +130,12 @@ return [
     ],
 
     'transportedObjects' => [
-        ['id' => 1, 'name' => 'Envelope', 'value' => false, 'number' => 0, 'color' => 'success'],
-        ['id' => 2, 'name' => 'Telephone', 'value' => false, 'number' => 0, 'color' => 'info'],
-        ['id' => 3, 'name' => 'Ordinateur', 'value' => false, 'number' => 0, 'color' => 'secondary'],
-        ['id' => 4, 'name' => 'Valise', 'value' => false, 'number' => 0, 'color' => 'danger'],
-        ['id' => 5, 'name' => 'divers', 'value' => false, 'number' => 0, 'color' => 'black'],
+        ['id' => 1, 'name' => 'Envelope', 'value' => false, 'number' => 1, 'color' => 'success', 'price' => 8],
+        ['id' => 2, 'name' => 'Telephone', 'value' => false, 'number' => 1, 'color' => 'info', 'price' => 8],
+        ['id' => 3, 'name' => 'Ordinateur', 'value' => false, 'number' => 1, 'color' => 'secondary', 'price' => 8],
+        ['id' => 4, 'name' => 'Valise', 'value' => false, 'number' => 1, 'color' => 'danger', 'price' => 8],
+        ['id' => 5, 'name' => 'divers', 'value' => false, 'number' => 1, 'color' => 'black', 'price' => 8],
+        ['id' => 6, 'name' => 'sac', 'value' => false, 'number' => 1, 'color' => 'dark', 'price' => 8],
     ],
 
     'howItWorks' => [
@@ -252,23 +253,61 @@ return [
         ]
     ],
 
-    'paymentMethods' => [
+    'payments' => [
         [
             'id' => 1,
-            'name' => 'Paypal'
+            'name' => 'Paypal',
+            'value' => false,
+            'status' => true,
+            'infos' => [
+                ['label' => 'Votre Paypal ?', 'value' => '', 'placeholder' => 'Entrer votre Paypal']
+            ]
         ],
         [
             'id' => 2,
-            'name' => 'Bank'
+            'name' => 'Bank',
+            'value' => false,
+            'status' => false,
+            'infos' => [
+                ['label' => 'Votre IBAN ?', 'value' => '', 'placeholder' => 'Entrer votre IBAN']
+            ]
         ],
         [
             'id' => 3,
-            'name' => 'Orange Money'
+            'name' => 'Orange Money',
+            'value' => false,
+            'status' => false,
+            'infos' => [
+                ['label' => 'Votre Nom ?', 'value' => '', 'placeholder' => 'Entrer votre nom'],
+                ['label' => 'Votre Numéro ?', 'value' => '', 'placeholder' => 'Entrer votre numero'],
+            ]
         ],
         [
             'id' => 4,
-            'name' => 'MTN Money'
+            'name' => 'MTN Money',
+            'value' => false,
+            'status' => false,
+            'infos' => [
+                ['label' => 'Votre Nom ?', 'value' => '', 'placeholder' => 'Entrer votre nom'],
+                ['label' => 'Votre Numéro ?', 'value' => '', 'placeholder' => 'Entrer votre numero'],
+            ]
         ]
+    ],
+
+    'tags' => [
+        ['id' => 1, 'name' => 'testimonials'],
+        ['id' => 2, 'name' => 'faqs'],
+        ['id' => 3, 'name' => 'howItWorks'],
+        ['id' => 4, 'name' => 'header'],
+        ['id' => 5, 'name' => 'contact'],
+        ['id' => 6, 'name' => 'destinations']
+    ],
+
+    'categories' => [
+        ['id' => 1, 'name' => 'voyages'],
+        ['id' => 2, 'name' => 'coli'],
+        ['id' => 3, 'name' => 'information'],
+        ['id' => 4, 'name' => 'plaintes'],
     ]
 
 ];

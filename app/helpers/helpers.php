@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Gallery;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\View\Factory as ViewFactory;
@@ -54,6 +55,39 @@ if (! function_exists('formatDate')) {
     function formatDate(string $date): string
     {
         return Carbon::parse($date)->format('d.m.y : H:i');
+    }
+
+}
+
+if (! function_exists('salutations')) {
+    function getSalution() {
+        if ((now())->hour > 12) {
+            return 'Bonsoir';
+        }
+        return 'Bonjour';
+    }
+}
+
+if (! function_exists('getHeaderImage')) {
+
+    function getHeaderImage()
+    {
+        $header = Gallery::where('title', 'header')->first();
+
+        if ($header) {
+            return $header->active_img;
+        }
+        return asset('images/about/about.jpg');
+    }
+
+    function getContactImage()
+    {
+        $contact = Gallery::where('title', 'contact')->first();
+
+        if ($contact) {
+            return $contact->active_img;
+        }
+        return asset('images/about/about.jpg');
     }
 
 }

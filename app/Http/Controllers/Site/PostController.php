@@ -25,10 +25,12 @@ class PostController extends Controller
     {
         $transportedObjects = config('users.transportedObjects');
         $companies = config('users.flyCompnies');
+        $payments = config('users.payments');
 
         return view('app.post.travel.create', [
             'transportedObjects' => $transportedObjects,
-            'companies' => $companies
+            'companies' => $companies,
+            'payments' => $payments
         ]);
     }
 

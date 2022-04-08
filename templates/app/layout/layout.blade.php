@@ -24,6 +24,8 @@
 
         @include('app.include.nav')
 
+        @yield('header')
+
         <div class="container text-center">
             @if(session('success'))
                 <div class="alert alert-success mt-5">
@@ -37,9 +39,8 @@
             @endif
         </div>
 
-        @yield('header')
-
         @yield('app')
+
     </div>
 
     <div>

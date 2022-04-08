@@ -56,6 +56,7 @@ class PostRepository
 
     public function store(PostRequest $request)
     {
+        dd($request->all());
         $post = $this->post->create([
             'user_id' => Auth::id(),
             'type' => 'TRAVEL',
@@ -67,13 +68,14 @@ class PostRepository
             'slug' => Str::slug($request->get('from') . '-' . $request->get('to') . '-' . (Carbon::parse($request->get('dateFrom'))->format('y_m_d'))),
             'kilo' => $request->get('kilo'),
             'objects' => $request->get('objects'),
+            'payments' => $request->get('payment'),
             'price' => $request->get('price'),
             'company' => $request->get('company'),
             'status' => 'PROGRESS'
         ]);
 
         if (request()->hasFile('ticket') && request()->file('ticket')->isValid()) {
-            $post->addMediaFromRequest('ticket')->toMediaCollection('tickets');
+            $post->addMediaFromRequest('ticket')->toMediaCollection('travels');
         }
     }
 

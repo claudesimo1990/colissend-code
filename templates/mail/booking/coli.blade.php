@@ -1,27 +1,44 @@
 @component('mail::message')
 
-# Salut,
+# {{ getSalution() }},
 
 ### Sur votre post de {{ $p->from }} pour {{ $p->to }} du {{ formatDate($p->dateFrom) }} au {{ formatDate($p->dateTo) }}
 
 #### Je me propose de transporter :
 
-@foreach(json_decode($r->objects) as $obj)
-- {{ $obj->name }}
-@endforeach
+@component('mail::table')
+    | Name      | Quantité  |
+    | :--------- | :------------- |
+    @foreach (json_decode($r->objects) as $obj)
+    | {{ $obj->name }} | 1 |
+    @endforeach
+@endcomponent
 
-*Poids estimé à* :  **{{ $r->kilo }}kg**.
+# Extimation de Prix:
 
-*Prix estimé à* :  **{{ $r->price }}&euro;**.
+@component('mail::table')
+    | Name      | Quantité  |
+    | :--------- | :------------- |
+    | Poids estimé à | {{ $r->kilo }}kg |
+    | Prix estimé à | {{ $r->price }}&euro; |
+@endcomponent
 
 Message:
 {{ $r->message }}
 
+<br><br>
 
-@component('mail::button', ['url' => url(route('user.profile.show', ['profile' => $notifiable->id])), 'color' => 'success'])
-    Retourner sur votre profile pour valider ou refuser la reservation
-@endcomponent
+<span style="display: inline;">
+    @component('mail::button', ['url' => route('booking-validate', ['reservation' => $r->id]), 'color' => 'green'])
+        Valider la reservation
+    @endcomponent
+    @component('mail::button', ['url' => route('booking-except', ['reservation' => $r->id]), 'color' => 'red'])
+        Refuser la reservation
+    @endcomponent
+</span>
 
-Merci de nous faire confiance!<br>
+<br><br>
+
+Merci,<br>
 {{ config('app.name') }}
 @endcomponent

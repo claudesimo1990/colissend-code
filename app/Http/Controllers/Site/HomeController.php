@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Gallery;
 use App\Repository\PostRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,9 @@ class HomeController extends Controller
     {
         $latestPosts = $postRepository->getLastTreePosts();
         $testimonials = config('users.testimonials');
-        $destinations = config('users.destinations');
         $howItWorks = config('users.howItWorks');
+
+        $destinations = Gallery::where('content', 'destinations')->get();
 
         return view('app.welcome', [
             'posts' => $latestPosts,
@@ -58,6 +60,11 @@ class HomeController extends Controller
     public function contact()
     {
         return view('app.contact');
+    }
+
+    public function privacy()
+    {
+        return view('app.privacy');
     }
 
     public function sendMessage(Request $request): RedirectResponse

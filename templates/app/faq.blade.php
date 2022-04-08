@@ -7,7 +7,7 @@
 
 @section('app')
 
-    <x-header page="page-howItWork" title="Questions fréquemment posées"/>
+    <x-header page="page-howItWork" img="" title="Questions fréquemment posées"/>
 
     <div class="card-section">
 

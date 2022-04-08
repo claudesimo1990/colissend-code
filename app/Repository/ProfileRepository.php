@@ -19,10 +19,6 @@ class ProfileRepository
 
         $data = $profileRequest->all();
 
-        if ($profile->avatar) {
-            Storage::delete('/public/avatars/' . $profile->avatar);
-        }
-
         $profile->update([
             'avatar' => $data['profile_image'] ?? '/images/colissend/default.svg',
             'about' => $data['about'],

@@ -3,23 +3,23 @@
       <div class="card-body">
         <div class="pub py-2">
           <form class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 my-1">
               <select class="form-select" v-model="searchElements.type" aria-label="Default select example">
                 <option value="ALL">Type d'annonce</option>
                 <option value="TRAVEL">Voyages</option>
                 <option value="PACKS">Colis</option>
               </select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 my-1">
               <InputLocation title="Ville depart" v-model.lazy="searchElements.from" :required="false" field="from" @location="setLocation"></InputLocation>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 my-1">
               <InputLocation title="Ville d'arrivé" v-model.lazy="searchElements.to" :required="false" field="to" @location="setLocation"></InputLocation>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 my-1">
               <input-date field="dateFrom" :format="{ year: 'numeric', month: 'long', day: 'numeric' }" title="Date depart" v-model="searchElements.dateFrom" field-class="form-label" @dateValue="initFiled"></input-date>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 my-1">
               <input type="button" @click.prevent="search" class="form-control btn btn-success" :value="searchCount > 0 ? searchCount + ' annonce(s) retrouvée(s)' : 'Rechercher'">
             </div>
           </form>

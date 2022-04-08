@@ -2,6 +2,7 @@
 
 namespace App\Notifications\Booking;
 
+use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,13 +13,18 @@ class ReservationRejected extends Notification
     use Queueable;
 
     /**
+     * @var Post
+     */
+    private $post;
+
+    /**w
      * Create a new notification instance.
      *
-     * @return void
+     * @param Post $post
      */
-    public function __construct()
+    public function __construct(Post $post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -41,10 +47,10 @@ class ReservationRejected extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Reservation rejetée')
-                    ->line('Votre reservation a ete rejeter par le voyageur.')
-                    ->action('Clicker sur le button pour retourner sur les annonces', url(route('posts.index')))
-                    ->line('Merci de toujours nous faire confiance!');
+            ->subject('Reservation rejetée')
+            ->markdown('mail.booking.reject', [
+                'type' => $this->post->type
+            ]);
     }
 
     /**

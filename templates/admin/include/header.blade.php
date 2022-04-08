@@ -2,9 +2,8 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="{{ asset('images/logo.png') }}" alt="colissend Logo">
-            <span class="d-none d-lg-block">Colissend</span>
+        <a href="{{ route('admin.home') }}" class="logo d-flex align-items-center">
+            <img src="{{ asset('images/colissend/logo.svg') }}" alt="colissend Logo">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>

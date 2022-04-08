@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ]);
         });*/
 
-        User::factory(1)->create([
+/*        User::factory(1)->create([
             'email' => 'claudesimo1990@gmail.com',
         ]);
 
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1
         ]);
 
-        Pub::factory(4)->create();
+        Pub::factory(4)->create();*/
 
         Admin::factory(1)->create();
     }

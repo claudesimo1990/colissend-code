@@ -63,7 +63,6 @@ class ProfileController extends Controller
     public function edit(int $profile, ProfileRequest $request): RedirectResponse
     {
         if (request()->hasFile('avatar') && request()->file('avatar')->isValid()) {
-            Auth::user()->updateMedia([], 'avatar');
             Auth::user()->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 

@@ -37,6 +37,12 @@ class BookingController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param Post $post
+     * @param ReservationRequest $request
+     * @param ReservationRepository $re
+     * @return Response
+     */
     public function booking(Post $post, ReservationRequest $request, ReservationRepository $re): Response
     {
         $reservation = $re->store($request, $post);
@@ -46,31 +52,69 @@ class BookingController extends Controller
         return redirect()->route('posts.index');
     }
 
+    /**
+     * @param Reservation $reservation
+     * @return RedirectResponse
+     */
     public function reservationValidate(Reservation $reservation): RedirectResponse
     {
         $post = $this->postRepository->findById($reservation->post_id);
 
-        $post->update([
-            'kilo' => (int)$post->kilo -= (int)$reservation->kilo
-        ]);
-
         $reservation->update([
-            'status' => 'ACCEPTED'
+            'status' => 'PROGRESS'
         ]);
 
-        Notification::send($this->userRepository->findById($reservation->user_id), new ReservationValidate());
+        if ($reservation->status != 'ACCEPTED' && $reservation->status != 'REJECTED') {
+            if ($post->type == 'TRAVEL') {
+                if ($reservation->status !== 'ACCEPTED') {
 
-        return redirect()->back()->with('success', 'La reservation a ete valider avec success');
+                    $post->update([
+                        'kilo' => (int)$post->kilo -= (int)$reservation->kilo
+                    ]);
+
+                    $reservation->update([
+                        'status' => 'ACCEPTED'
+                    ]);
+
+                    Notification::send($this->userRepository->findById($reservation->user_id), new ReservationValidate($post, $reservation));
+
+                    return redirect()->back()->with('success', 'La reservation a été validé');
+                }
+                return redirect()->back()->with('error', 'La reservation a déja été validé');
+            }
+
+            if ($post->type == 'PACKS') {
+
+                Notification::send($this->userRepository->findById($reservation->user_id), new ReservationValidate($post, $reservation));
+
+                return redirect()->back()->with('success', 'La reservation a été validé');
+            }
+        }
+
+        return redirect()->back()->with('error', 'Vous ne pouvez plus effectuer cette action');
     }
 
+    /**
+     * @param Reservation $reservation
+     * @return RedirectResponse
+     */
     public function reservationExcept(Reservation $reservation): RedirectResponse
     {
-        $reservation->update([
-            'status' => 'REJECTED'
-        ]);
+        $post = $this->postRepository->findById($reservation->post_id);
 
-        Notification::send($this->userRepository->findById($reservation->user_id), new ReservationRejected());
+        if ($reservation->status != 'ACCEPTED' && $reservation->status != 'REJECTED') {
+            if ($reservation->status !== 'REJECTED') {
+                $reservation->update([
+                    'status' => 'REJECTED'
+                ]);
 
-        return redirect()->back()->with('success', 'La reservation a ete refuser avec success');
+                Notification::send($this->userRepository->findById($reservation->user_id), new ReservationRejected($post));
+
+                return redirect()->back()->with('success', 'La reservation à été refuser');
+            }
+            return redirect()->back()->with('error', 'La reservation à déja été rejeté');
+        }
+
+        return redirect()->back()->with('error', 'Vous ne pouvez plus effectuer cette action');
     }
 }

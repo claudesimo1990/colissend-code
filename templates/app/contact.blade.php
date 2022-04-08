@@ -4,7 +4,7 @@
 
 @section('app')
 
-    <x-header page="page-howItWork" title="Nous somme a l'ecoute de vos preocupations"/>
+    <x-header page="page-howItWork" img="" title="Nous somme a l'ecoute de vos preocupations"/>
 
     <section class="section contact my-5 container">
 

@@ -48,18 +48,13 @@
 
 <script lang="ts">
 
-import {Vue, Component, Prop} from 'vue-property-decorator'
+  import {Vue, Component, Prop} from 'vue-property-decorator'
 
-@Component({
-  props: {
-    post: {}
-  }
-})
-export default class Coli extends Vue {
+  @Component({
+    props: {
+      post: {}
+    }
+  })
+  export default class Coli extends Vue {}
 
-}
 </script>
-
-<style lang=scss>
-
-</style>

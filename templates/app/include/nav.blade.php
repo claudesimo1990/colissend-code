@@ -43,19 +43,26 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link nav-item {{ (request()->routeIs('blog.index')) ? 'active' : '' }}" aria-current="page" href="{{ route('blog.index') }}">
+                        <i class="bi bi-pencil-square"></i>
+                        Blog
+                    </a>
+                </li>
+
                 @guest()
 
                     <li class="nav-item">
                         <a class="nav-link nav-item {{ (request()->routeIs('register')) ? 'active' : '' }}" aria-current="page" href="{{ route('register') }}">
                             <i class="bi bi-box-arrow-in-right"></i>
-                            Inscription
+                            S'inscrire
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link nav-item {{ (request()->routeIs('login')) ? 'active' : '' }}" aria-current="page" href="{{ route('login') }}">
                             <i class="bi bi-people"></i>
-                            Connexion
+                            Se connecter
                         </a>
                     </li>
 
@@ -136,13 +143,6 @@
                     </li>
 
                 @endguest
-
-                <li class="nav-item">
-                    <a class="nav-link nav-item {{ (request()->routeIs('contact')) ? 'active' : '' }}" aria-current="page" href="{{ route('contact') }}">
-                        <i class="bi bi-envelope"></i>
-                        Contact
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

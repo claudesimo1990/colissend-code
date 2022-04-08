@@ -3,6 +3,7 @@
 @section('app')
     <div class="container my-5 py-5">
         <div class="row justify-content-center">
+            <h1 class="text-dark text-center mb-4">S'inscrire</h1>
             <div class="col-md-8 py-4">
                 <div class="card">
                     <div class="card-header text-center">
@@ -83,16 +84,18 @@
                             <div class="form-group row my-4">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-success">
-                                        {{ __('Inscription') }}
+                                        S'inscrire
                                     </button>
 
                                     <a class="btn btn-link text-success" href="{{ route('login') }}">
-                                        Se connecté
+                                        Se connecter
                                     </a>
 
                                 </div>
                             </div>
                         </form>
+                        <p class="text-muted text-center">Vos données personnelles (email et nom d'utilisateur) ne sont utilisées qu'à des fins d'authentification et ne sont pas partagées avec des tiers
+                            <a class="text-success" href="{{ route('privacy') }}">(En savoir plus)</a>.</p>
                     </div>
                 </div>
             </div>

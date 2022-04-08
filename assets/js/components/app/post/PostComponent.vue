@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="card mt-4" v-for="post in foundPosts" :key="post.id">
-      <div class="card-body pb-0">
+      <div class="card-body">
         <div class="pub">
           <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
             <div class="row">
-              <div class="col-md-4">
-                <user-card-component :user="post.user"></user-card-component>
+              <div class="col-xs-12 col-sm-12 col-md-4 pb-4">
+                <user-card-component :user="post.user" :thumb="true"></user-card-component>
               </div>
-              <div class="col-md-8">
+              <div class="col-xs-12 col-sm-12 col-md-8">
                   <Travel v-if="post.type === 'TRAVEL'" :post="post"></Travel>
                   <Coli v-if="post.type === 'PACKS'" :post="post"></Coli>
               </div>

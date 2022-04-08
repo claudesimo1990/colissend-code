@@ -31,6 +31,7 @@ class PostRequest extends FormRequest
             'kilo' => 'required',
             'price' => 'required',
             'company' => 'required',
+            'payment' => 'required',
         ];
     }
 }

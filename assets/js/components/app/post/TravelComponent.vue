@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="p-3">
         <div id="about" class="">
             <div class="row">
                 <div class="col-lg-12 text-center my-4">
-                    <h2 class="fw-bold">Poster votre annonce de voyage</h2>
+                    <h2 class="fw-bold">Poster un trajet</h2>
                 </div>
             </div>
         </div>
@@ -31,18 +31,18 @@
                     </div>
                     <div class="row py-2">
                         <div class="col-md-3">
-                            <label for="kilo" class="form-label">Nombre de Kilo disponibles</label>
+                            <label for="kilo" class="form-label">Nombre de Kilos disponibles</label>
                             <ValidationProvider rules="required|integer" v-slot="{ errors }">
-                                <input type="text" name="kilo" v-model.number="form.kilo" class="form-control" id="kilo">
+                                <input type="number" name="kilo" v-model.number="form.kilo" class="form-control" id="kilo">
                                 <span class="invalid-feedback d-block" role="alert">
                                     <small>{{ errors[0] }}</small>
                                 </span>
                             </ValidationProvider>
                         </div>
                         <div class="col-md-3">
-                            <label for="price" class="form-label">Prix du Kilo</label>
+                            <label for="price" class="form-label">Prix du Kilo en &euro;</label>
                             <ValidationProvider rules="required|numeric" v-slot="{ errors }">
-                                <input type="text" name="price" v-model.number="form.price" class="form-control" id="price">
+                                <input type="number" name="price" v-model.number="form.price" class="form-control" id="price">
                                 <span class="invalid-feedback d-block" role="alert">
                                     <small>{{ errors[0] }}</small>
                                 </span>
@@ -63,7 +63,7 @@
                         <div class="col-md-3">
                             <label for="ticket" class="col-form-label">Image du billet d'avion</label>
                             <div class="">
-                                <ValidationProvider rules="" v-slot="{ errors }">
+                                <ValidationProvider rules="required" v-slot="{ errors }">
                                     <input class="form-control" name="ticket" ref="file"  @change="handleFileUpload( $event )" type="file" id="ticket">
                                     <span class="invalid-feedback d-block" role="alert">
                                         <small>{{ errors[0] }}</small>
@@ -73,25 +73,74 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <ValidationProvider rules="required" v-slot="{ errors }">
-                                <textarea class="form-control" v-model="form.message" placeholder="Laissez un message..." id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <small>{{ errors[0] }}</small>
-                                </span>
-                            </ValidationProvider>
-                        </div>
-                        <div class="col-md-6 mb-3 PY-3 border">
-                            <div class="col-md-12">
-                                <label class="col-form-label">Vous acceptez quels Objects ?</label>
-                                <div>
-                                    <div class="form-check form-check-inline" v-for="obj in form.transportedObjects">
-                                        <input class="form-check-input" v-model="obj.value" type="checkbox" :id="obj.name">
-                                        <label class="form-check-label" :for="obj.name">{{ obj.name }}</label>
+                        <div class="col-md-12">
+                          <div class="row">
+                            <label class="col-sm-12 col-form-label">Vous acceptez quels Objects ?</label>
+                            <div class="col-sm-12">
+                              <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6" v-for="obj in form.transportedObjects" :id="obj.id">
+                                  <div class="input-group mb-3 border">
+
+                                    <div class="form-check form-switch mx-2 pt-1">
+                                      <input class="form-check-input" v-model="obj.value" type="checkbox" id="flexSwitchCheckDefault">
+                                      <label class="form-check-label" for="flexSwitchCheckDefault">{{ obj.name }}</label>
                                     </div>
+
+                                    <span :class="'input-group-text text-white bg-' + obj.color " v-if="obj.value">Qunatité</span>
+                                    <input type="number" class="form-control" v-model="obj.number" v-if="obj.value" placeholder="Qunatité" aria-label="Server">
+
+                                    <span :class="'input-group-text text-white bg-' + obj.color " v-if="obj.value">Prix unitaire en &euro;</span>
+                                    <input type="number" class="form-control" v-model="obj.price" v-if="obj.value" placeholder="Prix" aria-label="Server">
+
+                                  </div>
                                 </div>
+                              </div>
                             </div>
+                          </div>
                         </div>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="alert alert-info fw-bold">NB: Pour le moment nous n'acceptons que des payments avec paypal</div>
+                          <label class="col-sm-12 col-form-label">Comment voulez-vous recevoir votre argent ?</label>
+                          <div class="col-sm-12">
+                            <div class="row">
+                              <div class="col-xs-12 col-sm-12 col-md-12" v-for="payment in form.payments" :id="payment.id">
+                                <div class="input-group mb-3 border">
+                                  <div class="form-check form-switch pt-1 mx-3">
+                                    <input class="form-check-input" @change="paymentSelected(payment)" v-model="payment.value" type="checkbox" :disabled="payment.status === false" :id="'flexSwitchCheckPayment-'+ payment.id">
+                                    <label class="form-check-label fw-bolder" :for="'flexSwitchCheckPayment-'+ payment.id">{{ payment.name }}</label>
+                                  </div>
+                                  <span v-if="payment.value" v-for="info in payment.infos" class="d-flex justify-content-between">
+                                    <span :class="'input-group-text text-white bg-success'">{{ info.label }}</span>
+                                    <input type="text" class="form-control" v-model="info.name" :placeholder="info.placeholder" aria-label="Server">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <ValidationProvider rules="" v-slot="{ errors }">
+                          <textarea class="form-control" v-model="form.message" placeholder="Laissez un message..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                          <span class="invalid-feedback d-block" role="alert">
+                              <small>{{ errors[0] }}</small>
+                          </span>
+                        </ValidationProvider>
+                      </div>
+                      <div class="col-md-12 mt-2">
+                        <ValidationProvider rules="required" v-slot="{ errors }">
+                          <div class="form-check">
+                            <input class="form-check-input" v-model="form.privacy" type="checkbox" id="gridCheck2">
+                            <label class="form-check-label" for="gridCheck2">
+                              En cochant sur cette case vous acceptez nos <a :href="privacy">conditions d'utlisations</a>
+                            </label>
+                            <span class="invalid-feedback d-block" role="alert">
+                              <small>{{ errors[0] }}</small>
+                            </span>
+                          </div>
+                        </ValidationProvider>
+                      </div>
                     </div>
                       <input type="submit" class="btn btn-success d-flex justify-content-center align-items-center" value="Poster votre voyage">
                     </form>
@@ -119,7 +168,9 @@ import axios from "axios";
     },
   props: {
       objects: String,
-      companies: String
+      companies: String,
+      payments: String,
+      privacy: String
   }
 })
 export default class TravelComponent extends Vue {
@@ -129,12 +180,15 @@ export default class TravelComponent extends Vue {
         to: null,
         dateFrom: null,
         dateTo: null,
-        kilo: null,
-        price: null,
+        kilo: 10,
+        price: 8,
         company: null,
         ticket: null,
         message: null,
-        transportedObjects: {}
+        payment: {},
+        transportedObjects: {},
+        payments: {},
+        privacy: null
     };
     success: boolean = false;
     message: string = '';
@@ -151,6 +205,10 @@ export default class TravelComponent extends Vue {
     setDateTo(val) {
         this.form.dateTo = val
     }
+
+  paymentSelected(payment: any) {
+      this.form.payment = payment;
+  }
 
     public onSubmit() {
 
@@ -174,17 +232,13 @@ export default class TravelComponent extends Vue {
         formData.append('content',  this.form.message);
         formData.append('ticket',  this.form.ticket);
         formData.append('objects',  JSON.stringify(this.form.transportedObjects));
+        formData.append('payment',  JSON.stringify(this.form.payment));
 
         axios.post('/post/travel/create', formData , config)
             .then((response)  => {
 
                 this.success = true;
                 this.message = response.data;
-
-                setTimeout(function() {
-                    window.location.reload();
-
-                }, 2000);
             })
             .catch(function (error) {
                 if(error.response.data){
@@ -213,6 +267,7 @@ export default class TravelComponent extends Vue {
     public mounted() {
         this.posted = false;
         this.form.transportedObjects = JSON.parse(this.$props.objects)
+        this.form.payments = JSON.parse(this.$props.payments)
     }
 }
 </script>

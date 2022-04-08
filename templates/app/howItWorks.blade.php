@@ -7,7 +7,7 @@
 
 @section('app')
 
-    <x-header page="page-howItWork" title="{{ $section['title'] }}"/>
+    <x-header page="page-howItWork" img="" title="{{ $section['title'] }}"/>
 
     <div class="card-section">
         <div class="container">

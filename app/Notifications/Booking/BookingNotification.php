@@ -52,27 +52,14 @@ class BookingNotification extends Notification
      */
     public function toMail($notifiable): ?MailMessage
     {
-        $from = $this->post['from'];
-
-        $to = $this->post['to'];
-
-        $kilo = $this->reservation['kilo'];
-
-        $dateFrom = formatDate($this->post['dateFrom']);
-
-        $dateTo = formatDate($this->post['dateTo']);
-
-        $price = $this->reservation['price'];
-
-        $message = $this->reservation['message'];
-
         if ($this->post->type == 'TRAVEL') {
             return (new MailMessage)
-                ->subject('Nouvelle reservation')
-                ->line("Nouvelle reservation de $kilo kilos su votre  Post de $from pour $to  du $dateFrom au $dateTo",)
-                ->line("retourner sur votre profile pour valider ou refuser la reservation",)
-                ->action('Retourner sur votre Profile', url(route('user.profile.show', ['profile' => $notifiable->id])))
-                ->line('Merci de nous faire confiance!');
+                ->subject('Nouvelle reservation de kilos')
+                ->markdown('mail.booking.travel', [
+                    'notifiable' => $notifiable,
+                    'p' => $this->post,
+                    'r' => $this->reservation
+                ]);
         }
 
         if ($this->post->type == 'PACKS') {
@@ -82,7 +69,7 @@ class BookingNotification extends Notification
                     'notifiable' => $notifiable,
                     'p' => $this->post,
                     'r' => $this->reservation
-                ]);
+            ]);
         }
 
         return null;

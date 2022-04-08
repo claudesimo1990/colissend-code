@@ -1,10 +1,15 @@
 @component('mail::message')
 
-    # Nouveau message de {{ $m->user->name }},
+# Nouveau message de {{ $m->user->name }},
 
-### Message: {{ $m->content }}
+### Message:<br>
+{{ $m->content }}
 
-Merci de nous faire confiance!
-</br>
+
+@component('mail::button', ['url' => url(route('welcome')), 'color' => 'success'])
+    Retourner sur Colissend
+@endcomponent
+
+Merci de nous faire confiance!<br>
 {{ config('app.name') }}
 @endcomponent

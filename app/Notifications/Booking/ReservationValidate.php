@@ -2,6 +2,8 @@
 
 namespace App\Notifications\Booking;
 
+use App\Models\Post;
+use App\Models\Reservation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,13 +14,24 @@ class ReservationValidate extends Notification
     use Queueable;
 
     /**
+     * @var Post
+     */
+    private $post;
+    /**
+     * @var Reservation
+     */
+    private $reservation;
+
+    /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Post $post
+     * @param Reservation $reservation
      */
-    public function __construct()
+    public function __construct(Post $post, Reservation $reservation)
     {
-        //
+        $this->post = $post;
+        $this->reservation = $reservation;
     }
 
     /**
@@ -41,10 +54,13 @@ class ReservationValidate extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Reservation validée')
-                    ->line('Votre reservation a ete valider par le voyageur.')
-                    ->action('Clicker sur le button pour retourner sur les annonces', url(route('posts.index')))
-                    ->line('Merci de toujours nous faire confiance!');
+            ->subject('Validation de reservation')
+            ->markdown('mail.booking.validate', [
+                'type' => $this->post->type,
+                'id' => $this->reservation->id,
+                'k' => $this->reservation->kilo,
+                'p' => $this->reservation->kilo *  $this->post->price
+            ]);
     }
 
     /**

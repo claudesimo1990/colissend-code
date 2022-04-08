@@ -56,15 +56,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
-        return Validator::make(
-            $data,
-            [
-            'name' => ['required', 'string', 'max:255'],
-//            'avatar' => ['required', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=200'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]
-        );
+        return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'avatar' => ['required', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=200'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
     }
 
     /**
@@ -89,7 +86,6 @@ class RegisterController extends Controller
         }
 
         $user->profile()->create([
-            'avatar' => '/images/colissend/default.svg',
             'full_name' => $user->name
         ])->save();
 

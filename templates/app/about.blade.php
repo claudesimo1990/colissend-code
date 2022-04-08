@@ -7,7 +7,7 @@
 
 @section('app')
 
-    <x-header page="page-howItWork" title="A-propos de nous"/>
+    <x-header page="page-howItWork" img="" title="A propos de nous"/>
 
     <div class="card-section">
         <div class="container">
@@ -20,41 +20,12 @@
                                     <img src="{{ asset('images/about/about.jpg') }}" width="300" alt="about">
                                 </div>
                                 <div class="col-md-8 col-sm-12 col-xs-12 text-justify my-3">
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet fuga maxime quisquam
-                                        reiciendis unde. Amet at aut dignissimos error itaque odit quo reiciendis sapiente
-                                        tempore. Accusantium assumenda beatae perspiciatis possimus.
-                                    </div>
-                                    <div>Aliquam, aspernatur consequatur dolorem et exercitationem illum modi nesciunt
-                                        perferendis quaerat sunt temporibus totam voluptates. Corporis dolorem enim fuga omnis
-                                        quisquam. Asperiores eos esse in optio ratione ut vel voluptatem.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row my-4 py-3">
-                                <div class="col-md-8 col-sm-12 col-xs-12 my-3">
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet fuga maxime quisquam
-                                        reiciendis unde. Amet at aut dignissimos error itaque odit quo reiciendis sapiente
-                                        tempore. Accusantium assumenda beatae perspiciatis possimus.
-                                    </div>
-                                    <div>Aliquam, aspernatur consequatur dolorem et exercitationem illum modi nesciunt
-                                        perferendis quaerat sunt temporibus totam voluptates. Corporis dolorem enim fuga omnis
-                                        quisquam. Asperiores eos esse in optio ratione ut vel voluptatem.
-                                    </div>
-                                    <div>Aliquam, aspernatur consequatur dolorem et exercitationem illum modi nesciunt
-                                        perferendis quaerat sunt temporibus totam voluptates. Corporis dolorem enim fuga omnis
-                                        quisquam. Asperiores eos esse in optio ratione ut vel voluptatem.
-                                    </div>
-                                    <div>Aliquam, aspernatur consequatur dolorem et exercitationem illum modi nesciunt
-                                        perferendis quaerat sunt temporibus totam voluptates. Corporis dolorem enim fuga omnis
-                                        quisquam. Asperiores eos esse in optio ratione ut vel voluptatem.
-                                    </div>
-                                    <div>Aliquam, aspernatur consequatur dolorem et exercitationem illum modi nesciunt
-                                        perferendis quaerat sunt temporibus totam voluptates. Corporis dolorem enim fuga omnis
-                                        quisquam. Asperiores eos esse in optio ratione ut vel voluptatem.
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 my-3">
-                                    <img src="{{ asset('images/about/manager.jpg') }}" width="300" alt="manager">
+                                    <p>
+                                        <span class="fw-bolder">Colissend</span>
+                                    </p>
+                                    <p>
+                                        Est une page mettant en relation les personnes de différentes communautés de l’Afrique comme de sa diaspora dans le but de transporter des colis et courriers destinés à leurs proches de partout dans le monde
+                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -11,15 +11,17 @@ class header extends Component
 {
     public $page;
     public $title;
+    public $img;
 
     /**
      * @param $page
      * @param $title
      */
-    public function __construct($page, $title)
+    public function __construct($page, $title, $img)
     {
         $this->page = $page;
         $this->title = $title;
+        $this->img = $img;
     }
 
     /**

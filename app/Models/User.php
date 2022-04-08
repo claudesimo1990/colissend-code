@@ -27,7 +27,7 @@ class User extends Authenticatable implements HasMedia
         'confirmation_token'
     ];
 
-    protected $appends = ['avatar', 'info', 'travels', 'packs'];
+    protected $appends = ['thumb', 'avatar', 'info', 'travels', 'packs'];
 
     protected $hidden = [
         'password',
@@ -44,6 +44,11 @@ class User extends Authenticatable implements HasMedia
     }
 
     public function getAvatarAttribute(): string
+    {
+        return $this->getFirstMediaUrl('avatar') ?? '/images/colissend/default.svg';
+    }
+
+    public function getThumbAttribute(): string
     {
         return $this->getFirstMediaUrl('avatar', 'thumb') ?? '/images/colissend/default.svg';
     }
@@ -76,5 +81,24 @@ class User extends Authenticatable implements HasMedia
     public function getPacksAttribute(): Collection
     {
         return $this->posts()->where('type', 'PACKS')->get(['*']);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatar')
+            ->singleFile();
+    }
+
+    public function registerAllMediaConversions(): void
+    {
+        $this->addMediaConversion('avatar')
+            ->width(36)
+            ->height(36)
+            ->sharpen(10);
+
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150)
+            ->sharpen(10);
     }
 }

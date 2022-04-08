@@ -16,6 +16,7 @@ class CreatePubsTable extends Migration
         Schema::create('pubs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->string('content');
             $table->string('link');

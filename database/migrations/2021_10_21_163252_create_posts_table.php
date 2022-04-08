@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->enum('type', ['TRAVEL', 'PACKS']);
             $table->string('from');
             $table->string('to');

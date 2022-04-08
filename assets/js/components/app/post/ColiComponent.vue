@@ -147,7 +147,7 @@ export default class ColiComponent extends Vue {
     formData.append('dateTo',  this.form.dateTo);
     formData.append('kilo',  this.form.kilo);
     formData.append('content',  this.form.message);
-    formData.append('coliImg',  this.form.coliImg);
+    formData.append('coli',  this.form.coliImg);
     formData.append('objects',  JSON.stringify(this.form.transportedObjects));
 
     axios.post('/post/coli/create', formData , config)
