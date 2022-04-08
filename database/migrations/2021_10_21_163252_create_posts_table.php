@@ -29,6 +29,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('company')->nullable();
             $table->longText('objects')->nullable();
+            $table->longText('payment')->nullable();
             $table->enum('status', ['PROGRESS', 'ACCEPTED', 'REJECTED']);
             $table->timestamps();
         });
