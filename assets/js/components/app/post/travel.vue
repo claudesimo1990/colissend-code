@@ -19,7 +19,7 @@
     <div class="my-4">
       <span class="text-black-50">Objects transportables :</span>
       <span v-for="object in post.objects" :key="object.name">
-        <span :class="'badge fw-bold bg-' + object.color"  v-if="object.value">{{ object.name }}{{ object.number > 0 ? ' x' . object.number  : '' }}</span>
+        <span :class="'mx-2 badge fw-bold bg-' + object.color"  v-if="object.value">{{ object.name }}{{ object.number > 0 ? ' x' + object.number  : '' }}</span>
       </span>
     </div>
     <blockquote class="blockquote-footer border rounded mt-2">

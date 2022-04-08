@@ -63,8 +63,8 @@
                         <div class="col-md-3">
                             <label for="ticket" class="col-form-label">Image du billet d'avion</label>
                             <div class="">
-                                <ValidationProvider rules="required" v-slot="{ errors }">
-                                    <input class="form-control" name="ticket" ref="file"  @change="handleFileUpload( $event )" type="file" id="ticket">
+                                <ValidationProvider rules="required" ref="observer" v-slot="{ errors, validate }">
+                                    <input class="form-control"  name="ticket" ref="file" accept="image/*"  @change="handleFileUpload( $event, errors)" type="file" id="ticket">
                                     <span class="invalid-feedback d-block" role="alert">
                                         <small>{{ errors[0] }}</small>
                                     </span>
@@ -112,7 +112,7 @@
                                   </div>
                                   <span v-if="payment.value" v-for="info in payment.infos" class="d-flex justify-content-between">
                                     <span :class="'input-group-text text-white bg-success'">{{ info.label }}</span>
-                                    <input type="text" class="form-control" v-model="info.name" :placeholder="info.placeholder" aria-label="Server">
+                                    <input type="text" class="form-control" v-model="info.value" :placeholder="info.placeholder" aria-label="Server">
                                   </span>
                                 </div>
                               </div>
@@ -196,6 +196,12 @@ export default class TravelComponent extends Vue {
     response: any = {};
     posted: boolean = false;
 
+   matchOptions: any = {
+     id: Number,
+     name: String,
+     scope: String
+   };
+
     @Watch('form.dateFrom')
     setDateFrom(val) {
         this.form.dateFrom = val
@@ -239,6 +245,11 @@ export default class TravelComponent extends Vue {
 
                 this.success = true;
                 this.message = response.data;
+
+              setTimeout(function() {
+                window.location.reload();
+
+              }, 2000);
             })
             .catch(function (error) {
                 if(error.response.data){
@@ -248,8 +259,15 @@ export default class TravelComponent extends Vue {
 
     }
 
-    public handleFileUpload(evt){
-        this.form.ticket = evt.target.files[0];
+  async handleFileUpload({ target: { files } }){
+      const valid = await (this.$refs.observer as any).validate(files)
+
+      if (!valid) {
+        console.log("not valid");
+        return;
+      }
+
+      this.form.ticket = files[0];
     }
 
     initFiled(payload)  {

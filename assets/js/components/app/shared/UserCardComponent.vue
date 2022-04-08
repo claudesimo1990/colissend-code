@@ -1,6 +1,7 @@
 <template>
     <div>
-      <img :src="thumb ? user.thumb : user.avatar" class="rounded-circle" alt="user avatar">
+      <img v-if="user.thumb || user.avatar" :src="thumb ? user.thumb : user.avatar" class="rounded-circle" alt="user avatar">
+      <img v-if="user.thumb === '' && user.avatar === ''" src="/images/colissend/default.svg" class="rounded-circle" alt="user avatar">
       <h4>{{ user.name }}</h4>
       <h4>
         <i class="bi bi-pin-map-fill mr-2"></i>

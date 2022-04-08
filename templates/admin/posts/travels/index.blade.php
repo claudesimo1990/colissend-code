@@ -25,10 +25,11 @@
                         <table class="table datatable">
                             <thead>
                             <tr class="text-center">
-                                <th scope="col">#User ID</th>
+                                <th scope="col">#User name</th>
                                 <th scope="col">from</th>
                                 <th scope="col">to</th>
                                 <th scope="col">Ticket</th>
+                                <th scope="col">Payment Method</th>
                                 <th scope="col">crée le</th>
                                 <th scope="col">status</th>
                                 <th scope="col">Action</th>
@@ -36,13 +37,15 @@
                             </thead>
                             <tbody>
                                 @foreach($travels as $travel)
+                                    @php($payment = json_decode($travel->payment))
                                     <tr class="text-center">
-                                        <td class="text-start"><a href="{{ route('admin.users.show', ['user' => $travel->user->id ]) }}">#{{ $travel->user->email }}</a></td>
-                                        <td class="text-start">{{ $travel->from }}</td>
-                                        <td class="text-start">{{ $travel->to }}</td>
-                                        <td class="text-start"><a href="{{ $travel->getMedia('travels')->first()->getUrl() }}"><img src="{{  $travel->getMedia('travels')->first()->getUrl('thumb') }}" width="50" height="50" class="rounded avatar"  alt=""></a></td>
-                                        <td class="text-start">{{ $travel->created_at->format('d.m.y') }}</td>
-                                        <td class="text-start fw-bold text-secondary">{{ $travel->status == 'PROGRESS' ? 'nouveau' : $travel->status  }}</td>
+                                        <td class=""><a href="{{ route('admin.users.show', ['user' => $travel->user->id ]) }}">#{{ $travel->user->name }}</a></td>
+                                        <td class="">{{ $travel->from }}</td>
+                                        <td class="">{{ $travel->to }}</td>
+                                        <td class=""><a href="{{ $travel->getMedia('travels')->first()->getUrl() }}"><img src="{{  $travel->getMedia('travels')->first()->getUrl('thumb') }}" width="50" height="50" class="rounded avatar"  alt=""></a></td>
+                                        <td class="">{{ $payment->name }} - {{ $payment->infos[0]->value }}</td>
+                                        <td class="">{{ $travel->created_at->format('d.m.y') }}</td>
+                                        <td class=" fw-bold text-secondary">{{ $travel->status == 'PROGRESS' ? 'nouveau' : $travel->status  }}</td>
                                         <td class="d-flex justify-content-between">
                                             <button type="button" class="btn btn-info text-white rounded-pill">details</button>
                                             <a type="button" href="{{ route('admin.post.accepted', ['post' => $travel->id]) }}" class="btn btn-success rounded-pill text-white">publier</a>
