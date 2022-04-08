@@ -31,18 +31,6 @@
         <i class="bx bxs-quote-alt-right fw-bold"></i>
       </p>
     </blockquote>
-    <div class="text-end my-2">
-      <span class="badge border-info text-black-50">
-          <i class="bx bxs-plane mx-2" style="font-size: 40px;color: green"></i> poster {{ post.created_at | ago }}
-      </span>
-      <span class="badge border-success border-1 text-success"><i class="bx bx-check-circle"></i>Annonce verifiée!</span>
-      <div class="ratings mx-2">
-        <i class="bi bi-star"></i>
-        <i class="bi bi-star"></i>
-        <i class="bi bi-star"></i>
-        <i class="bi bi-star"></i>
-      </div>
-    </div>
   </div>
 </template>
 

@@ -47545,6 +47545,29 @@ var render = function () {
                       _c("user-card-component", {
                         attrs: { user: post.user, thumb: true },
                       }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "my-2" }, [
+                        _c(
+                          "span",
+                          { staticClass: "badge border-info text-black-50" },
+                          [
+                            _c("i", {
+                              staticClass: "bx bxs-plane mx-2",
+                              staticStyle: {
+                                "font-size": "40px",
+                                color: "green",
+                              },
+                            }),
+                            _vm._v(
+                              " poster " +
+                                _vm._s(_vm._f("ago")(post.created_at)) +
+                                "\n                "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(0, true),
+                      ]),
                     ],
                     1
                   ),
@@ -47573,7 +47596,24 @@ var render = function () {
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ratings mx-2 my-2 bottom-0" }, [
+      _c("i", { staticClass: "bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "bi bi-star-fill" }),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -49255,53 +49295,9 @@ var render = function () {
         _c("i", { staticClass: "bx bxs-quote-alt-right fw-bold" }),
       ]),
     ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "text-end my-2" }, [
-      _c("span", { staticClass: "badge border-info text-black-50" }, [
-        _c("i", {
-          staticClass: "bx bxs-plane mx-2",
-          staticStyle: { "font-size": "40px", color: "green" },
-        }),
-        _vm._v(
-          " poster " + _vm._s(_vm._f("ago")(_vm.post.created_at)) + "\n    "
-        ),
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-    ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      { staticClass: "badge border-success border-1 text-success" },
-      [
-        _c("i", { staticClass: "bx bx-check-circle" }),
-        _vm._v("Annonce verifiée!"),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ratings mx-2" }, [
-      _c("i", { staticClass: "bi bi-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "bi bi-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "bi bi-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "bi bi-star" }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
