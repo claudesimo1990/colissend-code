@@ -99,8 +99,7 @@
                                     <img src="{{ !empty($post->user->getFirstMediaUrl('avatar', 'thumb')) ? $post->user->getFirstMediaUrl('avatar', 'thumb') : asset('images/colissend/default.svg') }}" class="rounded-circle" alt="{{ $post->user->name }} - avatar">
                                 </div>
                                 <div class="user-content">
-                                    <h5 class="mb-0">{{ $post->user->name }}</h5> <span>{{ $post->user->email }}</span>
-                                    <p>{{ Illuminate\Support\str::limit($post->content, $limit = 150, $end = '...') }}</p>
+                                    <h5 class="mb-0 fw-bold">{{ $post->user->name }}</h5>
                                 </div>
                                 <div class="d-flex justify-content-between text-center">
                                     <div>
@@ -114,33 +113,39 @@
                                         <div class="">{{ formatDate($post->dateTo) }}</div>
                                     </div>
                                 </div>
-                                <div class="badge bg-success-light text-center text-black-50 m-3">
+                                <div class="badge text-start text-black-50 mt-3 mb-3">
                                     @if($post->type == 'TRAVEL')
-                                        <div class="d-flex justify-content-between">
-                                            <span>{{ $post->kilo }} kg encore disponibles</span>
-                                            <span><i class="bi bi-forward"></i></span>
-                                            <span>{{ $post->price }}<i class="bi bi-currency-euro"></i>/kg</span>
+                                        <h4 class="fw-bolder">Details:</h4>
+                                        <div class="d-flex justify-content-between bg-success-light mb-1">
+                                            <h4 class="fw-bold"><i class="bi bi-bag-check-fill mx-2"></i>{{ $post->kilo }} kg</h4>
+                                            <span>............................</span>
+                                            <h4 class="fw-bold">{{ $post->price }}<i class="bi bi-currency-euro"></i>/kg</h4>
                                         </div>
+                                    @if($post->objects->courrier->status)
+                                        <div class="d-flex justify-content-between bg-success-light mb-1">
+                                            <h4 class="fw-bold"><i class="bi bi-envelope-fill mx-2"></i>x{{ $post->objects->courrier->number }}</h4>
+                                            <span>............................</span>
+                                            <h4 class="fw-bold">{{ $post->objects->courrier->price }}<i class="bi bi-currency-euro"></i>/<i class="bi bi-envelope-fill mx-2"></i></h4>
+                                        </div>
+                                    @endif
                                     @else
-                                        Estimation du poids du colis à {{ $post->kilo }} kg
+                                        <h4 class="fw-bolder">Objects à transporter :</h4>
+                                        @foreach($post->objects as $obj)
+                                            <div class="d-flex justify-content-between bg-success-light mb-1">
+                                                <h4 class="fw-bold">{{ $obj->name }} <span class="small fw-bold mx-2">x{{ $obj->quantity }}</span>.......<span class="fw-bold mx-2">Poids: {{ $obj->weight }}kg</span></h4>
+                                                <span> ........ </span>
+                                                <h4 class="fw-bolder">{{ $obj->price }}<i class="bi bi-currency-euro text-dark fw-bolder"></i>/kg</h4>
+                                            </div>
+                                        @endforeach
                                     @endif
                                 </div>
-                                <div class="ratings mb-5">
-                                    @if($post->type == 'TRAVEL')
-                                        <span class="badge border-info border-1 text-secondary">Objects acceptés :</span>
-                                    @else
-                                        <span class="badge border-info border-1 text-secondary">Objects à transporter :</span>
-                                    @endif
-                                    @foreach($post->objects as $obj)
-                                        @if($obj->value == true)
-                                            <span class="badge bg-{{ $obj->color }} fw-bold">{{ $obj->name }}{{ $obj->number > 0 ? ' x' . $obj->number  : '' }} ......... {{ $obj->price }}&euro;/Unité</span>
-                                        @endif
-                                    @endforeach
+                                <div class="ratings mb-3 text-start small">
+                                    <p><span class="fw-bolder">Message: </span>{{ Illuminate\Support\str::limit($post->content, $limit = 150, $end = '...') }}
                                 </div>
                                 @if($post->type == 'TRAVEL')
-                                    <a href="{{ route('posts.show', ['slug' =>  $post->slug]) }}" class="btn btn-success d-flex flex-column justify-content-center align-items-center position-absolute bottom-0 my-4">Contacter le voyageur</a>
+                                    <a href="{{ route('posts.show', ['slug' =>  $post->slug]) }}" class="btn btn-success d-flex justify-content-center align-items-center position-absolute bottom-0 my-4">Contacter le voyageur</a>
                                 @else
-                                    <a href="{{ route('posts.show', ['slug' =>  $post->slug]) }}" class="btn btn-success d-flex flex-column justify-content-center align-items-center position-absolute bottom-0 my-4">Contacter l'expediteur</a>
+                                    <a href="{{ route('posts.show', ['slug' =>  $post->slug]) }}" class="btn btn-success d-flex justify-content-center align-items-center position-absolute bottom-0 my-4">Contacter l'expediteur</a>
                                 @endif
                             </div>
                         </div>

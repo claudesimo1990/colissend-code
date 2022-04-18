@@ -9,3 +9,4 @@ mix.ts('assets/js/controller/appController.ts', 'public/js')
     .sass('assets/sass/baseController.scss', 'public/css');
 
 mix.copy('assets/resource/img', 'public/images')
+mix.copy('assets/resource/img/colissend/favicon', 'public/images')

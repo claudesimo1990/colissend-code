@@ -37,7 +37,7 @@ class ReservationRepository
                    'message'  => $request->get('message'),
                    'kilo'  => $request->get('kilo'),
                    'price'  => $request->get('price'),
-                   'objects'  => $request->get('objects'),
+                   'objects'  => json_encode($request->get('objects')),
                    'status'  => 'PROGRESS'
            ]);
     }

@@ -12,7 +12,8 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <div class="modal-header">
-                      <img :src="user.avatar" alt="Profile" width="20px" class="rounded-circle">
+                      <img v-if="user.thumb || user.avatar" :src="thumb ? user.thumb : user.avatar" class="rounded-circle" width="50px" alt="user avatar">
+                      <img v-if="user.thumb === '' && user.avatar === ''" src="/images/colissend/default.svg" class="rounded-circle" width="50px" alt="user avatar">
                       <span class="d-none d-md-block ps-2">{{ user.name }}</span>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

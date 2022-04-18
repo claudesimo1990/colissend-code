@@ -8,7 +8,8 @@ const message = {
         messages: [],
         navMessages: [],
         conversation: [],
-        status: false
+        status: false,
+        chat: false
     }),
     mutations: {
         setMessages(state: any) {
@@ -17,6 +18,10 @@ const message = {
             }).catch((error) => {
                 console.log(error)
             });
+        },
+
+        openChat(state: any, payload: boolean) {
+            state.chat = payload;
         },
 
         setMessage(state: any, payload: string) {
@@ -52,6 +57,10 @@ const message = {
             commit('setMessages', payload);
         },
 
+        openChat ({ commit} : any, payload: string) {
+            commit('openChat', payload);
+        },
+
         storeMessage({ commit } : any, payload: string) {
             commit('postMessage' , payload);
             commit('setMessages', payload);
@@ -80,6 +89,10 @@ const message = {
 
         conversation (state: any) {
             return state.conversation;
+        },
+
+        chatStatus (state: any) {
+            return state.chat;
         }
     }
 }

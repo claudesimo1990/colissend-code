@@ -1,58 +1,160 @@
 <template>
   <div>
-    <div class="plane d-flex justify-content-between">
-      <div class="fw-bold">
-        <i class="bx bxs-plane-take-off plane-icon"></i>
-        <div class="label">{{ post.from }}</div>
-        <div>{{ post.dateFrom  | formatDate }}</div>
-      </div>
-      <div class="fw-bold">
-        <i class="bx bxs-plane-land plane-icon"></i>
-        <div class="label">{{ post.to }}</div>
-        <div>{{ post.dateTo | formatDate }}</div>
-      </div>
-    </div>
-    <div class="my-2 text-center">
-      <div class="bg-success">
-        <h4 class="text-white fw-bold">{{ post.kilo }} Kilos encore disponibles!</h4>
-      </div>
-    </div>
-    <div class="py-2">
-      Objects acceptés par le voyageur :
-      <span v-for="object in post.objects" :key="object.name">
-          <span class="badge rounded-pill rounded mx-1" :class="'bg-' + object.color" v-if="object.value">{{ object.name }} {{ object.count > 0 ? 'x' + object.count : '' }}</span>
-      </span>
-    </div>
-    <div class="my-3">
-      <contact-component :auth="auth"  :user="post.user"></contact-component>
-    </div>
-    <ValidationObserver v-slot="{ handleSubmit }">
-      <form method="post" class="row g-3" @submit.prevent="handleSubmit(send)" ref="form">
-        <div class="mt-3">
-          <ValidationProvider rules="required|integer" v-slot="{ errors }">
-            <input type="text" class="form-control" id="kilo" v-model="booking.kilo" placeholder="Combien de kilos voullez vous ?">
-            <span class="invalid-feedback d-block" role="alert">
-              <small>{{ errors[0] }}</small>
-            </span>
-          </ValidationProvider>
-        </div>
-        <div class="my-3">
-          <select class="form-select" multiple="" v-model="objs" aria-label="multiple select example">
-            <option selected="">Que souhaitez vous envoyer ?</option>
-            <option v-for="object in post.objects" :key="object.name" :value="object.name">{{ object.name }}</option>
-          </select>
-        </div>
-        <div class="my-2">
-          <textarea type="text" class="form-control" v-model="booking.message"  placeholder="Laisser un message ..."></textarea>
-        </div>
-        <div class="my-3 pb-4 d-flex justify-content-between">
-          <input type="submit" class="form-control btn btn-success" value="reserver">
-          <div class="spinner-grow" role="status" v-if="show">
-            <span class="visually-hidden">chargement...</span>
+    <div class="card info-card sales-card">
+      <div class="card-body mt-2">
+        <div class="row">
+          <div class="card-body">
+            <h6 class="card-title-info my-2">Details du voyages</h6>
+            <div class="list-group">
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between fw-bold">
+                    <i class="bx bxs-plane-take-off large-icon"></i>
+                    <div class="text-muted pt-2 ps-1 text-justify">{{ post.from }} du {{
+                        post.dateFrom | formatDate
+                      }}
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between fw-bold">
+                    <i class="bx bxs-plane-land large-icon"></i>
+                    <div class="text-muted pt-2 ps-1 text-justify">{{ post.to }} du {{ post.dateTo | formatDate }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between fw-bold">
+                  <div class="text-muted pt-2 ps-1 mx-3 text-wrap">Kilos disponibles:</div>
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.kilo }} Kg</div>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between fw-bold">
+                  <div class="text-muted pt-2 ps-1 mx-3 text-wrap">Prix/Kg:</div>
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.price }}<i
+                      class="text-muted bi bi-currency-euro mt-2 text-black fw-bold"></i></div>
+                </div>
+              </div>
+              <div v-if="post.objects.courrier.status" class="list-group-item">
+                <div class="d-flex justify-content-between fw-bold">
+                  <div class="d-flex justify-content-between fw-bold">
+                    <div class="text-muted pt-2 mx-3 ps-1 text-wrap">Courriers acceptés:</div>
+                  </div>
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.objects.courrier.number }} <i
+                      class="bi bi-envelope mt-2 text-success"></i></div>
+                </div>
+              </div>
+              <div v-if="post.objects.courrier.status" class="list-group-item">
+                <div class="d-flex justify-content-between fw-bold">
+                  <div class="text-muted pt-2 ps-1 mx-3 text-wrap">Prix/courrier:</div>
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.objects.courrier.price }}<i
+                      class="text-muted bi bi-currency-euro mt-2 text-black fw-bold"></i></div>
+                </div>
+              </div>
+              <div v-if="post.objects.notDesired" class="list-group-item">
+                <div class="d-flex justify-content-between fw-bold">
+                  <div class="text-muted pt-2 ps-1 mx-3 text-wrap">Objects pas acceptés:</div>
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">Cigarettes, Liquides</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </form>
-    </ValidationObserver>
+        <div class="row">
+          <div class="card-body">
+            <h6 class="card-title-info my-2">Procéder á votre reservation</h6>
+            <ValidationObserver v-slot="{ handleSubmit }">
+              <form ref="form" class="row g-3" method="post" @submit.prevent="handleSubmit(send)">
+                <div class="list-group">
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-lg-5">
+                        <ValidationProvider v-slot="{ errors }" rules="required|integer|max:3">
+                          <input id="kilo" v-model="booking.kilo" :max="post.kilo" class="form-control" min="0"
+                                 placeholder="Combien de kilos voulez-vous reserver ?" type="number">
+                          <span class="invalid-feedback d-block" role="alert">
+                            <small>{{ errors[0] }}</small>
+                          </span>
+                        </ValidationProvider>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-check">
+                          <label class="form-check-label" for="gridCheck1">
+                            Avez-vous des courriers ?
+                          </label>
+                          <input id="gridCheck1" v-model="courrier" class="form-check-input" type="checkbox">
+                        </div>
+                      </div>
+                      <div v-if="shoHasCourrier" class="col-lg-3">
+                        <ValidationProvider v-slot="{ errors }" rules="required|min:1|max:8">
+                          <input type="number" id="courrier.number" v-model="booking.objects.courrier.number" class="form-control" name="price" placeholder="Combien ?">
+                          <span class="invalid-feedback d-block" role="alert">
+                          <small>{{ errors[0] }}</small>
+                        </span>
+                        </ValidationProvider>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="text my-4">
+                      <h6>Infos sur le destinataire</h6>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <ValidationProvider v-slot="{ errors }" rules="required">
+                          <input id="name" class="form-control" v-model="booking.objects.recipient.name" name="name" placeholder="Nom" type="text">
+                          <span class="invalid-feedback d-block" role="alert">
+                          <small>{{ errors[0] }}</small>
+                        </span>
+                        </ValidationProvider>
+                      </div>
+                      <div class="col-lg-3">
+                        <ValidationProvider v-slot="{ errors }" rules="required">
+                          <input id="cni" v-model="booking.objects.recipient.cni" class="form-control" name="cni"
+                                 placeholder="N° CNI" type="text">
+                          <span class="invalid-feedback d-block" role="alert">
+                            <small>{{ errors[0] }}</small>
+                          </span>
+                        </ValidationProvider>
+                      </div>
+                      <div class="col-lg-3">
+                        <ValidationProvider v-slot="{ errors }" rules="required">
+                          <input id="number" v-model="booking.objects.recipient.phone" class="form-control"
+                                 name="number" placeholder="Numéro de telephone" type="text">
+                          <span class="invalid-feedback d-block" role="alert">
+                            <small>{{ errors[0] }}</small>
+                          </span>
+                        </ValidationProvider>
+                      </div>
+                      <div class="col-lg-3">
+                        <ValidationProvider v-slot="{ errors }" rules="required">
+                          <input id="place" v-model="booking.objects.recipient.place" class="form-control" name="place"
+                                 placeholder="Lieux de rencontre"
+                                 type="text">
+                          <span class="invalid-feedback d-block" role="alert">
+                          <small>{{ errors[0] }}</small>
+                        </span>
+                        </ValidationProvider>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <textarea v-model="booking.message" class="form-control" placeholder="Laisser un message ..."
+                              type="text"></textarea>
+                  </div>
+                  <div class="mt-4 d-flex justify-content-between">
+                    <input class="form-control btn btn-success" type="submit" value="Reserver">
+                    <div v-if="show" class="spinner-grow" role="status">
+                      <span class="visually-hidden">chargement...</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </ValidationObserver>
+          </div>
+        </div>
+      </div>
+    </div>
+    <book-message :user="post.user"></book-message>
   </div>
 </template>
 
@@ -60,12 +162,13 @@
 
 import {ValidationProvider, ValidationObserver} from 'vee-validate';
 
-import {Vue, Component} from 'vue-property-decorator'
+import {Vue, Component, Watch} from 'vue-property-decorator'
 import ContactComponent from "../shared/ContactComponent.vue";
+import BookMessage from "../chat/BookMessage.vue";
 import axios from "axios";
 
 @Component({
-  components: { ValidationProvider, ValidationObserver, ContactComponent},
+  components: {ValidationProvider, ValidationObserver, ContactComponent, BookMessage},
   props: {
     post: {},
     auth: {}
@@ -75,22 +178,58 @@ export default class Travel extends Vue {
 
   error: boolean = false;
   show: boolean = false;
+  hasCourrier: boolean = false;
   errors: any = [];
   objs: any = [];
+  courrier: boolean = false;
 
   booking: any = {
     message: '',
+    kilo: '',
     price: 0,
     travel: 0,
-    objects: {},
-    kilo: '',
+    objects: {
+      courrier: {
+        status: false,
+        number: null,
+        price: this.$props.post.objects.courrier.price
+      },
+      recipient: {
+        name: null,
+        cni: null,
+        phone: null,
+        place: null
+      }
+    }
+  }
+
+  acceptableObjects: any = {}
+
+  get shoHasCourrier(): boolean {
+    return this.hasCourrier;
+  }
+
+  selectedTrue(objects: any): any {
+    return objects.filter(function (obj) {
+      return obj.value == true;
+    })
+  }
+
+  @Watch('courrier')
+  setCouurrier(val: any) {
+    this.booking.objects.courrier.status = val;
+    if (val === false) {
+      this.booking.objects.courrier.number = null;
+      this.booking.objects.courrier.price = null;
+      this.hasCourrier = false;
+      return;
+    }
+    this.hasCourrier = true;
   }
 
   send(): void {
 
     this.show = true;
-
-    this.booking.objects = JSON.stringify(this.objs);
 
     axios.post('/post/booking/' + this.$props.post.id, this.booking).then((response) => {
 
@@ -106,3 +245,12 @@ export default class Travel extends Vue {
 
 }
 </script>
+
+<style lang="scss" scoped>
+  .large-icon {
+    font-size: 42px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+</style>

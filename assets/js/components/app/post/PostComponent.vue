@@ -1,35 +1,24 @@
 <template>
-  <div>
-    <div class="card mt-4" v-for="post in foundPosts" :key="post.id">
-      <div class="card-body">
-        <div class="pub">
-          <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-4 pb-4">
-                <user-card-component :user="post.user" :thumb="true"></user-card-component>
-                <div class="my-2">
-                  <span class="badge border-info text-black-50">
-                      <i class="bx bxs-plane mx-2"
-                         style="font-size: 40px;color: green"></i> poster {{ post.created_at | ago }}
-                  </span>
-                  <div class="ratings mx-2 my-2 bottom-0">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
+  <div class="container">
+    <section class="section dashboard">
+      <div v-for="post in foundPosts" :key="post.id" class="row card">
+        <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
+          <div class="">
+            <div class="card-body mt-2">
+              <div class="row">
+                <div class="col-lg-4 bg-success-light">
+                  <user-card-component :user="post.user" :created="post.created_at|ago" branch="post" :type="post.type" :thumb="true"></user-card-component>
+                </div>
+                <div class="col-lg-8">
+                  <Travel v-if="post.type === 'TRAVEL'" :post="post"></Travel>
+                  <Coli v-if="post.type === 'PACKS'" :post="post"></Coli>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-8">
-                <Travel v-if="post.type === 'TRAVEL'" :post="post"></Travel>
-                <Coli v-if="post.type === 'PACKS'" :post="post"></Coli>
-              </div>
             </div>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 

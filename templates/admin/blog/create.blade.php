@@ -32,7 +32,6 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row my-3">
                                 <div class="col-md-12">
                                     <textarea class="form-control @error('content') is-invalid @enderror" name="content" placeholder="content" id="exampleFormControlTextarea1" rows="5"></textarea>

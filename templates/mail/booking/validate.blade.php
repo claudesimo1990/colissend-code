@@ -2,15 +2,13 @@
 
 # {{ getSalution() }},
 
-### Votre reservation a été validé par {{ $type == 'TRAVEL' ? "le voyageur" : "l'expediteur" }}.
-
-#### vous pouvez maintenant proceder au payement.
+## Votre reservation a été validé par {{ $type == 'TRAVEL' ? "le voyageur" : "l'expediteur" }}. Vous pouvez maintenant proceder au payement.
 
 @component('mail::table')
-    | Kilos      | Somme à payer  |
-    | :--------- | :------------- |
-    @foreach ([1] as $foo)
-    | {{ $k }} | {{ $p }} &euro; |
+    | Element       | Quantité       |  Prix unitaire |  Total en Euro |
+    | :--------- | :------------- | :------------- | :------------- |
+    @foreach ($r as $key => $value)
+        | {{ $value['name'] }} | {{ $value['number'] }} | {{ $value['price'] }} | {{ $value['number'] * $value['price'] }} |
     @endforeach
 @endcomponent
 

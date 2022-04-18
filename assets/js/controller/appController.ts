@@ -11,25 +11,34 @@ import ChatComponent from "../components/app/chat/ChatComponent.vue";
 import CookieComponent from "../components/app/CookieComponent.vue";
 
 import { extend } from 'vee-validate';
-import {required, integer, numeric, image} from 'vee-validate/dist/rules';
+import {required, integer, max, min, numeric, image} from 'vee-validate/dist/rules';
 
 
 //vee-validate rules
 extend('required', {
     ...required,
-    message: 'ce champs est obligatoire'
+    message: 'Ce champs est obligatoire'
 });
 extend('integer', {
     ...integer,
-    message: 'ce champs est un entier'
+    message: 'Ce champs est un entier'
 });
 extend('numeric', {
     ...numeric,
-    message: 'ce champs est numeric'
+    message: 'Ce champs est numeric'
 });
+extend('max', {
+    ...max,
+    message: 'La valeur taper est trop grande'
+});
+extend('min', {
+    ...min,
+    message: 'La valeur taper est trop petite'
+});
+
 extend('image', {
     ...image,
-    message: 'ce champs est doit etre une image'
+    message: 'Ce champs est doit etre une image'
 });
 
 import filters from "../utilities/filters";

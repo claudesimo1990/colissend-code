@@ -1,27 +1,21 @@
 <template>
-  <div>
-    <h1 class="text-center fw-bold" v-html="post.type === 'TRAVEL' ? 'Reserver vos kilos !' : 'Je me propose !'"></h1>
-    <div class="card mt-4">
-      <div class="card-body pb-0">
-        <div class="pub">
-          <div class="row">
-            <div class="col-md-4">
-              <user-card-component :user="post.user" :thumb="false"></user-card-component>
-            </div>
-            <div class="col-md-8">
-              <travel v-if="post.type === 'TRAVEL'" :post="post" :auth="auth"></travel>
-              <coli v-if="post.type === 'PACKS'" :post="post" :auth="auth"></coli>
-            </div>
-          </div>
-        </div>
+  <section class="section dashboard mt-3">
+    <h1 class="title text-center my-5 fw-bold">Reserver vos kilos</h1>
+    <div class="row">
+      <div class="col-lg-3">
+        <user-card-component :user="post.user" branch="booking" :type="post.type" :created="post.created_at|ago" :thumb="false"></user-card-component>
+      </div>
+      <div class="col-lg-9">
+        <travel v-if="post.type === 'TRAVEL'" :post="post" :auth="auth"></travel>
+        <coli v-if="post.type === 'PACKS'" :post="post" :auth="auth"></coli>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
 
-import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
+import {Vue, Component, Prop} from 'vue-property-decorator'
 import UserCardComponent from "../shared/UserCardComponent.vue";
 import Travel from "../booking/Travel.vue";
 import Coli from "../booking/Coli.vue";
@@ -42,8 +36,7 @@ export default class PostBookingComponent extends Vue {
 
 <style lang="scss">
 
-  .plane-icon
-  {
+  .plane-icon {
       font-size: 4rem;
   }
 </style>

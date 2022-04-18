@@ -128,7 +128,7 @@ class PostRepository
             'dateTo' => $request->get('dateTo'),
             'content' => $request->get('content'),
             'slug' => Str::slug($request->get('from') . '-' . $request->get('to') . '-' . (Carbon::parse($request->get('dateFrom'))->format('y_m_d'))),
-            'kilo' => $request->get('kilo'),
+            'kilo' => 0,
             'objects' => $request->get('objects'),
             'price' => 0,
             'status' => 'PROGRESS'

@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="text-center d-flex justify-content-between">
-      <h4 class="m-0 p-0 text-success">{{ post.kilo }} kilos encore disponibles</h4>
-      <span class="text-success">{{ post.price }}&#8364;/Kilo</span>
+    <div class="mb-2">
+      <h3 class="fw-bolder text-dark text-center">{{ post.kilo }} kilos encore disponibles .... {{ post.price }}&#8364;/Kilo</h3>
     </div>
     <div class="d-flex justify-content-between text-center">
       <div class="text-black-50">
@@ -16,14 +15,15 @@
         <span class="">{{ post.dateTo | formatDate }}</span>
       </div>
     </div>
-    <div class="my-4">
-      <span class="text-black-50">Objects transportables :</span>
-      <span v-for="object in post.objects" :key="object.name">
-        <span :class="'mx-2 badge fw-bold bg-' + object.color"  v-if="object.value">{{ object.name }}{{ object.number > 0 ? ' x' + object.number  : '' }}</span>
-      </span>
+    <div class="mt-3 border px-1">
+      <h3 class="small text-black-50 fw-bolder">Je transporte aussi les courriers</h3>
+      <div class="col-md-12">
+        <i class="bi bi-envelope text-success large-icon"></i>
+        <span class="text-black-50"> ............. Quantité: {{ post.objects.courrier.number }} .......... Prix: {{ post.objects.courrier.price }}<i class="bi bi-currency-euro text-dark fw-bolder"></i>/Unité</span>
+      </div>
     </div>
     <blockquote class="blockquote-footer border rounded mt-2">
-      <span class="text-black">Message du voyageur:</span>
+      <span class="text-black">Message:</span>
       <br>
       <p class="mb-0 mx-2">
         <i class="bx bxs-quote-alt-left fw-bold"></i>

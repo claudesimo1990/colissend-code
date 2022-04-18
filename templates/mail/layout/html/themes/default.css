@@ -283,6 +283,11 @@ img {
     padding-bottom: 0;
 }
 
+.panel-header {
+    padding: 0;
+    margin-bottom: 0;
+}
+
 /* Utilities */
 
 .break-all {

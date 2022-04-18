@@ -34,13 +34,13 @@ class PostController extends Controller
         ]);
     }
 
-    public function coli(Request $request)
+    public function coli()
     {
-        $transportedObjects = config('users.transportedObjects');
+        $coli = config('users.coli');
         $companies = config('users.flyCompnies');
 
         return view('app.post.coli.create', [
-            'transportedObjects' => $transportedObjects,
+            'coli' => $coli,
             'companies' => $companies
         ]);
     }

@@ -130,13 +130,15 @@ return [
     ],
 
     'transportedObjects' => [
-        ['id' => 1, 'name' => 'Envelope', 'value' => false, 'number' => 1, 'color' => 'success', 'price' => 8],
-        ['id' => 2, 'name' => 'Telephone', 'value' => false, 'number' => 1, 'color' => 'info', 'price' => 8],
-        ['id' => 3, 'name' => 'Ordinateur', 'value' => false, 'number' => 1, 'color' => 'secondary', 'price' => 8],
-        ['id' => 4, 'name' => 'Valise', 'value' => false, 'number' => 1, 'color' => 'danger', 'price' => 8],
-        ['id' => 5, 'name' => 'divers', 'value' => false, 'number' => 1, 'color' => 'black', 'price' => 8],
-        ['id' => 6, 'name' => 'sac', 'value' => false, 'number' => 1, 'color' => 'dark', 'price' => 8],
+        ['id' => 1, 'name' => 'Envelope', 'value' => false, 'number' => 1, 'color' => 'success', 'price' => 8, 'poids' => false],
+        ['id' => 2, 'name' => 'Telephone', 'value' => false, 'number' => 1, 'color' => 'info', 'price' => 8, 'poids' => false],
+        ['id' => 3, 'name' => 'Ordinateur', 'value' => false, 'number' => 1, 'color' => 'secondary', 'price' => 8, 'poids' => 0],
+        ['id' => 4, 'name' => 'Valise', 'value' => false, 'number' => 1, 'color' => 'danger', 'price' => 8, 'poids' => 23],
+        ['id' => 5, 'name' => 'sac', 'value' => false, 'number' => 1, 'color' => 'dark', 'price' => 8, 'poids' => 0],
+        ['id' => 6, 'name' => 'divers', 'value' => false, 'number' => 1, 'color' => 'black', 'price' => 8, 'description' => '', 'poids' => 0],
     ],
+
+    'coli' => ['id' => null, 'name' => null, 'quantity' => null, 'price' => null, 'width' => null, 'height' => null, 'length' => null, 'showBlock' => false],
 
     'howItWorks' => [
         [

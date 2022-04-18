@@ -73,31 +73,36 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                          <div class="row">
-                            <label class="col-sm-12 col-form-label">Vous acceptez quels Objects ?</label>
-                            <div class="col-sm-12">
-                              <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6" v-for="obj in form.transportedObjects" :id="obj.id">
-                                  <div class="input-group mb-3 border">
-
-                                    <div class="form-check form-switch mx-2 pt-1">
-                                      <input class="form-check-input" v-model="obj.value" type="checkbox" id="flexSwitchCheckDefault">
-                                      <label class="form-check-label" for="flexSwitchCheckDefault">{{ obj.name }}</label>
-                                    </div>
-
-                                    <span :class="'input-group-text text-white bg-' + obj.color " v-if="obj.value">Qunatité</span>
-                                    <input type="number" class="form-control" v-model="obj.number" v-if="obj.value" placeholder="Qunatité" aria-label="Server">
-
-                                    <span :class="'input-group-text text-white bg-' + obj.color " v-if="obj.value">Prix unitaire en &euro;</span>
-                                    <input type="number" class="form-control" v-model="obj.price" v-if="obj.value" placeholder="Prix" aria-label="Server">
-
-                                  </div>
-                                </div>
-                              </div>
+                      <div class="col-md-12">
+                        <div class="row border my-2 py-2">
+                          <div class="col-md-4">
+                            <div class="form-check">
+                              <label class="form-check-label" for="gridCheck1">
+                                J' accepte aussi les courriers
+                              </label>
+                              <input class="form-check-input" v-model.number="courrier" type="checkbox" id="gridCheck1">
                             </div>
                           </div>
+                          <div class="col-md-4" v-show="takeCourrier">
+                            <ValidationProvider rules="required|numeric" v-slot="{ errors }">
+                              <label for="courrier.number" class="form-label">Combien ?</label>
+                              <input type="number" name="price" v-model.number="form.transportedObjects.courrier.number" class="form-control" id="courrier.number">
+                              <span class="invalid-feedback d-block" role="alert">
+                              <small>{{ errors[0] }}</small>
+                          </span>
+                            </ValidationProvider>
+                          </div>
+                          <div class="col-md-4" v-show="takeCourrier">
+                            <ValidationProvider rules="required|numeric" v-slot="{ errors }">
+                              <label for="courrier.price" class="form-label">Prix unitaire en <i class="bi bi-currency-euro text-dark fw-bolder"></i></label>
+                              <input type="number" name="price" v-model.number="form.transportedObjects.courrier.price" class="form-control" id="courrier.price">
+                              <span class="invalid-feedback d-block" role="alert">
+                              <small>{{ errors[0] }}</small>
+                          </span>
+                            </ValidationProvider>
+                          </div>
                         </div>
+                      </div>
                       <div class="col-md-12">
                         <div class="row">
                           <div class="alert alert-info fw-bold">NB: Pour le moment nous n'acceptons que des payments avec paypal</div>
@@ -186,15 +191,23 @@ export default class TravelComponent extends Vue {
         ticket: null,
         message: null,
         payment: {},
-        transportedObjects: {},
+        transportedObjects: {
+          courrier: {
+            status: false,
+            number: null,
+            price: null
+          }
+        },
         payments: {},
         privacy: null
     };
+    description: String = '';
     success: boolean = false;
     message: string = '';
     file: any = {};
     response: any = {};
     posted: boolean = false;
+    courrier: boolean = false;
 
    matchOptions: any = {
      id: Number,
@@ -211,6 +224,15 @@ export default class TravelComponent extends Vue {
     setDateTo(val) {
         this.form.dateTo = val
     }
+
+  @Watch('courrier')
+  setCourrier(val) {
+    this.form.transportedObjects.courrier.status = val;
+    if (val === false) {
+      this.form.transportedObjects.courrier.number = null;
+      this.form.transportedObjects.courrier.price = null;
+    }
+  }
 
   paymentSelected(payment: any) {
       this.form.payment = payment;
@@ -282,9 +304,12 @@ export default class TravelComponent extends Vue {
         }
     }
 
+    get takeCourrier() {
+      return this.courrier;
+    }
+
     public mounted() {
         this.posted = false;
-        this.form.transportedObjects = JSON.parse(this.$props.objects)
         this.form.payments = JSON.parse(this.$props.payments)
     }
 }

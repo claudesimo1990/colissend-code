@@ -4,7 +4,6 @@ namespace App\Notifications\Booking;
 
 use App\Models\Post;
 use App\Models\Reservation;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -52,13 +51,27 @@ class BookingNotification extends Notification
      */
     public function toMail($notifiable): ?MailMessage
     {
+        $objects = json_decode($this->reservation->objects);
+        $courrier = $objects->courrier;
+        $total = $this->post->price * $this->reservation->kilo;
+
+        $res = [];
+        if ($courrier->status) $total += $courrier->number * $courrier->price;  $res['courier'] = ['name' => 'courrier', 'number' => $courrier->number, 'price' => $courrier->price];
+        $res['kilo'] = ['name' => 'kilos', 'number' => $this->reservation->kilo, 'price' => $this->post->price];
+        $res['total'] = ['name' => 'Total', 'number' => 1, 'price' => $total];
+
         if ($this->post->type == 'TRAVEL') {
             return (new MailMessage)
-                ->subject('Nouvelle reservation de kilos')
+                ->subject('Nouvelle reservation')
                 ->markdown('mail.booking.travel', [
                     'notifiable' => $notifiable,
                     'p' => $this->post,
-                    'r' => $this->reservation
+                    'kilos' => $this->reservation->kilo,
+                    'total' => $total,
+                    'r' => $res,
+                    'message' => $this->reservation->message,
+                    'id' => $this->reservation->id,
+                    'recipient' => $objects->recipient,
                 ]);
         }
 

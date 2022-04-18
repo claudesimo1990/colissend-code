@@ -4,7 +4,7 @@
 @section('app')
 
     <div class="container py-5">
-        <Coli-component objects="{{ json_encode($transportedObjects) }}"></Coli-component>
+        <Coli-component objects="{{ json_encode($coli) }}"></Coli-component>
     </div>
 
 @endsection

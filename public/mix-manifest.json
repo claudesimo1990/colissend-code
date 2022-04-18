@@ -9,5 +9,15 @@
     "/images/news-2.jpg": "/images/news-2.jpg",
     "/images/news-3.jpg": "/images/news-3.jpg",
     "/images/news-4.jpg": "/images/news-4.jpg",
-    "/images/news-5.jpg": "/images/news-5.jpg"
+    "/images/news-5.jpg": "/images/news-5.jpg",
+    "/images/android-chrome-192x192.png": "/images/android-chrome-192x192.png",
+    "/images/android-chrome-512x512.png": "/images/android-chrome-512x512.png",
+    "/images/apple-touch-icon.png": "/images/apple-touch-icon.png",
+    "/images/browserconfig.xml": "/images/browserconfig.xml",
+    "/images/favicon-16x16.png": "/images/favicon-16x16.png",
+    "/images/favicon-32x32.png": "/images/favicon-32x32.png",
+    "/images/favicon.ico": "/images/favicon.ico",
+    "/images/mstile-150x150.png": "/images/mstile-150x150.png",
+    "/images/safari-pinned-tab.svg": "/images/safari-pinned-tab.svg",
+    "/images/site.webmanifest": "/images/site.webmanifest"
 }

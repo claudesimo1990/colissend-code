@@ -21,7 +21,7 @@ class HomeController extends Controller
 
         $destinations = Gallery::where('content', 'destinations')->get();
 
-        return view('app.welcome', [
+        return view('app.pages.welcome', [
             'posts' => $latestPosts,
             'testimonials' => $testimonials,
             'destinations' => $destinations,
@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         $section = $this->findSectionWithId(config('users.howItWorks'), $id);
 
-        return view('app.howItWorks', [
+        return view('app.pages.howItWorks', [
             'section' => $section
         ]);
     }
@@ -42,29 +42,29 @@ class HomeController extends Controller
     {
         $faqs = config('users.faqs');
 
-        return view('app.faq', [
+        return view('app.pages.faq', [
             'faqs' => $faqs
         ]);
     }
 
     public function impressum()
     {
-        return view('app.impressum');
+        return view('app.pages.impressum');
     }
 
     public function about()
     {
-        return view('app.about');
+        return view('app.pages.about');
     }
 
     public function contact()
     {
-        return view('app.contact');
+        return view('app.pages.contact');
     }
 
     public function privacy()
     {
-        return view('app.privacy');
+        return view('app.pages.privacy');
     }
 
     public function sendMessage(Request $request): RedirectResponse

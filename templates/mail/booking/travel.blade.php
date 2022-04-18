@@ -1,25 +1,38 @@
 @component('mail::message')
 
-# {{ getSalution() }},
+@php($total = 0)
 
-# Reservation de {{ $r->kilo }} Kilos,
+# {{ getSalution() }}, vous avez une nouvelle reservation.
 
-### Vous avez une nouvelle resevation Sur votre post de {{ $p->from }} pour {{ $p->to }} du {{ formatDate($p->dateFrom) }} au {{ formatDate($p->dateTo) }}
+Une resevation de {{ $kilos }} kilos à été faite, Sur votre post de {{ $p->from }} pour {{ $p->to }} du {{ formatDate($p->dateFrom) }} au {{ formatDate($p->dateTo) }}.
+<br><br>
 
-#### Objects à transporter :
-@foreach(json_decode($r->objects) as $obj)
-    - {{ $obj }}
-@endforeach
+## Details de la reservation:
+@component('mail::table')
+    | Element       | Quantité       |  Prix unitaire |  Total en Euro |
+    | :--------- | :------------- | :------------- | :------------- |
+    @foreach ($r as $key => $value)
+        | {{ $value['name'] }} | {{ $value['number'] }} | {{ $value['price'] }} | {{ $value['number'] * $value['price'] }} |
+    @endforeach
+@endcomponent
 
-Message de l'acheteur:
+@component('mail::panel')
+    # Infos sur le destinataire:
+@component('mail::table')
+    | Nom       | N°CNI         | Telephone  | Lieux de rencontre  |
+    | ------------- |:-------------:| --------:|:-------------:|
+    | {{ $recipient->name }}      | {{ $recipient->cni }}      | {{ $recipient->phone }}      | {{ $recipient->place }}|
+@endcomponent
 
-{{ $r->message }}
+# Message:
+{{ $message }}
+@endcomponent
 
 <span style="display: inline;">
-    @component('mail::button', ['url' => route('booking-validate', ['reservation' => $r->id]), 'color' => 'green'])
+    @component('mail::button', ['url' => route('booking-validate', ['reservation' => $id]), 'color' => 'green'])
            Valider la reservation
     @endcomponent
-    @component('mail::button', ['url' => route('booking-except', ['reservation' => $r->id]), 'color' => 'red'])
+    @component('mail::button', ['url' => route('booking-except', ['reservation' => $id]), 'color' => 'red'])
             Refuser la reservation
     @endcomponent
 </span>

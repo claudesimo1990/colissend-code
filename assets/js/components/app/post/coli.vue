@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="text-center d-flex justify-content-between bg-success-light mb-2">
-      <h4 class="m-0 p-0">Recherche d'un transporter pour mon Coli</h4>
-      <span class="text-success">poids estimé á : {{ post.kilo }} Kilo(s)</span>
+    <div class="">
+      <h3 class="fw-bolder text-dark text-center">Recherche d'un transporter</h3>
     </div>
     <div class="d-flex justify-content-between text-center">
       <div class="text-black-50">
@@ -16,14 +15,20 @@
         <span class="">{{ post.dateTo | formatDate }}</span>
       </div>
     </div>
-    <div class="my-4">
-      <span class="text-black-50">Objects à transporter :</span>
-       <span v-for="object in post.objects" :key="object.name">
-         <span class="badge rounded-pill rounded mx-1 small" :class="'bg-' + object.color" v-if="object.value">{{ object.name }} {{ object.count > 0 ? 'x' + object.count : '' }}</span>
-      </span>
+    <div class="mt-3 border px-1">
+      <h3 class="small text-black-50 fw-bolder">Objects à transporter :</h3>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6" v-for="object in post.objects" :key="object.id">
+            <i v-if="object.type === 'Bagages'" class="bi bi-box-seam text-success large-icon"></i>
+            <i v-if="object.type === 'Courrier'" class="bi bi-envelope text-success large-icon"></i>
+            <span class="text-black-50 small">{{ object.name }} x{{ object.quantity }} ..Poids: {{ object.weight }} ..Prix: {{ object.price }}<i class="bi bi-currency-euro text-dark fw-bolder"></i>/Unité</span>
+          </div>
+        </div>
+      </div>
     </div>
     <blockquote class="blockquote-footer border rounded mt-2">
-      <span class="text-black">Message de l'expediteur:</span>
+      <span class="text-black">Message:</span>
       <br>
       <p class="mb-0 mx-2">
         <i class="bx bxs-quote-alt-left fw-bold"></i>
@@ -31,24 +36,12 @@
         <i class="bx bxs-quote-alt-right fw-bold"></i>
       </p>
     </blockquote>
-    <div class="text-end my-2">
-      <span class="badge border-info text-black-50">
-          <i class="bi bi-box-seam mx-2" style="font-size: 40px;color: green;"></i> poster {{ post.created_at | ago }}
-      </span>
-      <span class="badge border-success border-1 text-success"><i class="bx bx-check-circle"></i>Annonce verifiée!</span>
-      <div class="ratings mx-2">
-        <i class="bi bi-star"></i>
-        <i class="bi bi-star"></i>
-        <i class="bi bi-star"></i>
-        <i class="bi bi-star"></i>
-      </div>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 
-  import {Vue, Component, Prop} from 'vue-property-decorator'
+  import {Vue, Component} from 'vue-property-decorator'
 
   @Component({
     props: {
@@ -58,3 +51,11 @@
   export default class Coli extends Vue {}
 
 </script>
+<style lang="scss" scoped>
+.large-icon {
+  font-size: 20px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+</style>

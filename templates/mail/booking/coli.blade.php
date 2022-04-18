@@ -23,8 +23,10 @@
     | Prix estimé à | {{ $r->price }}&euro; |
 @endcomponent
 
-Message:
-{{ $r->message }}
+@component('mail::panel')
+    # Message:
+    {{ $r->message }}
+@endcomponent
 
 <br><br>
 

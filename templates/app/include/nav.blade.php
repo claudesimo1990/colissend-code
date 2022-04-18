@@ -43,9 +43,16 @@
                     </a>
                 </li>
 
+<!--                <li class="nav-item">
+                    <a class="nav-link nav-item {{ (request()->routeIs('blog.index')) ? 'active' : '' }}" aria-current="page" href="{{ route('blog.index') }}">
+                        <i class="bi bi-chat"></i>
+                        Forum
+                    </a>
+                </li>-->
+
                 <li class="nav-item">
                     <a class="nav-link nav-item {{ (request()->routeIs('blog.index')) ? 'active' : '' }}" aria-current="page" href="{{ route('blog.index') }}">
-                        <i class="bi bi-pencil-square"></i>
+                        <i class="bi bi-book"></i>
                         Blog
                     </a>
                 </li>

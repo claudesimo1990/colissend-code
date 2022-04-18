@@ -53,13 +53,22 @@ class ReservationValidate extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
+        $objects = json_decode($this->reservation->objects);
+        $courrier = $objects->courrier;
+        $total = $this->post->price * $this->reservation->kilo;
+
+        $res = [];
+        if ($courrier->status) $total += $courrier->number * $courrier->price;  $res['courier'] = ['name' => 'courrier', 'number' => $courrier->number, 'price' => $courrier->price];
+        $res['kilo'] = ['name' => 'kilos', 'number' => $this->reservation->kilo, 'price' => $this->post->price];
+        $res['total'] = ['name' => 'Somme à payer', 'number' => 1, 'price' => $total];
+
         return (new MailMessage)
             ->subject('Validation de reservation')
             ->markdown('mail.booking.validate', [
                 'type' => $this->post->type,
                 'id' => $this->reservation->id,
-                'k' => $this->reservation->kilo,
-                'p' => $this->reservation->kilo *  $this->post->price
+                'r' => $res,
+                'message' => $this->reservation->message,
             ]);
     }
 

@@ -2,19 +2,19 @@
     <div>
         <ValidationProvider rules="" v-slot="{ errors }">
             <datetime
-                :type="type"
+                type="datetime"
                 v-model="date"
                 :placeholder="title"
                 input-class="form-control"
                 value-zone="Europe/Paris"
                 zone="Europe/Paris"
-                :format="format"
+                :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }"
                 :phrases="{ ok: 'Continue', cancel: 'Exit' }"
                 :min-datetime="minDate.toString()"
                 :week-start="7"
                 use24-hour
                 auto
-            />
+            ></datetime>
             <span class="invalid-feedback d-block" role="alert">
                 <small>{{ errors[0] }}</small>
             </span>
@@ -61,7 +61,7 @@ export default class InputDate extends Vue {
         }
     }
 
-    public created () {
+    public mounted () {
         this.label = this.$props.title;
         this.model = this.$props.field;
 
