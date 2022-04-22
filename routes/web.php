@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\social\LoginController;
 use App\Http\Controllers\Pub\PubController;
 use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
+use App\Mail\TestMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,12 @@ Route::get('/facebook/login', [LoginController::class, 'facebook'])->name('faceb
 Route::get('/facebook/callback', [LoginController::class, 'facebookCallBack'])->name('facebookCallBack');
 
 Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, 'confirmation'])->name('user.account.confirmation');
+
+Route::get('testMail', function () {
+
+    $reservation = \App\Models\Reservation::latest()->first();
+    $post = \App\Models\Post::where('TYPE', 'TRAVEL')->latest()->first();
+
+    return new TestMail($reservation, $post);
+
+});

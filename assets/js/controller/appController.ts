@@ -27,11 +27,11 @@ extend('numeric', {
     ...numeric,
     message: 'Ce champs est numeric'
 });
-extend('max', {
+extend('maximun:', {
     ...max,
     message: 'La valeur taper est trop grande'
 });
-extend('min', {
+extend('minimun', {
     ...min,
     message: 'La valeur taper est trop petite'
 });
@@ -42,6 +42,10 @@ extend('image', {
 });
 
 import filters from "../utilities/filters";
+
+import VueChatScroll from 'vue-chat-scroll';
+
+Vue.use(VueChatScroll);
 
 Vue.use(filters)
 

@@ -68,7 +68,7 @@
                   <div class="list-group-item">
                     <div class="row">
                       <div class="col-lg-5">
-                        <ValidationProvider v-slot="{ errors }" rules="required|integer|max:3">
+                        <ValidationProvider v-slot="{ errors }" rules="required|integer">
                           <input id="kilo" v-model="booking.kilo" :max="post.kilo" class="form-control" min="0"
                                  placeholder="Combien de kilos voulez-vous reserver ?" type="number">
                           <span class="invalid-feedback d-block" role="alert">
@@ -85,7 +85,7 @@
                         </div>
                       </div>
                       <div v-if="shoHasCourrier" class="col-lg-3">
-                        <ValidationProvider v-slot="{ errors }" rules="required|min:1|max:8">
+                        <ValidationProvider v-slot="{ errors }" rules="required">
                           <input type="number" id="courrier.number" v-model="booking.objects.courrier.number" class="form-control" name="price" placeholder="Combien ?">
                           <span class="invalid-feedback d-block" role="alert">
                           <small>{{ errors[0] }}</small>
@@ -118,7 +118,7 @@
                       </div>
                       <div class="col-lg-3">
                         <ValidationProvider v-slot="{ errors }" rules="required">
-                          <input id="number" v-model="booking.objects.recipient.phone" class="form-control"
+                          <input id="phone" v-model="booking.objects.recipient.phone" class="form-control"
                                  name="number" placeholder="Numéro de telephone" type="text">
                           <span class="invalid-feedback d-block" role="alert">
                             <small>{{ errors[0] }}</small>
@@ -154,7 +154,7 @@
         </div>
       </div>
     </div>
-    <book-message :user="post.user"></book-message>
+    <book-message :post="post" :auth="auth"></book-message>
   </div>
 </template>
 

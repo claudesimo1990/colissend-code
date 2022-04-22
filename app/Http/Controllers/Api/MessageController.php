@@ -31,7 +31,7 @@ class MessageController extends Controller
     {
         $message = $repository->store($request);
 
-        Notification::send(Auth::user(), new NewMessage($message->load('user')));
+        //Notification::send(Auth::user(), new NewMessage($message->load('user')));
 
         return response()->json($message);
     }

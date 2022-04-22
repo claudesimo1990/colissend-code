@@ -34,26 +34,11 @@ class MessageRepository
 
     public function getFor(int $id)
     {
-        (Message::where('from', $id)->where('to', auth()->id())->get())->each(function ($m) {
-          $m->update(['read' => true]);
-          $m->save();
-       });
-
-        return Message::where(function ($q) use ($id) {
-            $q->where('from', auth()->id());
-            $q->where('to', $id);
-        })->orWhere(function ($q) use ($id) {
-            $q->where('from', $id);
-            $q->where('to', auth()->id());
-        })->get();
+       return Message::all()->load('from');
     }
 
     public function store($request)
     {
-        \DB::table('friends')->updateOrInsert([
-            'user_id' => Auth::id(),
-            'user' => $request->get('to'),
-        ]);
         return Message::create([
             'from' => $request->get('from'),
             'to' => $request->get('to'),

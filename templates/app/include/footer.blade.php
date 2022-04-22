@@ -8,11 +8,11 @@
                         <img src="{{ asset('images/colissend/logo.svg') }}" width="150px" alt="colissend-logo">
                     </a>
                 </div>
-                <p class="fw-bold">Votre service d'echange, d'envoie de courrier ou colis entre Particuliers</p>
+                <p class="">Votre service d'echange, d'envoie de courrier ou colis entre Particuliers</p>
             </div>
             <div class="col-md-3 mt-md-0 mt-3 ">
                 <div class="text-uppercase bg__title">Products</div>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled text-center">
                     <li><a class="text-success" href="{{ route('welcome') }}"><i class="bi bi-house-fill mx-1"></i>Accueil</a></li>
                     <li><a class="text-success" href="{{ route('posts.index') }}"><i class="bi bi-search mx-1"></i>Annonces</a></li>
                     <li><a class="text-success" href="{{ route('posts.travel.create') }}"><i class="bi bi-pencil-square mx-1"></i>Poster un Trajet</a></li>

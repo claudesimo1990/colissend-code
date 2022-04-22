@@ -2062,7 +2062,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_app_shared_SearchComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/app/shared/SearchComponent.vue */ "./assets/js/components/app/shared/SearchComponent.vue");
 /* harmony import */ var _components_app_post_PostComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/app/post/PostComponent.vue */ "./assets/js/components/app/post/PostComponent.vue");
 /* harmony import */ var _components_app_post_PostBookingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/app/post/PostBookingComponent.vue */ "./assets/js/components/app/post/PostBookingComponent.vue");
@@ -2075,6 +2075,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 /* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
 /* harmony import */ var _utilities_filters__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utilities/filters */ "./assets/js/utilities/filters.ts");
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue-chat-scroll */ "./node_modules/vue-chat-scroll/dist/index.js");
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_12__);
 var __assign = undefined && undefined.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -2113,18 +2115,20 @@ var __assign = undefined && undefined.__assign || function () {
 (0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)('numeric', __assign(__assign({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__.numeric), {
   message: 'Ce champs est numeric'
 }));
-(0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)('max', __assign(__assign({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__.max), {
+(0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)('maximun:', __assign(__assign({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__.max), {
   message: 'La valeur taper est trop grande'
 }));
-(0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)('min', __assign(__assign({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__.min), {
+(0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)('minimun', __assign(__assign({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__.min), {
   message: 'La valeur taper est trop petite'
 }));
 (0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)('image', __assign(__assign({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_10__.image), {
   message: 'Ce champs est doit etre une image'
 }));
 
-vue__WEBPACK_IMPORTED_MODULE_12__["default"].use(_utilities_filters__WEBPACK_IMPORTED_MODULE_11__["default"]);
-var app = new vue__WEBPACK_IMPORTED_MODULE_12__["default"]({
+
+vue__WEBPACK_IMPORTED_MODULE_13__["default"].use((vue_chat_scroll__WEBPACK_IMPORTED_MODULE_12___default()));
+vue__WEBPACK_IMPORTED_MODULE_13__["default"].use(_utilities_filters__WEBPACK_IMPORTED_MODULE_11__["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_13__["default"]({
   components: {
     searchComponent: _components_app_shared_SearchComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     PostComponent: _components_app_post_PostComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2217,7 +2221,7 @@ var message = {
   },
   mutations: {
     setMessages: function setMessages(state) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/message/all').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/messages').then(function (response) {
         state.messages = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -2230,14 +2234,14 @@ var message = {
       state.posts = payload;
     },
     postMessage: function postMessage(state, payload) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/message/all', payload).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/messages', payload).then(function (response) {
         state.sendStatus = true;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     messagesWith: function messagesWith(state, payload) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/message/with/' + payload).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/messages/with/' + payload).then(function (response) {
         state.conversation = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -2263,7 +2267,6 @@ var message = {
     storeMessage: function storeMessage(_a, payload) {
       var commit = _a.commit;
       commit('postMessage', payload);
-      commit('setMessages', payload);
     },
     getMessagesWith: function getMessagesWith(_a, payload) {
       var commit = _a.commit;
@@ -2976,7 +2979,10 @@ function (_super) {
   __extends(BookMessage, _super);
 
   function BookMessage() {
-    return _super !== null && _super.apply(this, arguments) || this;
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+
+    _this.message = '';
+    return _this;
   }
 
   Object.defineProperty(BookMessage.prototype, "displayChat", {
@@ -2991,12 +2997,37 @@ function (_super) {
     _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('message/openChat', !this.displayChat);
   };
 
+  Object.defineProperty(BookMessage.prototype, "conversations", {
+    get: function get() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["message/conversation"];
+    },
+    enumerable: false,
+    configurable: true
+  });
+
+  BookMessage.prototype.sendMessage = function () {
+    if (this.message.length > 0) {
+      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('message/storeMessage', {
+        from: this.$props.auth.id,
+        to: this.$props.post.user.id,
+        content: this.message
+      });
+      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('message/getMessagesWith', this.$props.post.user.id);
+      this.message = '';
+    }
+  };
+
+  BookMessage.prototype.mounted = function () {
+    _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('message/getMessagesWith', this.$props.post.user.id);
+  };
+
   BookMessage = __decorate([(0,vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__.Component)({
     components: {
       ContactComponent: _shared_ContactComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     },
     props: {
-      user: Object
+      post: Object,
+      auth: Object
     }
   })], BookMessage);
   return BookMessage;
@@ -41974,6 +42005,17 @@ var version = '3.4.14';
 
 /***/ }),
 
+/***/ "./node_modules/vue-chat-scroll/dist/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-chat-scroll/dist/index.js ***!
+  \****************************************************/
+/***/ (function(module) {
+
+!function(e,n){ true?module.exports=n():0}(this,function(){"use strict";function o(e,n){var t=n||e.scrollHeight-e.clientHeight;"function"==typeof e.scroll?e.scroll({top:t}):e.scrollTop=t}function i(e,n){if(!1!==n.enabled)if(!1!==n.handlePrepend){var t=0===e.scrollTop&&s.has(e)&&e.scrollHeight-s.get(e);o(e,t),s.set(e,e.scrollHeight)}else o(e)}var r=function(){return(r=Object.assign||function(e){for(var n,t=1,o=arguments.length;t<o;t++)for(var i in n=arguments[t])Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i]);return e}).apply(this,arguments)},l={enabled:!0,handlePrepend:!1},c=new WeakMap,s=new WeakMap,n={inserted:function(e,n){var t=r(r({},l),n.value);i(e,t)},update:function(e,n){c.has(e)&&c.get(e).disconnect();var t=r(r({},l),n.value),o=new MutationObserver(function(){i(e,t)});o.observe(e,{childList:!0,subtree:!0}),c.set(e,o)}},e={install:function(e){e.directive("chat-scroll",n)}};return"undefined"!=typeof window&&window.Vue&&window.Vue.use(e),e});
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-class-component/dist/vue-class-component.esm.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/vue-class-component/dist/vue-class-component.esm.js ***!
@@ -46500,9 +46542,7 @@ var render = function () {
                                       { staticClass: "col-lg-5" },
                                       [
                                         _c("ValidationProvider", {
-                                          attrs: {
-                                            rules: "required|integer|max:3",
-                                          },
+                                          attrs: { rules: "required|integer" },
                                           scopedSlots: _vm._u(
                                             [
                                               {
@@ -46654,9 +46694,7 @@ var render = function () {
                                           { staticClass: "col-lg-3" },
                                           [
                                             _c("ValidationProvider", {
-                                              attrs: {
-                                                rules: "required|min:1|max:8",
-                                              },
+                                              attrs: { rules: "required" },
                                               scopedSlots: _vm._u(
                                                 [
                                                   {
@@ -46961,7 +46999,7 @@ var render = function () {
                                                       staticClass:
                                                         "form-control",
                                                       attrs: {
-                                                        id: "number",
+                                                        id: "phone",
                                                         name: "number",
                                                         placeholder:
                                                           "Numéro de telephone",
@@ -47193,7 +47231,7 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("book-message", { attrs: { user: _vm.post.user } }),
+      _c("book-message", { attrs: { post: _vm.post, auth: _vm.auth } }),
     ],
     1
   )
@@ -47254,7 +47292,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { ref: "box", staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
@@ -47276,14 +47314,138 @@ var render = function () {
             },
             [
               _c("div", { staticClass: "chatbox__title text-white" }, [
-                _c("h5", [_vm._v("Contacter " + _vm._s(_vm.user.name))]),
+                _c("h5", [_vm._v("Contacter " + _vm._s(_vm.post.user.name))]),
               ]),
             ]
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "div",
+            {
+              directives: [{ name: "chat-scroll", rawName: "v-chat-scroll" }],
+              staticClass: "chatbox__body",
+              attrs: { id: "message-box" },
+            },
+            _vm._l(_vm.conversations, function (message) {
+              return _c(
+                "div",
+                {
+                  class:
+                    message.from.id === _vm.auth.id
+                      ? "chatbox__body__message chatbox__body__message--right"
+                      : "chatbox__body__message chatbox__body__message--left",
+                  attrs: { id: message.id },
+                },
+                [
+                  _c("div", { staticClass: "chatbox_timing" }, [
+                    _c("ul", [
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-calendar" }),
+                          _vm._v(
+                            _vm._s(_vm._f("formatDate")(message.created_at))
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  message.from.thumb || message.from.avatar
+                    ? _c("img", {
+                        attrs: {
+                          src: message.from.thumb
+                            ? message.from.thumb
+                            : message.from.avatar,
+                          width: "50px",
+                          height: "50px",
+                          alt: "Picture",
+                        },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  message.from.thumb === "" && message.from.avatar === ""
+                    ? _c("img", {
+                        attrs: {
+                          src: "/images/colissend/default.svg",
+                          alt: "Picture",
+                        },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "clearfix" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ul_section_full" }, [
+                    _c("ul", { staticClass: "ul_msg" }, [
+                      _c("li", [
+                        _c("strong", [_vm._v(_vm._s(message.from.name))]),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [_vm._v(_vm._s(message.content))]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "clearfix" }),
+                    _vm._v(" "),
+                    _vm._m(0, true),
+                  ]),
+                ]
+              )
+            }),
+            0
+          ),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "panel-footer" }, [
+            _c(
+              "div",
+              {
+                staticClass: "list-group-item",
+                staticStyle: { "background-color": "#012970" },
+              },
+              [
+                _c("div", { staticClass: "my-2" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.message,
+                        expression: "message",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Laisser un message ...",
+                    },
+                    domProps: { value: _vm.message },
+                    on: {
+                      keyup: function ($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        $event.preventDefault()
+                        return _vm.sendMessage()
+                      },
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.message = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+              ]
+            ),
+          ]),
         ]
       ),
     ]),
@@ -47294,333 +47456,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "chatbox__body" }, [
-      _c(
-        "div",
-        { staticClass: "chatbox__body__message chatbox__body__message--left" },
-        [
-          _c("div", { staticClass: "chatbox_timing" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-calendar" }),
-                  _vm._v(" 22/11/2018"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-clock-o" }),
-                  _vm._v(" 7:00 PM"),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src: "https://www.gstatic.com/webp/gallery/2.jpg",
-              alt: "Picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "ul_section_full" }, [
-            _c("ul", { staticClass: "ul_msg" }, [
-              _c("li", [_c("strong", [_vm._v("Person Name")])]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }),
-            _vm._v(" "),
-            _c("ul", { staticClass: "ul_msg2" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-pencil" }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-trash chat-trash" }),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
+    return _c("ul", { staticClass: "ul_msg2" }, [
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("i", { staticClass: "fa fa-pencil" }),
+        ]),
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "chatbox__body__message chatbox__body__message--right" },
-        [
-          _c("div", { staticClass: "chatbox_timing" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-calendar" }),
-                  _vm._v(" 22/11/2018"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-clock-o" }),
-                  _vm._v(" 7:00 PM"),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src: "https://www.gstatic.com/webp/gallery/2.jpg",
-              alt: "Picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "ul_section_full" }, [
-            _c("ul", { staticClass: "ul_msg" }, [
-              _c("li", [_c("strong", [_vm._v("Person Name")])]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }),
-            _vm._v(" "),
-            _c("ul", { staticClass: "ul_msg2" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-pencil" }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-trash chat-trash" }),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "chatbox__body__message chatbox__body__message--left" },
-        [
-          _c("div", { staticClass: "chatbox_timing" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-calendar" }),
-                  _vm._v(" 22/11/2018"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-clock-o" }),
-                  _vm._v(" 7:00 PM"),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src: "https://www.gstatic.com/webp/gallery/2.jpg",
-              alt: "Picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "ul_section_full" }, [
-            _c("ul", { staticClass: "ul_msg" }, [
-              _c("li", [_c("strong", [_vm._v("Person Name")])]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }),
-            _vm._v(" "),
-            _c("ul", { staticClass: "ul_msg2" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-pencil" }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-trash chat-trash" }),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "chatbox__body__message chatbox__body__message--right" },
-        [
-          _c("div", { staticClass: "chatbox_timing" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-calendar" }),
-                  _vm._v(" 22/11/2018"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-clock-o" }),
-                  _vm._v(" 7:00 PM"),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src: "https://www.gstatic.com/webp/gallery/2.jpg",
-              alt: "Picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "ul_section_full" }, [
-            _c("ul", { staticClass: "ul_msg" }, [
-              _c("li", [_c("strong", [_vm._v("Person Name")])]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }),
-            _vm._v(" "),
-            _c("ul", { staticClass: "ul_msg2" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-pencil" }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-trash chat-trash" }),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "chatbox__body__message chatbox__body__message--left" },
-        [
-          _c("div", { staticClass: "chatbox_timing" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-calendar" }),
-                  _vm._v(" 22/11/2018"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-clock-o" }),
-                  _vm._v(" 7:00 PM"),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src: "https://www.gstatic.com/webp/gallery/2.jpg",
-              alt: "Picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "ul_section_full" }, [
-            _c("ul", { staticClass: "ul_msg" }, [
-              _c("li", [_c("strong", [_vm._v("Person Name")])]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }),
-            _vm._v(" "),
-            _c("ul", { staticClass: "ul_msg2" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-pencil" }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-trash chat-trash" }),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-footer" }, [
-      _c(
-        "div",
-        {
-          staticClass: "list-group-item",
-          staticStyle: { "background-color": "#012970" },
-        },
-        [
-          _c("div", { staticClass: "my-2" }, [
-            _c("textarea", {
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Laisser un message ..." },
-            }),
-          ]),
-        ]
-      ),
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("i", { staticClass: "fa fa-trash chat-trash" }),
+        ]),
+      ]),
     ])
   },
 ]

@@ -13,7 +13,7 @@ const message = {
     }),
     mutations: {
         setMessages(state: any) {
-            axios.get('/message/all').then((response) => {
+            axios.get('/api/messages').then((response) => {
                 state.messages = response.data;
             }).catch((error) => {
                 console.log(error)
@@ -29,7 +29,7 @@ const message = {
         },
 
         postMessage(state: any, payload: string){
-            axios.post('/message/all', payload).then((response) => {
+            axios.post('/api/messages', payload).then((response) => {
                 state.sendStatus = true;
             }).catch((error) => {
                 console.log(error)
@@ -37,7 +37,7 @@ const message = {
         },
 
         messagesWith(state: any, payload: number){
-            axios.get('/message/with/' + payload).then((response) => {
+            axios.get('/api/messages/with/' + payload).then((response) => {
                 state.conversation = response.data;
             }).catch((error) => {
                 console.log(error)
@@ -63,7 +63,6 @@ const message = {
 
         storeMessage({ commit } : any, payload: string) {
             commit('postMessage' , payload);
-            commit('setMessages', payload);
         },
 
         getMessagesWith({ commit } : any, payload: number) {

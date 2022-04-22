@@ -293,3 +293,8 @@ img {
 .break-all {
     word-break: break-all;
 }
+
+.total {
+    color: black;
+    font-weight: bold;
+}

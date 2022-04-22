@@ -8,12 +8,12 @@
     | Element       | Quantité       |  Prix unitaire |  Total en Euro |
     | :--------- | :------------- | :------------- | :------------- |
     @foreach ($r as $key => $value)
-        | {{ $value['name'] }} | {{ $value['number'] }} | {{ $value['price'] }} | {{ $value['number'] * $value['price'] }} |
+        | <span>{{ $key == 'total' ? 'Somme à payer :' : $value['name'] }}</span> | <span @if($key == 'total')style="display: none"@endif>{{ $value['number'] }}</span> | <span @if($key == 'total')style="display: none"@endif>{{ $value['price'] }} |</span> <span class="{{ $key }}">{{ $value['number'] * $value['price'] }}</span> |
     @endforeach
 @endcomponent
 
 <span style="display: inline;">
-    @component('mail::button', ['url' => route('booking-validate', ['reservation' => $id]), 'color' => 'green'])
+    @component('mail::button', ['url' => route('booking-checkout', ['reservation' => $id]), 'color' => 'green'])
         Proceder au payment
     @endcomponent
     @component('mail::button', ['url' => route('booking-except', ['reservation' => $id]), 'color' => 'red'])
