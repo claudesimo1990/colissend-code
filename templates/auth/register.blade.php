@@ -7,12 +7,12 @@
             <div class="col-md-8 py-4">
                 <div class="card">
                     <div class="card-header text-center">
-                        <div class="login-card-footer-nav block-media-login my-4">
-                            <a href="{{ route('facebook') }}" class="btn btn-primary">
-                                <span class="bi bi-facebook text-white"></span> Continuer avec facebook
+                        <div class="login-card-footer-nav block-media-login">
+                            <a href="{{ route('facebook') }}" class="btn btn-primary my-1">
+                                <span class="bi bi-facebook text-white mx-2"></span>Facebook
                             </a>
-                            <a href="{{ route('google') }}" class="btn btn-danger">
-                                <span class="bi bi-google text-white"></span> Continuer avec google
+                            <a href="{{ route('google') }}" class="btn btn-danger my-1">
+                                <span class="bi bi-google text-white mx-2"></span>Google
                             </a>
                         </div>
                     </div>
@@ -22,8 +22,38 @@
                             {{ csrf_field() }}
 
                             <div class="form-group row my-2">
-                                <label for="avatar" class="col-md-4 col-form-label text-md-right">Image du Profile</label>
                                 <div class="col-md-6">
+                                    <label for="lastname" class="col-form-label text-md-right">Nom</label>
+                                    <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  autocomplete="lastname" autofocus>
+                                    @error('lastname')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="firstname" class="col-form-label text-md-right">Prénom</label>
+                                    <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}"  autocomplete="firstname" autofocus>
+                                    @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row my-2">
+                                <div class="col-md-6">
+                                    <label for="email" class="col-form-label text-md-right">Adresse mail</label>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="avatar" class="col-form-label text-md-right">Image du Profile</label>
                                     <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" autocomplete="avatar">
                                     @error('avatar')
                                     <span class="invalid-feedback" role="alert">
@@ -34,49 +64,17 @@
                             </div>
 
                             <div class="form-group row my-2">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Nom</label>
-
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row my-2">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">Adresse mail</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row my-2">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
-                                <div class="col-md-6">
+                                    <label for="password" class="col-form-label text-md-right">Mot de passe</label>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
-
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                            <div class="form-group row my-2">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Mot de passe de confirmation</label>
                                 <div class="col-md-6">
+                                    <label for="password-confirm" class="col-form-label">Mot de passe de confirmation</label>
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
                                 </div>
                             </div>
@@ -94,8 +92,9 @@
                                 </div>
                             </div>
                         </form>
-                        <p class="text-muted text-center">Vos données personnelles (email et nom d'utilisateur) ne sont utilisées qu'à des fins d'authentification et ne sont pas partagées avec des tiers
-                            <a class="text-success" href="{{ route('privacy') }}">(En savoir plus)</a>.</p>
+                        <div class="d-flex justify-content-center align-items-center text-muted text-center flex-column">
+                            Vos données personnelles (email et nom d'utilisateur) ne sont utilisées qu'à des fins d'authentification et ne sont pas partagées avec des tiers
+                            <a class="text-success" href="{{ route('privacy') }}">(En savoir plus)</a>.</div>
                     </div>
                 </div>
             </div>

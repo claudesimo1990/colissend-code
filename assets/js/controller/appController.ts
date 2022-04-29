@@ -8,45 +8,15 @@ import NotificationComponent from "../components/app/nav/NotificationComponent.v
 import TravelComponent from "../components/app/post/TravelComponent.vue";
 import ColiComponent from "../components/app/post/ColiComponent.vue";
 import ChatComponent from "../components/app/chat/ChatComponent.vue";
+import MessagesComponent from "../components/app/user/Messages.vue";
 import CookieComponent from "../components/app/CookieComponent.vue";
 
-import { extend } from 'vee-validate';
-import {required, integer, max, min, numeric, image} from 'vee-validate/dist/rules';
-
-
-//vee-validate rules
-extend('required', {
-    ...required,
-    message: 'Ce champs est obligatoire'
-});
-extend('integer', {
-    ...integer,
-    message: 'Ce champs est un entier'
-});
-extend('numeric', {
-    ...numeric,
-    message: 'Ce champs est numeric'
-});
-extend('maximun:', {
-    ...max,
-    message: 'La valeur taper est trop grande'
-});
-extend('minimun', {
-    ...min,
-    message: 'La valeur taper est trop petite'
-});
-
-extend('image', {
-    ...image,
-    message: 'Ce champs est doit etre une image'
-});
+require("../../js/utilities/validator");
 
 import filters from "../utilities/filters";
-
 import VueChatScroll from 'vue-chat-scroll';
 
 Vue.use(VueChatScroll);
-
 Vue.use(filters)
 
 const app = new Vue({
@@ -59,6 +29,7 @@ const app = new Vue({
         TravelComponent: TravelComponent,
         ColiComponent: ColiComponent,
         ChatComponent: ChatComponent,
+        MessagesComponent: MessagesComponent,
         CookieComponent: CookieComponent
     }
 }).$mount('#app');

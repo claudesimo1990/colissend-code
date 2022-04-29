@@ -21,18 +21,11 @@ class Post extends Model implements HasMedia
 
     protected $appends = ['ticket'];
 
-    /**
-     * @param  $value
-     * @return mixed
-     */
     public function getObjectsAttribute($value)
     {
         return json_decode($value);
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -49,9 +42,6 @@ class Post extends Model implements HasMedia
         $this->addMediaCollection('colis');
     }
 
-    /**
-     * @throws InvalidManipulation
-     */
     public function registerAllMediaConversions(): void
     {
         $this->addMediaConversion('thumb')

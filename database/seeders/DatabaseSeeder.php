@@ -54,6 +54,22 @@ class DatabaseSeeder extends Seeder
 
         Pub::factory(4)->create();*/
 
-        Admin::factory(1)->create();
+        //Admin::factory(1)->create();
+
+        for ($i = 1; $i <= 3; $i++) {
+
+            $n = 1;
+            while( in_array( ($n = mt_rand(1,3)), array($i)));
+
+            $from = $i;
+            $to = $n;
+
+            if ($from != $to) {
+                Message::factory(10)->create([
+                    'from' => $from,
+                    'to' => $to,
+                ]);
+            }
+        }
     }
 }

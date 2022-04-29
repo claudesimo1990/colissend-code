@@ -34,7 +34,7 @@ class MessageRepository
 
     public function getFor(int $id)
     {
-       return Message::all()->load('from');
+       return Message::all()->load('user');
     }
 
     public function store($request)

@@ -4,10 +4,10 @@
       <div class="chatbox chatbox22" :class="displayChat ? '' : 'chatbox--tray'">
 
           <a href="" @click.prevent="openChat()">
-            <div class="chatbox__title text-white"><h5>Contacter {{ post.user.name }}</h5></div>
+            <div class="chatbox__title text-white"><h5>Contacter {{ to.firstname + ' ' + to.lastname }}</h5></div>
           </a>
         <div class="chatbox__body" id="message-box" v-chat-scroll>
-          <div v-for="message in conversations" :id="message.id" :class="message.from.id === auth.id ? 'chatbox__body__message chatbox__body__message--right' : 'chatbox__body__message chatbox__body__message--left'">
+          <div v-for="message in conversations" :id="message.id" :class="message.from.id === from.id ? 'chatbox__body__message chatbox__body__message--right' : 'chatbox__body__message chatbox__body__message--left'">
 
             <div class="chatbox_timing">
               <ul>
@@ -15,8 +15,7 @@
               </ul>
             </div>
 
-            <img v-if="message.from.thumb || message.from.avatar" :src="message.from.thumb ? message.from.thumb : message.from.avatar" width="50px" height="50px" alt="Picture">
-            <img v-if="message.from.thumb === '' && message.from.avatar === ''" src="/images/colissend/default.svg" alt="Picture">
+            <img :src="message.user.avatar ? message.user.avatar : '/images/colissend/default.svg'" alt="Picture">
 
             <div class="clearfix"></div>
             <div class="ul_section_full">
@@ -55,8 +54,8 @@ import ContactComponent from "../shared/ContactComponent.vue";
 @Component({
   components: { ContactComponent },
   props: {
-    post: Object,
-    auth: Object
+    to: Object,
+    from: Object
   }
 })
 export default class BookMessage extends Vue {
@@ -77,14 +76,14 @@ export default class BookMessage extends Vue {
 
   sendMessage () {
     if (this.message.length > 0) {
-      store.dispatch('message/storeMessage',{ from: this.$props.auth.id, to: this.$props.post.user.id, content: this.message });
-      store.dispatch('message/getMessagesWith', this.$props.post.user.id);
+      store.dispatch('message/storeMessage',{ from: this.$props.from.id, to: this.$props.to.id, content: this.message });
+      store.dispatch('message/getMessagesWith', this.$props.to.id);
       this.message = '';
     }
   }
 
   mounted() {
-    store.dispatch('message/getMessagesWith', this.$props.post.user.id);
+    store.dispatch('message/getMessagesWith', this.$props.to.id);
   }
 
 }

@@ -6,30 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateReservationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');;
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');;
-            $table->text('message');
-            $table->text('kilo');
+            $table->text('message')->nullable();
+            $table->text('kilo')->nullable();
+            $table->string('price')->nullable();
             $table->enum('status', ['PROGRESS', 'ACCEPTED', 'REJECTED']);
             $table->boolean('paid')->default(false);
+            $table->longText('objects')->nullable();
+            $table->longText('billing_infos')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('reservations');

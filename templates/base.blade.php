@@ -24,7 +24,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/baseController.css') }}">
-    <script src="https://unpkg.com/vue-chat-scroll@alpha/dist/vue-chat-scroll.js"></script>
 
      @yield('stylesheets')
 </head>

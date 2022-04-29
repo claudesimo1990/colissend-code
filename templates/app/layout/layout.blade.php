@@ -47,7 +47,7 @@
         @include('app.include.footer')
     </div>
 
-    @if (Auth::check())
+    @if(Auth::check())
         <script>window.auth={!! json_encode(Auth::user()); !!};</script>
     @else
         <script>window.auth=null;</script>

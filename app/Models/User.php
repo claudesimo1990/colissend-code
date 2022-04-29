@@ -22,13 +22,19 @@ class User extends Authenticatable implements HasMedia
 
     protected $fillable = [
         'id',
-        'name',
+        'firstname',
+        'lastname',
+        'country',
+        'avatar',
+        'birthday',
+        'phone',
         'email',
+        'genre',
         'password',
         'confirmation_token'
     ];
 
-    protected $appends = ['thumb', 'avatar', 'info', 'travels', 'packs'];
+    protected $appends = ['thumb', 'avatar', 'travels', 'packs'];
 
     protected $hidden = [
         'password',
@@ -54,19 +60,9 @@ class User extends Authenticatable implements HasMedia
         return $this->getFirstMediaUrl('avatar', 'thumb') ?? '/images/colissend/default.svg';
     }
 
-    public function getInfoAttribute()
+    public function messages(): HasMany
     {
-        return Profile::find($this->attributes['id']);
-    }
-
-    public function profile(): HasOne
-    {
-        return $this->hasOne(Profile::class);
-    }
-
-    public function message(): HasMany
-    {
-        return $this->hasMany(Message::class, 'from');
+        return $this->hasMany(Message::class, 'to');
     }
 
     public function friends(): HasMany

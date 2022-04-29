@@ -154,7 +154,7 @@
         </div>
       </div>
     </div>
-    <book-message :post="post" :auth="auth"></book-message>
+    <book-message :to="post.user" :from="auth"></book-message>
   </div>
 </template>
 

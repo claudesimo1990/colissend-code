@@ -3,7 +3,7 @@
     <div id="about" class="">
       <div class="row">
         <div class="col-lg-12 text-center my-4">
-          <h2 class="fw-bold">Envoyer ou recevoir des objets</h2>
+          <h2 class="fw-bold">Envoyer vos colis</h2>
         </div>
       </div>
     </div>

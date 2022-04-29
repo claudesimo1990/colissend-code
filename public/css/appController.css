@@ -45,6 +45,40 @@
   flex-grow: 0;
 }
 
+.road-icon {
+  display: inline-block;
+  fill: currentcolor;
+  margin: 5px;
+  max-width: 100%;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: bottom;
+  height: 1rem;
+  width: auto;
+}
+
+.profile-dashboard {
+  position: relative;
+  transition: all 0.3s;
+  background-color: #fff;
+}
+
+.dash-icon {
+  font-size: 20px !important;
+  color: green !important;
+}
+
+.profile-dashboard-nav-active {
+  background-color: green !important;
+  color: #fff !important;
+}
+.profile-dashboard-nav-active .dash-icon {
+  color: #fff !important;
+}
+
 .page-header {
   background: url(/storage/about/about.jpg) no-repeat;
   position: relative;
