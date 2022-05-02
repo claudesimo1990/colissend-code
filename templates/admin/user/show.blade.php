@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                         <img src="{{ $user->avatar }}" alt="Profile" class="rounded-circle">
-                        <h2>{{ $user->name }}</h2>
+                        <h2>{{ $user->firstname . ' ' . $user->lastname }}</h2>
                         <h3>{{ $user->email }}</h3>
                     </div>
                 </div>
@@ -49,34 +49,22 @@
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                <h5 class="card-title">A propos de moi</h5>
-                                <p class="small fst-italic">{{ $user->profile->about }}</p>
 
                                 <h5 class="card-title">Details du profile</h5>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label ">Nom complet</div>
-                                    <div class="col-lg-9 col-md-8">{{ $user->profile->full_name }}</div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Pays</div>
-                                    <div class="col-lg-9 col-md-8">{{ $user->profile->country }}</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">adresse</div>
-                                    <div class="col-lg-9 col-md-8">{{ $user->profile->street }}, {{ $user->profile->city }}</div>
+                                    <div class="col-lg-9 col-md-8">{{ $user->country }}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Telephone</div>
-                                    <div class="col-lg-9 col-md-8">{{ $user->profile->phone }}</div>
+                                    <div class="col-lg-9 col-md-8">{{ $user->phone }}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Date de Naissance</div>
-                                    <div class="col-lg-9 col-md-8">{{ $user->profile->birthday }}</div>
+                                    <div class="col-lg-9 col-md-8">{{ $user->birthday }}</div>
                                 </div>
 
                             </div>

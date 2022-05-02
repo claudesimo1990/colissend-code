@@ -43,8 +43,11 @@
                                    <td>{{ $user->created_at->format('d.m.y') }}</td>
                                    <td>
                                        <a  href="{{ route('admin.users.show', ['user' => $user->id]) }}" type="button" class="btn btn-success rounded-pill">show</a>
-                                       <button type="button" class="btn btn-info rounded-pill text-white">delete</button>
-                                       <button type="button" class="btn btn-danger rounded-pill">delete</button>
+                                       <form class="d-inline" method="POST" action="{{ route('admin.users.destroy', ['user' => $user->id ]) }}">
+                                           @method('DELETE')
+                                           @csrf
+                                            <button type="submit" class="btn btn-danger rounded-pill">delete</button>
+                                       </form>
                                    </td>
                                </tr>
                            @endforeach

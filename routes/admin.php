@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'adminauth'], function () {
     // Admin Dashboard
-    Route::get('/home', [AdminController::class, 'dashboard'])->name('admin.home');
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.home');
 
     Route::get('/users', [UsersController::class, 'index'])->name('admin.users.index');
     Route::get('/users/{user}', [UsersController::class, 'show'])->name('admin.users.show');
+    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('admin.transactions.index');
 

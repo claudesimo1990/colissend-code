@@ -78,8 +78,10 @@ class UsersController extends Controller
      *
      * @param int $id
      */
-    public function destroy(int $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->back();
     }
 }
