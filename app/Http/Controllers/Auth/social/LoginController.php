@@ -52,7 +52,7 @@ class LoginController
 
                 Auth::login($createUser);
 
-                return redirect('/user/profile/' . $createUser->id)->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
+                return redirect()->route('user.profile.index')->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
             }
 
         } catch (Exception $exception) {
@@ -83,7 +83,7 @@ class LoginController
 
                 Auth::login($createUser);
 
-                return redirect('/user/profile/' . $createUser->id)->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
+                return redirect()->route('user.profile.index')->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
             }
 
         } catch (Exception $exception) {
