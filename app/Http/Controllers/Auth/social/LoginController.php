@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Auth\social;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,22 +40,17 @@ class LoginController
                 return redirect('/');
             }else{
                 $createUser = User::create([
-                    'name' => $user->name,
+                    'firstname' => $user->name,
+                    'lastname' => $user->name,
                     'email' => $user->email,
                     'google_id' => $user->id,
                     'email_verified_at' => Carbon::now(),
                     'confirmation_token' => null,
-                    'password' => encrypt($user->name)
+                    'password' => encrypt($user->name),
+                    'last_connexion' => now()->toDateTime()
                 ]);
 
-                $createUser->profile()->create([
-                    'avatar' => $user->avatar,
-                    'full_name' => $user->name
-                ])->save();
-
                 Auth::login($createUser);
-
-                $request->attributes->add(['active' => 'edit']);
 
                 return redirect('/user/profile/' . $createUser->id)->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
             }
@@ -77,20 +73,15 @@ class LoginController
                 return redirect('/');
             }else{
                 $createUser = User::create([
-                    'name' => $user->name,
+                    'firstname' => $user->name,
+                    'lastname' => $user->name,
                     'email' => $user->email,
                     'facebook_id' => $user->id,
-                    'password' => encrypt($user->email)
+                    'password' => encrypt($user->email),
+                    'last_connexion' => now()->toDateTime()
                 ]);
 
-                $createUser->profile()->create([
-                    'avatar' => $user->avatar,
-                    'full_name' => $user->name
-                ])->save();
-
                 Auth::login($createUser);
-
-                $request->attributes->add(['active' => 'edit']);
 
                 return redirect('/user/profile/' . $createUser->id)->with(['success' => 'Votre compte à été enregistrer avec success, veuillez completer ces informations et aussi un mot de passe']);
             }
