@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\ProfileController;
+use App\Http\Controllers\Site\UsersPostsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile/messages/all', [ProfileController::class, 'markAllAsRead'])->name('user.profiles.messages.mark-all-read');
     Route::post('/profile/messages/{message}', [ProfileController::class, 'markAsRead']);
     Route::post('/profile/messages/delete/{message}', [ProfileController::class, 'deleteMessage']);
+
+    // posts
+    Route::get('/profile/posts', [UsersPostsController::class, 'posts'])->name('user.posts.index');
 
     Route::get('/profile/friend/invitation', [ProfileController::class, 'invitation'])->name('user.friend.invitation');
     Route::post('/profile/friend/invitation', [ProfileController::class, 'invitationSend']);

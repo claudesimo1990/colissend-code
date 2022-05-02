@@ -44,8 +44,11 @@
             </div>
         </div>
     </div>
-    <div class="footer-copyright text-center py-3 bg-footer">© 2022 Copyright:
+
+    <div class="footer-copyright text-center py-3 bg-footer">© {{ now()->format('Y') }} Copyright:
         <a href="{{ route('welcome') }}" class="text-success">simweb.com</a>
     </div>
+
     <cookie-component></cookie-component>
+
 </footer>

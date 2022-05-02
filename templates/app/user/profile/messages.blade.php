@@ -20,7 +20,7 @@
         @else
             <div class="messages d-flex justify-content-center align-items-center flex-column mt-5 pt-5">
                 <p class="text-wrap">Vous souhaitez envoyer des objets ? <br>Créer une annonce gratuitement en 2 minutes.</p>
-                <a href="" class="btn btn-success p-2">Nouvelle annonce</a>
+                <a href="{{ route('posts.coli.create') }}" class="btn btn-success p-2">Nouvelle annonce</a>
             </div>
         @endif
     </div>

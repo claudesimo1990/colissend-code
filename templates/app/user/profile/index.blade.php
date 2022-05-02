@@ -2,39 +2,53 @@
 
 @section('profile')
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card info-card sales-card">
                 <div class="card-body my-2">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center flex-column">
                         <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center text-success">0</div>
                         <div class="ps-3">
-                            <span class="text-secondary">ENVOIS EN COURS DE LIVRAISON</span>
+                            <span class="text-secondary  text-uppercase">Annonce voyage EN COURS</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card info-card sales-card">
                 <div class="card-body my-2">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center flex-column">
                         <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center text-success">0</div>
                         <div class="ps-3">
-                            <span class="text-secondary">TRANSPORTS EN COURS DE LIVRAISON</span>
+                            <span class="text-secondary  text-uppercase">Annonce colis EN COURS</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card info-card sales-card">
                 <div class="card-body my-2">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center flex-column">
                         <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center text-success">
                             0 <i class="bi bi-currency-euro text-success"></i>
                         </div>
                         <div class="ps-3">
-                            <span class="text-secondary">GAGNÉ EN AVRIL 2022</span>
+                            <span class="text-secondary text-uppercase">GAGNÉ EN {{ now()->translatedFormat('F Y') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card info-card sales-card">
+                <div class="card-body my-2">
+                    <div class="d-flex align-items-center flex-column">
+                        <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center text-success">
+                            0 <i class="bi bi-currency-euro text-success"></i>
+                        </div>
+                        <div class="ps-3">
+                            <span class="text-secondary  text-uppercase">SOMME GAGNÉ EN {{ now()->format('Y') }}</span>
                         </div>
                     </div>
                 </div>

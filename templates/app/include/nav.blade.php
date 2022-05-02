@@ -91,10 +91,11 @@
                         <li class="nav-item">
                             <a class="nav-link nav-item position-relative" href="{{ route('user.profile.messages') }}">
                                 <i class="bi bi-envelope-fill"></i>
-                                <span class="text-danger small position-absolute top-0 border rounded">
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ unreadMessages() }}+
-                                    <span class="visually-hidden">unread messages</span>
+                                    <span class="text-danger small position-absolute top-0 border rounded">
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ unreadMessages() }}+
+                                        <span class="visually-hidden">messages non lus</span>
+                                    </span>
                                 </span>
                             </a>
                         </li>
@@ -118,8 +119,12 @@
                             </li>
 
                             <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
                                 <a class="dropdown-item d-flex align-items-center"
-                                   href="#">
+                                   href="{{ route('user.profile.board') }}">
                                     <i class="bi bi-person"></i>
                                     <div class="d-flex justify-content-between">
                                         <span>Mon Profil</span>
@@ -133,7 +138,7 @@
 
                             <li>
                                 <a class="dropdown-item d-flex align-items-center"
-                                   href="#">
+                                   href="{{ route('user.posts.index') }}">
                                     <i class="bi bi-box"></i>
                                     <div class="d-flex justify-content-between">
                                         <span>Mes annonces</span>
@@ -147,15 +152,19 @@
 
                             <li>
                                 <a class="dropdown-item d-flex align-items-center"
-                                   href="#">
+                                   href="{{ route('user.profile.board') }}">
                                     <i class="bx bxs-plane text-success"></i>
                                     <span>Mes livraisons</span>
                                 </a>
                             </li>
 
                             <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
                                 <a class="dropdown-item d-flex align-items-center"
-                                   href="#">
+                                   href="{{ route('user.profile.board') }}">
                                     <svg viewBox="0 0 24 24" class="road-icon">
                                         <g>
                                             <path d="M18.749 6.375a.817.817 0 01-.131-.011 1.125 1.125 0 01-.982-.983.698.698 0 010-.26c.06-.513.47-.923.982-.983a.717.717 0 01.262 0c.513.06.922.47.983.983a.796.796 0 010 .26c-.061.513-.47.923-.983.983a.817.817 0 01-.131.011z"></path>
@@ -167,8 +176,12 @@
                             </li>
 
                             <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
                                 <a class="dropdown-item d-flex align-items-center"
-                                   href="#">
+                                   href="{{ route('user.profile.board') }}">
                                     <i class="bi bi-currency-euro"></i>
                                     <span>Mes paiements</span>
                                 </a>

@@ -3,7 +3,7 @@
 
 @section('profile')
     <h2 class="fw-bold">Coordonnées bancaires</h2>
-    <p>Les informations du compte bancaire doivent être au même nom que votre compte Cocolis.</p>
+    <p>Les informations du compte bancaire doivent être au même nom que votre compte Colissend.</p>
 
     <div class="col-sm-10 mt-4">
         <form action="" method="POST">

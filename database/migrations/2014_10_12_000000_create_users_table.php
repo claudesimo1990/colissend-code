@@ -37,9 +37,20 @@ class CreateUsersTable extends Migration
             $table->string('google')->nullable();
             $table->string('linkedin')->nullable();
 
+            $table->string('paypal_name')->nullable();
+            $table->string('paypal_email')->nullable();
+
+            $table->string('bank_address_1')->nullable();
+            $table->string('bank_address_2')->nullable();
+            $table->string('bank_postal_code')->nullable();
+            $table->string('bank_city')->nullable();
+            $table->string('bank_owner')->nullable();
+            $table->string('bank_iban')->nullable();
+
             $table->timestamp('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
+            $table->timestamp('last_connexion')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

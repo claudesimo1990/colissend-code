@@ -30,7 +30,7 @@
             @endif
             Email vérifié
             <hr>
-            <div class="fw-bold mx-2 my-2">Dernière connexion le 06/04/2022</div>
+            <div class="fw-bold mx-2 my-2">Dernière connexion le {{ \Carbon\Carbon::parse($profile->last_connexion)->format('d/m/Y') }}</div>
         </div>
     </div>
 

@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{  route('user.profile.index') }}">
+        <a href="{{  route('user.posts.index') }}" class="nav-link collapsed {{ (request()->routeIs('user.posts.index')) ? 'profile-dashboard-nav-active' : '' }}">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                 <i class="bi bi-box  dash-icon"></i>
                 <span>Mes annonces</span>

@@ -47,7 +47,8 @@ class RegisterController extends Controller
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-             'confirmation_token' => Str::random(60)
+             'confirmation_token' => Str::random(60),
+             'last_connexion' => now()->toDateTime()
             ]
         );
 
