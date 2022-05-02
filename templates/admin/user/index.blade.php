@@ -39,7 +39,7 @@
                                    <th scope="row">{{ $user->id }}</th>
                                    <td>{{ $user->name }}</td>
                                    <td>{{ $user->email }}</td>
-                                   <td><a href="{{ $user->avatar }}"><img src="{{ $user->myAvatar() }}" width="50" height="50" class="rounded avatar"  alt=""></a></td>
+                                   <td><a href="{{ $user->avatar }}"><img src="{{ $user->myAvatar }}" width="50" height="50" class="rounded avatar"  alt=""></a></td>
                                    <td>{{ $user->created_at->format('d.m.y') }}</td>
                                    <td>
                                        <a  href="{{ route('admin.users.show', ['user' => $user->id]) }}" type="button" class="btn btn-success rounded-pill">show</a>

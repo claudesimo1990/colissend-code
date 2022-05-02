@@ -1,1 +1,1 @@
-<img src="{{ !empty(Auth::user()->getFirstMediaUrl('avatar', 'avatar')) ? Auth::user()->getFirstMediaUrl('avatar', 'avatar') : Auth::user()->myAvatar() ?? asset('images/colissend/default.svg') }}" class="rounded-circle" alt="avatar">
+<img src="{{ !empty(Auth::user()->getFirstMediaUrl('avatar', 'avatar')) ? Auth::user()->getFirstMediaUrl('avatar', 'avatar') : Auth::user()->myAvatar ?? asset('images/colissend/default.svg') }}" class="rounded-circle" alt="avatar">

@@ -70,7 +70,7 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Friends::class, 'user_id');
     }
 
-    public function myAvatar()
+    public function getMyAvatarAttribute()
     {
         return $this->attributes['avatar'];
     }
