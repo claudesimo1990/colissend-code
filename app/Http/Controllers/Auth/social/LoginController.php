@@ -43,6 +43,7 @@ class LoginController
                     'firstname' => $user->name,
                     'lastname' => $user->name,
                     'email' => $user->email,
+                    'avatar' => $user->getAvatar(),
                     'google_id' => $user->id,
                     'email_verified_at' => Carbon::now(),
                     'confirmation_token' => null,
@@ -76,8 +77,9 @@ class LoginController
                     'firstname' => $user->name,
                     'lastname' => $user->name,
                     'email' => $user->email,
+                    'avatar' => $user->getAvatar(),
                     'facebook_id' => $user->id,
-                    'password' => encrypt($user->email),
+                    'password' => encrypt($user->name),
                     'last_connexion' => now()->toDateTime()
                 ]);
 
