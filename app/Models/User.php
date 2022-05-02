@@ -34,7 +34,7 @@ class User extends Authenticatable implements HasMedia
         'confirmation_token'
     ];
 
-    protected $appends = ['thumb', 'avatar', 'travels', 'packs'];
+    protected $appends = ['thumb', 'avatar', 'travels', 'packs', 'myAvatar'];
 
     protected $hidden = [
         'password',
@@ -68,6 +68,11 @@ class User extends Authenticatable implements HasMedia
     public function friends(): HasMany
     {
         return $this->hasMany(Friends::class, 'user_id');
+    }
+
+    public function myAvatar()
+    {
+        return $this->attributes['avatar'];
     }
 
     public function getTravelsAttribute(): Collection

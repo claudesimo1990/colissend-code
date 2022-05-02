@@ -7,7 +7,7 @@
 
     <div class="col-sm-8 mt-4 bg-white py-2">
         <div class="logo d-flex gap-5 text-center m-4">
-            <img src="{{ !is_null($profile->getFirstMedia('avatar')) ? $profile->getFirstMedia('avatar')->getUrl('thumb') : $profile->avatar ?? asset('images/colissend/default.svg') }}" alt="{{ $profile->firstname }}">
+            <img src="{{ !is_null($profile->getFirstMedia('avatar')) ? $profile->getFirstMedia('avatar')->getUrl('thumb') : $profile->myAvatar() ?? asset('images/colissend/default.svg') }}" alt="{{ $profile->firstname }}">
             <div class="name">
                 <h4 class="fw-bold">{{ $profile->firstname }}</h4>
                 <h4 class="fw-bold">{{ $profile->lastname }}</h4>
