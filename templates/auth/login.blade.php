@@ -9,10 +9,10 @@
                 <div class="card-header text-center">
                     <div class="login-card-footer-nav block-media-login">
                         <a href="{{ route('facebook') }}" class="btn btn-primary  my-1">
-                            <span class="bi bi-facebook text-white"></span> Continuer avec facebook
+                            <span class="bi bi-facebook text-white mx-2"></span>Se connecter avec Facebook
                         </a>
                         <a href="{{ route('google') }}" class="btn btn-danger my-1">
-                            <span class="bi bi-google text-white"></span> Continuer avec google
+                            <span class="bi bi-google text-white mx-2"></span>Se connecter avec Google
                         </a>
                     </div>
                 </div>
