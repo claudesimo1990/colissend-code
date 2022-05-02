@@ -40,17 +40,14 @@ class GenerateImportancesUsers extends Command
     public function handle()
     {
     $user = User::create([
-            'name' => 'Test User',
-            'email' => 'simwebcolissend@gmail.com',
+            'firstname' => 'Jean Claude',
+            'lastname' => 'Simo',
+            'email' => 'claudesimo1990@gmail.com',
             'email_verified_at' => now(),
+            'last_connexion' => now()->toDateTime(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => null,
         ]);
-
-        $user->profile()->create([
-            'avatar' => '/images/colissend/default.svg',
-            'full_name' => $user->name
-        ])->save();
 
         Admin::create([
             'name' => 'Claude Simo',
