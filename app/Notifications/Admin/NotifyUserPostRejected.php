@@ -52,7 +52,7 @@ class NotifyUserPostRejected extends Notification
             ->subject('Annonce rejetée')
             ->line("Votre Post de $from pour $to  du $dateFrom au $dateTo à été rejeter par les admins du groupe Colissend",)
             ->line("Veuiller contacter les admins pour plus d informations",)
-            ->action('Retourner sur votre profile', url(route('user.profile.show', ['profile' => $notifiable->id])))
+            ->action('Retourner sur votre profile', url(route('user.profile.index')))
             ->line('Merci de nous faire confiance!');
     }
 

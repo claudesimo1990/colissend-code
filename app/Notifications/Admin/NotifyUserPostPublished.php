@@ -51,7 +51,7 @@ class NotifyUserPostPublished extends Notification
         return (new MailMessage)
                     ->subject('Annonce validée')
                     ->line("Votre Post de $from pour $to  du $dateFrom au $dateTo à été valider par les admins du groupe Colissend",)
-                    ->action('Aller sur votre profile', url(route('user.profile.show', ['profile' => $notifiable->id])))
+                    ->action('Aller sur votre profile', url(route('user.profile.index')))
                     ->line('Merci de nous faire confiance!');
     }
 
