@@ -4,10 +4,11 @@
       <h5 class="card-title text-center">Menbre <span> {{ user.created_at | ago }}</span></h5>
       <div class="d-flex align-items-center">
         <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center">
-          <img :src="user.avatar" width="50px" height="50px" alt="user avatar">
+          <img v-if="user.avatar" :src="user.avatar" width="50px" height="50px" alt="user avatar">
+          <img v-if="user.myAvatar":src="user.myAvatar" width="50px" height="50px" alt="user avatar">
         </div>
         <div class="ps-3">
-          <h6 class="card-title-info">{{ user.firstname }} {{  user.lastname }}</h6>
+          <h6 class="card-title-info">{{ user.firstname }}</h6>
           <div class="d-flex justify-content-between">
             <i class="bx bxs-location-plus text-success"></i>
             <span class="text-muted small">{{ user.country !== null ? user.country : 'Encore vide' }}</span>
