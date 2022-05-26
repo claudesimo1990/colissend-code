@@ -11,15 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 if (! function_exists('render')) {
-    /**
-     * Get the evaluated view contents for the given view.
-     *
-     * @param string|null $view
-     * @param Arrayable|array $data
-     * @param array $mergeData
-     * @return View|ViewFactory
-     * @throws BindingResolutionException
-     */
+
     function render(string $view = null, $data = [], array $mergeData = [])
     {
         $factory = app(ViewFactory::class);
@@ -34,10 +26,6 @@ if (! function_exists('render')) {
 
 if (! function_exists('checkIfAvatarExist')) {
 
-    /**
-     * @param string $file
-     * @return bool
-     */
     function checkIfAvatarExist(string $file): bool
     {
         if (Storage::disk('public')->exists('avatars/' . $file)) {
@@ -79,10 +67,10 @@ if (! function_exists('getHeaderImage')) {
 
     function getHeaderImage()
     {
-        $header = Gallery::where('title', 'header')->first();
+        $header = Gallery::where('title', 'header')->where('active_img', '!=', null)->first();
 
         if ($header) {
-            return $header->active_img;
+            return $header->getFirstMediaUrl('galleries');
         }
         return asset('images/about/about.jpg');
     }
@@ -104,4 +92,8 @@ function unreadMessages() {
             ->where('read', false)
             ->get()
             ->count();
+}
+
+function generateRandomNumber(): int {
+    return str_pad(time(), 15, "0", STR_PAD_LEFT);
 }

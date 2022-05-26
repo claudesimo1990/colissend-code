@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Http\Requests\Site\PostRequest;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -14,23 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PostRepository
 {
-    /**
-     * @var Post
-     */
     private $post;
 
-    /**
-     * @param Post $post
-     */
     public function __construct(Post $post)
     {
         $this->post = $post;
     }
 
-    /**
-     * List of all Posts
-     * @return mixed
-     */
     public function posts()
     {
         return $this->post
@@ -45,10 +34,6 @@ class PostRepository
         return $this->post->with('user')->find($id);
     }
 
-    /**
-     * @param string $slug
-     * @return Builder|Model|object|null
-     */
     public function showPost(string $slug)
     {
         return $this->post->with('user')->where('slug', $slug)->first();
@@ -58,6 +43,7 @@ class PostRepository
     {
         $post = $this->post->create([
             'user_id' => Auth::id(),
+            'referenznumber' => generateRandomNumber(),
             'type' => 'TRAVEL',
             'from' => $request->get('from'),
             'to' => $request->get('to'),
@@ -112,15 +98,12 @@ class PostRepository
             ->get();
     }
 
-    /**
-     * @param PostRequest $request
-     * @return void
-     */
     public function storeColi(PostRequest $request)
     {
         $post = $this->post->create(
         [
             'user_id' => Auth::id(),
+            'referenznumber' => generateRandomNumber(),
             'type' => 'PACKS',
             'from' => $request->get('from'),
             'to' => $request->get('to'),

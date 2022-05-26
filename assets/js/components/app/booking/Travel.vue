@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="success" class="alert alert-success text-center" role="alert">
+      {{ message }}
+    </div>
     <div class="card info-card sales-card">
       <div class="card-body mt-2">
         <div class="row">
@@ -179,8 +182,9 @@ export default class Travel extends Vue {
   error: boolean = false;
   show: boolean = false;
   hasCourrier: boolean = false;
+  success: boolean = false;
+  message: string = '';
   errors: any = [];
-  objs: any = [];
   courrier: boolean = false;
 
   booking: any = {
@@ -233,9 +237,14 @@ export default class Travel extends Vue {
 
     axios.post('/post/booking/' + this.$props.post.id, this.booking).then((response) => {
 
-      location.reload();
-
       this.show = false;
+      this.success = true;
+      this.message = response.data;
+
+      setTimeout(function() {
+        window.location.reload();
+
+      }, 2000);
 
     }).catch((error) => {
       this.errors = error.response.data.errors;

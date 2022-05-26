@@ -34,7 +34,7 @@
                             0 <i class="bi bi-currency-euro text-success"></i>
                         </div>
                         <div class="ps-3">
-                            <span class="text-secondary">GAGNÉ EN AVRIL 2022</span>
+                            <span class="text-secondary">SOMME GAGNÉ EN AVRIL 2022</span>
                         </div>
                     </div>
                 </div>

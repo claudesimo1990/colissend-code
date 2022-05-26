@@ -10,15 +10,15 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');;
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('message')->nullable();
             $table->text('kilo')->nullable();
             $table->string('price')->nullable();
-            $table->enum('status', ['PROGRESS', 'ACCEPTED', 'REJECTED']);
+            $table->bigInteger('referenznumber')->unsigned()->unique();
+            $table->enum('status', ['DRAFT','ACCEPTED', 'REJECTED', 'PAID', 'PROGRESS', 'COMPLETED']);
             $table->boolean('paid')->default(false);
             $table->longText('objects')->nullable();
-            $table->longText('billing_infos')->nullable();
             $table->timestamps();
         });
     }

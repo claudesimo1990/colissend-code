@@ -15,43 +15,22 @@ class BookingNotification extends Notification
 
     public $reservation;
     public $post;
-    /**
-     * @var int
-     */
     private $price;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @param Reservation $reservation
-     * @param Post $post
-     */
     public function __construct(Reservation $reservation, Post $post)
     {
         $this->reservation = $reservation;
         $this->post = $post;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via($notifiable): array
     {
         return ['mail', 'database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage|null
-     */
     public function toMail($notifiable): ?MailMessage
     {
-        $objects = json_decode($this->reservation->objects);
+        $objects = json_decode(json_decode($this->reservation->objects));
         $courrier = $objects->courrier;
         $total = $this->post->price * $this->reservation->kilo;
 
@@ -88,12 +67,6 @@ class BookingNotification extends Notification
         return null;
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray($notifiable): array
     {
         return [

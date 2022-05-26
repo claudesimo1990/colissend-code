@@ -20,7 +20,7 @@ class Post extends Model implements HasMedia
 
     protected $guarded = [];
 
-    protected $appends = ['ticket'];
+    protected $appends = ['ticket', 'countReservations'];
 
     public function getObjectsAttribute($value)
     {
@@ -30,6 +30,11 @@ class Post extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getCountReservationsAttribute()
+    {
+        return $this->reservations->count();
     }
 
     public function reservations(): HasMany

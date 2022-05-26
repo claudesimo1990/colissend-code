@@ -16,14 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationRepository
 {
-    /**
-     * @var Reservation
-     */
     private $reservation;
 
-    /**
-     * @param Reservation $reservation
-     */
     public function __construct(Reservation $reservation)
     {
         $this->reservation = $reservation;
@@ -34,6 +28,7 @@ class ReservationRepository
            return Reservation::create([
                    'post_id'  => $post->id,
                    'user_id'  => Auth::id(),
+                   'referenznumber' => generateRandomNumber(),
                    'message'  => $request->get('message'),
                    'kilo'  => $request->get('kilo'),
                    'price'  => $request->get('price'),

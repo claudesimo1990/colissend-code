@@ -4,7 +4,7 @@
       <div v-for="post in foundPosts" :key="post.id" class="row card">
         <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
           <div class="">
-            <div class="card-body mt-2">
+            <div class="card-body post_card_body mt-2">
               <div class="row">
                 <div class="col-lg-4 bg-success-light">
                   <user-card-component :user="post.user" :created="post.created_at|ago" branch="post" :type="post.type" :thumb="true"></user-card-component>

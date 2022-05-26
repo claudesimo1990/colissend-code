@@ -22,15 +22,11 @@
         <span class="text-black-50"> ............. Quantité: {{ post.objects.courrier.number }} .......... Prix: {{ post.objects.courrier.price }}<i class="bi bi-currency-euro text-dark fw-bolder"></i>/Unité</span>
       </div>
     </div>
-    <blockquote class="blockquote-footer border rounded mt-2">
-      <span class="text-black">Message:</span>
-      <br>
-      <p class="mb-0 mx-2">
-        <i class="bx bxs-quote-alt-left fw-bold"></i>
-          {{ post.content | preview }}
-        <i class="bx bxs-quote-alt-right fw-bold"></i>
-      </p>
-    </blockquote>
+    <p class="mb-0 mx-2 py-2 text-black-50 small">
+      <i class="bx bxs-quote-alt-left fw-bold"></i>
+      {{ post.content | preview }}
+      <i class="bx bxs-quote-alt-right fw-bold"></i>
+    </p>
   </div>
 </template>
 

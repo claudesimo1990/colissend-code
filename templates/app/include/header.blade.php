@@ -9,9 +9,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-
-            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"></div>
         </div>
         <div class="row mt-5">
             <search-component location="home"></search-component>

@@ -359,7 +359,7 @@
         </div>
         <div class="col-lg-4 p-2 text-center">
             <p class="fw-bold mb-3">Modifier votre image de profile</p>
-            <img src="{{ !is_null(Auth::user()->getFirstMedia('avatar')) ? Auth::user()->getFirstMedia('avatar')->getUrl('thumb') : Auth::user()->myAvatar ?? asset('images/colissend/default.svg') }}" class="rounded-circle text-center"   alt="{{ Auth::user()->name }}">
+            <img src="{{ !is_null(Auth::user()->getFirstMedia('avatar')) ? Auth::user()->getFirstMedia('avatar')->getUrl('avatar') : Auth::user()->myAvatar ?? asset('images/colissend/default.svg') }}" class="rounded-circle text-center"   alt="{{ Auth::user()->name }}">
             <div class="pt-2">
                 <div class="image-upload mt-3">
                     <label for="file-input" class="btn btn-success" style="padding-left: 36px;padding-right: 36px;">

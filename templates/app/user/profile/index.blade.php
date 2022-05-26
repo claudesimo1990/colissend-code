@@ -31,10 +31,10 @@
                 <div class="card-body my-2">
                     <div class="d-flex align-items-center flex-column">
                         <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center text-success">
-                            0 <i class="bi bi-currency-euro text-success"></i>
+                            30 <i class="bi bi-currency-euro text-success"></i>
                         </div>
                         <div class="ps-3">
-                            <span class="text-secondary text-uppercase">GAGNÉ EN {{ now()->translatedFormat('F Y') }}</span>
+                            <span class="text-secondary text-uppercase">SOMME GAGNÉ EN {{ now()->translatedFormat('F Y') }}</span>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="card-body my-2">
                     <div class="d-flex align-items-center flex-column">
                         <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center text-success">
-                            0 <i class="bi bi-currency-euro text-success"></i>
+                            80 <i class="bi bi-currency-euro text-success"></i>
                         </div>
                         <div class="ps-3">
                             <span class="text-secondary  text-uppercase">SOMME GAGNÉ EN {{ now()->format('Y') }}</span>

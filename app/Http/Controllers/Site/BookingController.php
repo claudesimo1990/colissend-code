@@ -18,44 +18,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookingController extends Controller
 {
-    /**
-     * @var PostRepository
-     */
     private $postRepository;
-    /**
-     * @var UserRepository
-     */
     private $userRepository;
 
-    /**
-     * @param PostRepository $postRepository
-     * @param UserRepository $userRepository
-     */
     public function __construct(PostRepository $postRepository, UserRepository $userRepository)
     {
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @param Post $post
-     * @param ReservationRequest $request
-     * @param ReservationRepository $re
-     * @return Response
-     */
     public function booking(Post $post, ReservationRequest $request, ReservationRepository $re): Response
     {
         $reservation = $re->store($request, $post);
 
-        Notification::send($post->user, new BookingNotification($reservation, $post));
+        //Notification::send($post->user, new BookingNotification($reservation, $post));
 
-        return redirect()->route('posts.index');
+        return new Response('Votre reservation á été soumise avec success!', 200);
     }
 
-    /**
-     * @param Reservation $reservation
-     * @return RedirectResponse
-     */
     public function reservationValidate(Reservation $reservation): RedirectResponse
     {
         $post = $this->postRepository->findById($reservation->post_id);
@@ -94,10 +74,6 @@ class BookingController extends Controller
         return redirect()->back()->with('error', 'Vous ne pouvez plus effectuer cette action');
     }
 
-    /**
-     * @param Reservation $reservation
-     * @return RedirectResponse
-     */
     public function reservationExcept(Reservation $reservation): RedirectResponse
     {
         $post = $this->postRepository->findById($reservation->post_id);

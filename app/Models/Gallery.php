@@ -22,6 +22,7 @@ class Gallery extends Model implements HasMedia
             ->height(720)
             ->crop('crop-center', 1425, 720)
             ->sharpen(10)
+            ->withResponsiveImages()
             ->format('jpg');
 
         $this->addMediaConversion('contact')
@@ -29,6 +30,7 @@ class Gallery extends Model implements HasMedia
             ->height(398)
             ->crop('crop-center', 1425, 398)
             ->sharpen(10)
+            ->withResponsiveImages()
             ->format('jpg');
 
         $this->addMediaConversion('destinations')
@@ -36,6 +38,7 @@ class Gallery extends Model implements HasMedia
             ->height(400)
             ->crop('crop-center', 800, 400)
             ->sharpen(10)
+            ->withResponsiveImages()
             ->format('jpg');
 
         $this->addMediaConversion('thumb')

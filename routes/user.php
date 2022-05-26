@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // posts
     Route::get('/profile/posts', [UsersPostsController::class, 'posts'])->name('user.posts.index');
+    Route::get('/profile/travels', [UsersPostsController::class, 'travels'])->name('user.posts.travels');
+    Route::get('/profile/packs', [UsersPostsController::class, 'packs'])->name('user.posts.packs');
+    Route::get('/profile/bookings', [UsersPostsController::class, 'bookings'])->name('user.posts.bookings');
 
     Route::get('/profile/friend/invitation', [ProfileController::class, 'invitation'])->name('user.friend.invitation');
     Route::post('/profile/friend/invitation', [ProfileController::class, 'invitationSend']);

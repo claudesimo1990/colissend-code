@@ -52,12 +52,12 @@ class User extends Authenticatable implements HasMedia
 
     public function getAvatarAttribute(): string
     {
-        return $this->getFirstMediaUrl('avatar') ?? '/images/colissend/default.svg';
+        return $this->getFirstMediaUrl('avatar', 'post') ?? '/images/colissend/default.svg';
     }
 
     public function getThumbAttribute(): string
     {
-        return $this->getFirstMediaUrl('avatar', 'thumb') ?? '/images/colissend/default.svg';
+        return $this->getFirstMediaUrl('avatar', 'post') ?? '/images/colissend/default.svg';
     }
 
     public function messages(): HasMany
@@ -85,6 +85,11 @@ class User extends Authenticatable implements HasMedia
         return $this->posts()->where('type', 'PACKS')->get(['*']);
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'user_id');
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatar')
@@ -94,13 +99,12 @@ class User extends Authenticatable implements HasMedia
     public function registerAllMediaConversions(): void
     {
         $this->addMediaConversion('avatar')
-            ->width(36)
-            ->height(36)
-            ->sharpen(10);
+            ->crop('crop-center', 150, 150);
 
         $this->addMediaConversion('thumb')
-            ->width(150)
-            ->height(150)
-            ->sharpen(10);
+            ->crop('crop-center', 368, 232);
+
+        $this->addMediaConversion('post')
+            ->crop('crop-center', 100, 100);
     }
 }

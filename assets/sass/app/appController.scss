@@ -55,9 +55,6 @@
     color: green
 }
 
-
-element.style {
-}
 h1, h2, h3, h4, h5, h6 {
     font-family: "Nunito", sans-serif;
 }
@@ -73,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
 *, ::after, ::before {
     box-sizing: border-box;
 }
-feuille de style user-agent
+
 h5 {
     display: block;
     font-size: 0.83em;
@@ -100,6 +97,11 @@ h5 {
 
 .home-icon {
     font-size: 25px;color: green !important;
+}
+
+.post_card_body {
+    padding: 0 !important;
+    margin-top: 0 !important;
 }
 
 
