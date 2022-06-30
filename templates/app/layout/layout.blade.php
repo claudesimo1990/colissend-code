@@ -11,7 +11,7 @@
 @section('scripts')
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBzinmkgT6lSn--CiB3l5H_ffUCG4bpiyY">
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ env('GOOGLE_PLACES_KEY') }}">
     </script>
 
     <script src="{{ mix('js/appController.js') }}"></script>
@@ -29,12 +29,12 @@
         <div class="container text-center">
             @if(session('success'))
                 <div class="alert alert-success mt-5">
-                    {{ session('success') }}
+                    {!! session('success') !!}
                 </div>
             @endif
             @if(session('error'))
                 <div class="alert alert-danger mt-5">
-                    {{ session('error') }}
+                    {!! session('error') !!}
                 </div>
             @endif
         </div>

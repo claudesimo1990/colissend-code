@@ -31,7 +31,15 @@ class User extends Authenticatable implements HasMedia
         'email',
         'genre',
         'password',
-        'confirmation_token'
+        'paypal_name',
+        'paypal_email',
+        'confirmation_token',
+        'bank_address_1',
+        'bank_address_2',
+        'bank_postal_code',
+        'bank_city',
+        'bank_owner',
+        'bank_iban',
     ];
 
     protected $appends = ['thumb', 'avatar', 'travels', 'packs', 'myAvatar'];
@@ -63,6 +71,11 @@ class User extends Authenticatable implements HasMedia
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class, 'to');
+    }
+
+    public function identities()
+    {
+        return $this->hasMany(Identity::class);
     }
 
     public function friends(): HasMany

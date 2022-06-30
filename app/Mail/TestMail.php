@@ -56,7 +56,10 @@ class TestMail extends Mailable
         $res['kilo'] = ['name' => 'kilos', 'number' => $this->reservation->kilo, 'price' => $this->post->price];
         $res['total'] = ['name' => 'Total', 'number' => 1, 'price' => $total];
 
-        return $this->markdown('mail.test', [
+        return $this
+            ->to('claudesimo1990@gmail.com')
+            ->subject('Nouvelle reservation')
+            ->markdown('mail.test', [
             'notifiable' => \App\Models\User::first(),
             'p' => $this->post,
             'kilos' => $this->reservation->kilo,

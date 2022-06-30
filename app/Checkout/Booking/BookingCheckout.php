@@ -22,10 +22,12 @@ use Throwable;
 class BookingCheckout implements CheckoutInterface
 {
     private $provider;
+
     /**
      * @var TransactionRepository
      */
     private $transactionRepository;
+
     /**
      * @var Reservation
      */

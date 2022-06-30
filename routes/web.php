@@ -39,6 +39,7 @@ Route::post('admin/login', [AuthController::class, 'postLogin']);
 Route::post('admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 Auth::routes(['verify' => true]);
+Route::get('/email/verify/{hash}', [\App\Http\Controllers\Auth\VerificationController::class, 'resend']);
 
 //SOCIAL LOGIN
 Route::get('/google/login', [LoginController::class, 'google'])->name('google');
@@ -48,12 +49,3 @@ Route::get('/facebook/login', [LoginController::class, 'facebook'])->name('faceb
 Route::get('/facebook/callback', [LoginController::class, 'facebookCallBack'])->name('facebookCallBack');
 
 Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, 'confirmation'])->name('user.account.confirmation');
-
-Route::get('testMail', function () {
-
-    $reservation = \App\Models\Reservation::latest()->first();
-    $post = \App\Models\Post::where('TYPE', 'TRAVEL')->latest()->first();
-
-    return new TestMail($reservation, $post);
-
-});

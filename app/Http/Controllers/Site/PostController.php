@@ -66,4 +66,11 @@ class PostController extends Controller
             'user' => Auth::user()
         ]);
     }
+
+    public function reservations(string $slug, PostRepository $postRepository)
+    {
+        return view('app.user.profile.posts.reservations', [
+            'post' => $postRepository->showPost($slug)
+        ]);
+    }
 }

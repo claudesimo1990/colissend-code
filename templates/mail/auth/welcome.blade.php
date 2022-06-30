@@ -37,7 +37,19 @@
         table, td {
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
-            line-height: 33px !important;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* RESET STYLES */
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
         }
 
         table {
@@ -72,10 +84,12 @@
         /* ANDROID CENTER FIX */
         div[style*="margin: 16px 0;"] {
             margin: 0 !important;
-        }
-    </style>
+        } </style>
 </head>
 <body style="background-color: #f5f8fe; margin: 0 !important; padding: 0 !important;">
+<div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+    We're thrilled to have you here! Get ready to dive into your new account.
+</div>
 <table border="0" cellpadding="0" cellspacing="0" width="100%"> <!-- LOGO -->
     <tr>
         <td bgcolor="#d1e7dd" align="center">
@@ -92,8 +106,9 @@
                 <tr>
                     <td bgcolor="#ffffff" align="center" valign="top"
                         style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                        <h1 style="font-size: 35px; font-weight: 400; margin: 2px; text-align: center">Reservation de {{ $kilos }} kilos!</h1>
-                    </td>
+                        <h1 style="font-size: 48px; font-weight: 400; margin: 2;">Bienvenue!</h1> <img
+                                src=" https://img.icons8.com/clouds/100/000000/handshake.png" width="125" height="120"
+                                style="display: block; border: 0px;"/></td>
                 </tr>
             </table>
         </td>
@@ -104,75 +119,20 @@
                 <tr>
                     <td bgcolor="#ffffff" align="left"
                         style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                        <p style="margin: 0;">
-                            {{ getSalution() }}  {{ $notifiable->name }},<br>
-                            Une resevation de {{ $kilos }} kilos à été faite, Sur votre post de {{ $p->from }} pour {{ $p->to }} du {{ formatDate($p->dateFrom) }} au {{ formatDate($p->dateTo) }}.
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td bgcolor="#ffffff" align="center" valign="top"
-                        style="padding: 0 0 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                        <h3 style="font-size: 20px; font-weight: 400; margin-bottom: 20px; text-align: center">Details de la reservation</h3>
-
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size: 14px; text-align: center;">
-                            <tr>
-                                <th>Element</th>
-                                <th>Qté</th>
-                                <th>Prix</th>
-                                <th>Total</th>
-                            </tr>
-                            @foreach ($r as $key => $value)
-                                <tr style="border: 1px solid black">
-                                    <td>{{ $value['name'] }}</td>
-                                    <td>{{ $value['number'] }}</td>
-                                    <td>{{ $value['name'] != 'Total'? $value['price'] : '' }}</td>
-                                    <td>{{ $value['number'] * $value['price'] }}&euro;</td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td bgcolor="#ffffff" align="center" valign="top"
-                        style="padding: 0 0 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                        <h3 style="font-size: 20px; font-weight: 400; margin-bottom: 20px; text-align: center">Informations du destinataire</h3>
-
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size: 14px; text-align: center;">
-                            <tr>
-                                <th>Nom</th>
-                                <th>N° CNI</th>
-                                <th>Telephone</th>
-                                <th>Lieux</th>
-                            </tr>
-                            <tr style="border: 1px solid black">
-                                <td>{{ $recipient->name }}</td>
-                                <td>{{ $recipient->cni }}</td>
-                                <td>{{ $recipient->phone }}</td>
-                                <td>{{ $recipient->place }}</td>
-                            </tr>
-                        </table>
-                    </td>
+                        <p style="margin: 0;">Nous sommes impatients de vous voir commencer. D'abord, vous devez confirmer votre
+                            compte. Appuyez simplement sur le bouton ci-dessous.</p></td>
                 </tr>
                 <tr>
                     <td bgcolor="#ffffff" align="left">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr style="text-align: center">
+                            <tr>
                                 <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                                     <table border="0" cellspacing="0" cellpadding="0">
-                                        <tr style="float: left!important; width: 50%!important;">
+                                        <tr>
                                             <td align="center" style="border-radius: 3px;" bgcolor="#d1e7dd">
-                                                <a href="{{ route('booking-validate', ['reservation' => $id]) }}" target="_blank"
-                                                   style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; background-color: darkgreen; padding: 15px 25px; border-radius: 2px; border: 1px solid #d1e7dd; display: inline-block;">
-                                                    Valider
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr style="float: left!important; width: 50%!important;">
-                                            <td align="center" style="border-radius: 3px;" bgcolor="#ff4040">
-                                                <a href="{{ route('booking-validate', ['reservation' => $id]) }}" target="_blank"
-                                                   style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; background-color: darkred; padding: 15px 25px; border-radius: 2px; border: 1px solid #d1e7dd; display: inline-block;">
-                                                    Refuser
+                                                <a href="{{ $action }}" target="_blank"
+                                                   style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; background-color: green; padding: 15px 25px; border-radius: 2px; border: 1px solid #d1e7dd; display: inline-block;">
+                                                    Confirmez votre compte
                                                 </a>
                                             </td>
                                         </tr>
@@ -181,6 +141,22 @@
                             </tr>
                         </table>
                     </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#ffffff" align="left"
+                        style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                        <p style="margin: 0;">Si cela ne fonctionne pas, copiez et collez le lien suivant dans votre navigateur :</p></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#ffffff" align="left"
+                        style="padding: 20px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                        <p style="margin: 0;"><a href="#" target="_blank" style="color: lightgreen;">{{ $action }}</a>
+                        </p></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#ffffff" align="left"
+                        style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                        <p style="margin: 0;">Si vous avez des questions, répondez simplement à cet e-mail - nous sommes toujours heureux de vous aider.</p></td>
                 </tr>
                 <tr>
                     <td bgcolor="#ffffff" align="left"

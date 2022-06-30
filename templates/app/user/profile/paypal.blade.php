@@ -10,24 +10,24 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" name="name">
-                            @error('name')
+                        <input type="text" class="form-control @error('paypal_name') is-invalid @enderror" id="paypal_name" placeholder="" name="paypal_name" value="{{ $profile->paypal_name }}">
+                            @error('paypal_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        <label for="current">Votre nom sur paypal</label>
+                        <label for="paypal_name">Votre nom sur paypal</label>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="" name="email">
-                        @error('password')
+                        <input type="email" class="form-control @error('paypal_email') is-invalid @enderror" id="paypal_email" placeholder="" name="paypal_email" value="{{ $profile->paypal_email }}">
+                        @error('paypal_email')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <label for="password">Votre adresse mail sur paypal</label>
+                        <label for="paypal_email">Votre adresse mail sur paypal</label>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\PasswordRequest;
 use App\Http\Requests\Site\ProfileRequest;
 use App\Mail\FriendInvitationEmail;
+use App\Models\Country;
 use App\Models\Message;
 use App\Models\User;
 use App\Repository\ProfileRepository;
+use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -16,9 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProfileController extends Controller
 {
-    public function __construct()
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('auth');
+        $this->userRepository = $userRepository;
     }
 
     public function board()
@@ -45,7 +50,8 @@ class ProfileController extends Controller
     public function edit()
     {
         return view('app.user.profile.edit', [
-            'profile' => Auth::user()
+            'profile' => Auth::user(),
+            'countries' => Country::all()
         ]);
     }
 
@@ -78,6 +84,18 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function paypalStore(Request $request)
+    {
+        $request->validate([
+            'paypal_name' => 'required',
+            'paypal_email' => 'required'
+        ]);
+
+        $this->userRepository->updatePaypalAccount($request->only('paypal_name', 'paypal_email'));
+
+        return redirect()->back()->with(['success' => 'Votre données ont été sauvegarder.']);
+    }
+
     public function profile()
     {
         return view('app.user.profile.detail', [
@@ -99,9 +117,19 @@ class ProfileController extends Controller
         return redirect()->back()->with(['success' => 'Vos informations ont été sauvegarder avec succés.']);
     }
 
-    public function bankStore()
+    public function bankStore(Request $request)
     {
-        // Store Bank Data
+        $request->validate([
+            'bank_address_1' => 'required',
+            'bank_postal_code' => 'required',
+            'bank_city' => 'required',
+            'bank_owner' => 'required',
+            'bank_iban' => 'required',
+        ]);
+
+        $this->userRepository->updateBankAccount($request->only('bank_address_1', 'bank_address_2' ,'bank_address_2' ,'bank_postal_code' ,'bank_city' ,'bank_owner' ,'bank_iban'));
+
+        return redirect()->back()->with(['success' => 'Votre données ont été sauvegarder.']);
     }
 
     public function passwordStore(PasswordRequest $request)
@@ -118,11 +146,6 @@ class ProfileController extends Controller
         return redirect()->back()->with(['error' => 'Ups! une erruer est souvenue, veuiller verifier vos informations']);
     }
 
-    public function paypalStore()
-    {
-        // TODO Paypal Data store
-    }
-
     public function invitationSend(Request $request)
     {
         $request->validate([
@@ -131,7 +154,7 @@ class ProfileController extends Controller
 
         Mail::to($request->get('email'))->send(new FriendInvitationEmail());
 
-        return redirect()->back()->with(['success' => 'Un e-mail a été envoyé a votre ami. Merci d agrandir la communauté Colissend :)']);
+        return redirect()->back()->with(['success' => 'Un e-mail a été envoyé a votre ami. Merci d agrandir la communauté Colissend.']);
     }
 
     public function markAsRead(Message $message)

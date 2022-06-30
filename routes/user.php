@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Identity\IdentityController;
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\ProfileController;
 use App\Http\Controllers\Site\UsersPostsController;
@@ -28,6 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile/messages/all', [ProfileController::class, 'markAllAsRead'])->name('user.profiles.messages.mark-all-read');
     Route::post('/profile/messages/{message}', [ProfileController::class, 'markAsRead']);
     Route::post('/profile/messages/delete/{message}', [ProfileController::class, 'deleteMessage']);
+
+    // identity files
+    Route::post('/profile/files', [IdentityController::class, 'store'])->name('profile.identityFiles.store');
+    Route::post('/profile/files/{identity}', [IdentityController::class, 'destroy'])->name('profile.identity.delete');
 
     // posts
     Route::get('/profile/posts', [UsersPostsController::class, 'posts'])->name('user.posts.index');

@@ -19,5 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('booking/validate/{reservation}', [BookingController::class, 'reservationValidate'])->name('booking-validate');
     Route::get('booking/except/{reservation}', [BookingController::class, 'reservationExcept'])->name('booking-except');
 
+    Route::get('post/reservations/{slug}', [PostController::class, 'reservations'])->name('post.reservation.list');
+
     Route::get('booking/checkout/{reservation}', [CheckoutController::class, 'checkout'])->name('booking-checkout');
 });

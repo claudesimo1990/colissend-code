@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Pub;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
 
 class DatabaseSeeder extends Seeder
 {
@@ -54,9 +55,13 @@ class DatabaseSeeder extends Seeder
 
         Pub::factory(4)->create();*/
 
+        Pub::factory(4)->create([
+            'user_id' => 1
+        ]);
+
         //Admin::factory(1)->create();
 
-        for ($i = 1; $i <= 3; $i++) {
+/*        for ($i = 1; $i <= 3; $i++) {
 
             $n = 1;
             while( in_array( ($n = mt_rand(1,3)), array($i)));
@@ -70,6 +75,6 @@ class DatabaseSeeder extends Seeder
                     'to' => $to,
                 ]);
             }
-        }
+        }*/
     }
 }

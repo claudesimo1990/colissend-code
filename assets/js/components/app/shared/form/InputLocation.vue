@@ -41,7 +41,7 @@ export default class InputLocation extends Vue {
 
     public mounted() {
 
-        /*this.input = this.$refs[this.$props.field];
+        this.input = this.$refs[this.$props.field];
         this.label = this.$props.title;
 
         const location = new google.maps.places.Autocomplete(
@@ -54,10 +54,9 @@ export default class InputLocation extends Vue {
         );
 
         location.addListener('place_changed', () => {
-          alert(this.data)
-            //this.$emit('location', { 'field': this.$props.field, 'value': location.getPlace().formatted_address })
-            this.$emit('location', { 'field': this.$props.field, 'value': this.data })
-        });*/
+            this.$emit('location', { 'field': this.$props.field, 'value': location.getPlace().formatted_address })
+            //this.$emit('location', { 'field': this.$props.field, 'value': this.data })
+        });
 
     }
 

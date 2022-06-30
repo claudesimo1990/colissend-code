@@ -9,6 +9,8 @@
 namespace App\Repository;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserRepository
 {
@@ -28,6 +30,16 @@ class UserRepository
     public function findById(int $id)
     {
         return $this->user->find($id);
+    }
+
+    public function updatePaypalAccount(array $data)
+    {
+        return Auth::user()->update($data);
+    }
+
+    public function updateBankAccount(array $data)
+    {
+        return Auth::user()->update($data);
     }
 
 }
