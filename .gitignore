@@ -2,3 +2,6 @@
 /vendor
 /storage
 .env
+/public/css/adminController.css
+/public/css/appController.css
+/public/css/baseController.css
