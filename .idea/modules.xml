@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/docker/colissend/.idea/colissend.iml" filepath="$USER_HOME$/docker/colissend/.idea/colissend.iml" />
-      <module fileurl="file://$USER_HOME$/docker/.idea/docker.iml" filepath="$USER_HOME$/docker/.idea/docker.iml" />
+      <module fileurl="file:///var/docker/colissend/.idea/colissend.iml" filepath="/var/docker/colissend/.idea/colissend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/www.iml" filepath="$PROJECT_DIR$/.idea/www.iml" />
     </modules>
   </component>

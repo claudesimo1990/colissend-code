@@ -8,8 +8,15 @@ use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Pub;
 use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use JetBrains\PhpStorm\ArrayShape;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,9 +62,24 @@ class DatabaseSeeder extends Seeder
 
         Pub::factory(4)->create();*/
 
-        Pub::factory(4)->create([
+        Pub::factory(3)->create([
             'user_id' => 1
         ]);
+
+//        $avatars = [1 => '/images/testimonials/paris.jpeg', 2 => '/images/testimonials/paris-2.jpeg', 3 => '/images/testimonials/paris-3.jpeg'];
+//
+//        User::factory(3)->create()->each(function (User $user) use($avatars) {
+//
+//            $fileAddress = base_path(). '/public'.$avatars[$user->id];
+//
+//            $file = new UploadedFile($fileAddress, 'avatar');
+//
+//            $user->addMedia($file)->toMediaCollection('avatar');
+//
+//            Post::factory(1)->create([
+//                'user_id' => $user->id
+//            ]);
+//        });
 
         //Admin::factory(1)->create();
 

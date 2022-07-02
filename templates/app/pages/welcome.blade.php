@@ -132,7 +132,7 @@
                                         <h4 class="fw-bolder">Objects à transporter :</h4>
                                         @foreach($post->objects as $obj)
                                             <div class="d-flex justify-content-between bg-success-light mb-1">
-                                                <h4 class="fw-bold">{{ $obj->name }} <span class="small fw-bold mx-2">x{{ $obj->quantity }}</span>.......<span class="fw-bold mx-2">Poids: {{ $obj->weight }}kg</span></h4>
+                                                <h4 class="fw-bold">{{ $obj->name }} <span class="small fw-bold mx-2">x{{ $obj->quantity }}</span>.......<span class="fw-bold mx-2">Poids: 10kg</span></h4>
                                                 <span> ........ </span>
                                                 <h4 class="fw-bolder">{{ $obj->price }}<i class="bi bi-currency-euro text-dark fw-bolder"></i>/kg</h4>
                                             </div>

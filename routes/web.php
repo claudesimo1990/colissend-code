@@ -9,6 +9,7 @@ use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('welcome');
@@ -49,3 +50,7 @@ Route::get('/facebook/login', [LoginController::class, 'facebook'])->name('faceb
 Route::get('/facebook/callback', [LoginController::class, 'facebookCallBack'])->name('facebookCallBack');
 
 Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, 'confirmation'])->name('user.account.confirmation');
+
+Route::get('test', function () {
+    Mail::raw('Hello World!', function($msg) {$msg->to('claudesimo1990@gmail.com')->subject('Test Email'); });
+});
