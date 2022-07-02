@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
 /*        User::factory(1000)->create()->each(function ($user) {
             Post::factory(1)->create([
@@ -62,24 +62,27 @@ class DatabaseSeeder extends Seeder
 
         Pub::factory(4)->create();*/
 
-        Pub::factory(3)->create([
-            'user_id' => 1
-        ]);
+        $avatars = [1 => '/images/testimonials/paris.jpeg', 2 => '/images/testimonials/paris-2.jpeg', 3 => '/images/testimonials/paris-3.jpeg'];
 
-//        $avatars = [1 => '/images/testimonials/paris.jpeg', 2 => '/images/testimonials/paris-2.jpeg', 3 => '/images/testimonials/paris-3.jpeg'];
-//
-//        User::factory(3)->create()->each(function (User $user) use($avatars) {
-//
-//            $fileAddress = base_path(). '/public'.$avatars[$user->id];
-//
-//            $file = new UploadedFile($fileAddress, 'avatar');
-//
-//            $user->addMedia($file)->toMediaCollection('avatar');
-//
-//            Post::factory(1)->create([
-//                'user_id' => $user->id
-//            ]);
-//        });
+        User::factory(3)->create()->each(function (User $user) use($avatars) {
+
+            Pub::factory(1)->create([
+                'user_id' => $user->id
+            ]);
+
+            $fileAddress = base_path(). '/public'.$avatars[$user->id];
+
+            $file = new UploadedFile($fileAddress, 'avatar');
+
+            try {
+                $user->addMedia($file)->toMediaCollection('avatar');
+            } catch (FileDoesNotExist|FileIsTooBig $e) {
+            }
+
+            Post::factory(1)->create([
+                'user_id' => $user->id
+            ]);
+        });
 
         //Admin::factory(1)->create();
 
