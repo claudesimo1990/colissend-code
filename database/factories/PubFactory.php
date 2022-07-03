@@ -21,9 +21,9 @@ class PubFactory extends Factory
      */
     public function definition(): array
     {
-        $images = ['news-1.jpg', 'news-2.jpg', 'news-3.jpg', 'news-4.jpg', 'news-5.jpg'];
+        $images = ['news-1.jpg', 'news-2.jpeg', 'news-3.jpg'];
 
-        $image = $images[rand(0, 3)];
+        $image = $images[rand(0, 2)];
 
         return [
             'title' => $this->faker->name,
