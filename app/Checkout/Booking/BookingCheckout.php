@@ -17,27 +17,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Symfony\Component\HttpFoundation\Request;
-use Throwable;
 
 class BookingCheckout implements CheckoutInterface
 {
     private $provider;
 
-    /**
-     * @var TransactionRepository
-     */
     private $transactionRepository;
 
-    /**
-     * @var Reservation
-     */
-    private $reservation;
-
-    /**
-     * @param TransactionRepository $transactionRepository
-     * @param Reservation $reservation
-     * @throws Throwable
-     */
     public function __construct(TransactionRepository $transactionRepository, Reservation $reservation)
     {
         $provider = new PayPalClient;
@@ -50,9 +36,6 @@ class BookingCheckout implements CheckoutInterface
         $this->reservation = $reservation;
     }
 
-    /**
-     * @throws Throwable
-     */
     public function process(Reservation $reservation): RedirectResponse
     {
         $this->reservation = $reservation;
@@ -76,7 +59,6 @@ class BookingCheckout implements CheckoutInterface
 
         if (isset($response['id']) && $response['id'] != null) {
 
-            // redirect to approve href
             foreach ($response['links'] as $links) {
                 if ($links['rel'] == 'approve') {
                     return redirect($links['href'])->send();
@@ -95,9 +77,6 @@ class BookingCheckout implements CheckoutInterface
 
     }
 
-    /**
-     * @throws Throwable
-     */
     public function buySuccess(Request $request, Reservation $reservation): bool
     {
         $response = $this->provider->capturePaymentOrder($request['token']);
