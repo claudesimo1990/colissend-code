@@ -52,5 +52,9 @@ Route::get('/facebook/callback', [LoginController::class, 'facebookCallBack'])->
 Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, 'confirmation'])->name('user.account.confirmation');
 
 Route::get('test', function () {
-    Mail::raw('Hello World!', function($msg) {$msg->to('claudesimo1990@gmail.com')->subject('Test Email'); });
+    try {
+        Mail::raw('Hello World!', function($msg) {$msg->to('claudesimo1990@gmail.com')->subject('Test Email'); });
+    }catch (Exeption $exeption) {
+        dd($exeption->getMessage());
+    }
 });

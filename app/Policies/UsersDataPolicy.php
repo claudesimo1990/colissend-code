@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Profoile\UsersData;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class UsersDataPolicy
 {
@@ -13,10 +13,10 @@ class UsersDataPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @return Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): Response|bool
     {
         //
     }
@@ -24,11 +24,11 @@ class UsersDataPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Profoile\UsersData  $usersData
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param User $usersData
+     * @return Response|bool
      */
-    public function view(User $user, UsersData $usersData)
+    public function view(User $user, User $usersData): Response|bool
     {
         //
     }
@@ -36,10 +36,10 @@ class UsersDataPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @return Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): Response|bool
     {
         //
     }
@@ -47,11 +47,11 @@ class UsersDataPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Profoile\UsersData  $usersData
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param User $usersData
+     * @return Response|bool
      */
-    public function update(User $user, UsersData $usersData)
+    public function update(User $user, User $usersData): Response|bool
     {
         //
     }
@@ -59,11 +59,11 @@ class UsersDataPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Profoile\UsersData  $usersData
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param User $usersData
+     * @return Response|bool
      */
-    public function delete(User $user, UsersData $usersData)
+    public function delete(User $user, User $usersData): Response|bool
     {
         //
     }
@@ -71,11 +71,11 @@ class UsersDataPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Profoile\UsersData  $usersData
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param User $usersData
+     * @return Response|bool
      */
-    public function restore(User $user, UsersData $usersData)
+    public function restore(User $user, User $usersData): Response|bool
     {
         //
     }
@@ -83,11 +83,11 @@ class UsersDataPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Profoile\UsersData  $usersData
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param User $usersData
+     * @return void
      */
-    public function forceDelete(User $user, UsersData $usersData)
+    public function forceDelete(User $user, User $usersData): void
     {
         //
     }

@@ -9,12 +9,13 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use JetBrains\PhpStorm\ArrayShape;
 
 class Hallo implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $name;
+    public string $name;
 
     /**
      * Create a new event instance.
@@ -41,7 +42,7 @@ class Hallo implements ShouldBroadcast
         return 'TestApp';
     }
 
-    public function broadcastWith(): array
+    #[ArrayShape(['name' => "string"])] public function broadcastWith(): array
     {
         return ['name' => $this->name];
     }

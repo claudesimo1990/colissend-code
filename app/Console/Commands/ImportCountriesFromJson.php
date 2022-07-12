@@ -36,11 +36,11 @@ class ImportCountriesFromJson extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         Country::truncate();
 
-        $json = storage_path('country.json');
+        $json = base_path('countries.json');
         $json = json_decode(file_get_contents($json), true);
 
         foreach ($json as $country) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="colissend@localhost" uuid="d71855a5-3f4a-4dfb-afbb-07bea061b994">
+    <data-source source="LOCAL" name="Colissend" uuid="dadecd17-6230-457c-858b-34041c29c8c4">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

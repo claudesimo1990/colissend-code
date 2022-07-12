@@ -21,17 +21,12 @@ use Throwable;
 
 class BookingCheckout implements CheckoutInterface
 {
-    private $provider;
+    private PayPalClient $provider;
 
     /**
      * @var TransactionRepository
      */
-    private $transactionRepository;
-
-    /**
-     * @var Reservation
-     */
-    private $reservation;
+    private TransactionRepository $transactionRepository;
 
     /**
      * @param TransactionRepository $transactionRepository
@@ -67,7 +62,7 @@ class BookingCheckout implements CheckoutInterface
                 [
                     "amount"=> [
                         "currency_code"=> "EUR",
-                        "value"=> $this->sumToBuy($reservation)
+                        "value"=> $reservation->price
                     ],
                     'description' => 'New Reservation'
                 ]
@@ -114,10 +109,5 @@ class BookingCheckout implements CheckoutInterface
 
             return false;
         }
-    }
-
-    private function sumToBuy(Reservation $reservation)
-    {
-        return  (int)$reservation->kilo * $reservation->post->price;
     }
 }

@@ -8,14 +8,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use JetBrains\PhpStorm\ArrayShape;
 
 class BookingNotification extends Notification
 {
     use Queueable;
 
-    public $reservation;
-    public $post;
-    private $price;
+    public Reservation $reservation;
+    public Post $post;
+    private int $price;
 
     public function __construct(Reservation $reservation, Post $post)
     {
@@ -30,16 +31,19 @@ class BookingNotification extends Notification
 
     public function toMail($notifiable): ?MailMessage
     {
-        $objects = json_decode(json_decode($this->reservation->objects));
-        $courrier = $objects->courrier;
-        $total = $this->post->price * $this->reservation->kilo;
-
-        $res = [];
-        if ($courrier->status) $total += $courrier->number * $courrier->price;  $res['courier'] = ['name' => 'courrier', 'number' => $courrier->number, 'price' => $courrier->price];
-        $res['kilo'] = ['name' => 'kilos', 'number' => $this->reservation->kilo, 'price' => $this->post->price];
-        $res['total'] = ['name' => 'Total', 'number' => 1, 'price' => $total];
-
         if ($this->post->type == 'TRAVEL') {
+
+            $objects = json_decode($this->reservation->objects);
+            $total = 0;
+
+            $res = [];
+            if ($objects->courrier->status){
+                $total += $objects->courrier->number * ($objects->courrier->price/100);
+                $res['courier'] = ['name' => 'courrier', 'number' => $objects->courrier->number, 'price' => ($objects->courrier->price/100)];
+            }
+            $res['kilo'] = ['name' => 'kilos', 'number' => $this->reservation->kilo, 'price' => ($this->post->price/100)];
+            $res['total'] = ['name' => 'Total', 'number' => 1, 'price' => ($total += $this->reservation->kilo * ($this->post->price/100))];
+
             return (new MailMessage)
                 ->subject('Nouvelle reservation')
                 ->markdown('mail.booking.travel', [
@@ -67,7 +71,7 @@ class BookingNotification extends Notification
         return null;
     }
 
-    public function toArray($notifiable): array
+    #[ArrayShape(['slug' => "mixed", 'price' => "", 'title' => "string", 'message' => "mixed", 'kilo' => "mixed", 'status' => "mixed", 'valider' => "string", 'refuser' => "string"])] public function toArray($notifiable): array
     {
         return [
             'slug' => $this->reservation['id'],

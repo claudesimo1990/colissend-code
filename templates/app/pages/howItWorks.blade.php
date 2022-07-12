@@ -1,10 +1,5 @@
 @extends('app.layout.layout')
 
-@section('style')
-
-@endsection
-
-
 @section('app')
 
     <x-header page="page-howItWork" img="" title="{{ $section['title'] }}"/>
@@ -14,13 +9,20 @@
             <div class="card-block bg-white mb30">
                 <div class="section-title mb-0 dashboard">
                     <div class="activity">
-                        @foreach($section['steps'] as $step)
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">{{ $step['step'] }}</div>
-                                <i class="bi bi-circle-fill activity-badge {{ $step['color'] }} align-self-start"></i>
-                                <div class="activity-content">{{ $step['text'] }}</div>
-                            </div>
-                        @endforeach
+                        <h2 class="card-title">{{ $section['title'] }}</h2>
+                        <p class="mb-4">{{ $section['text'] }}</p>
+                        <div class="accordion accordion-flush">
+                            @foreach($section['steps'] as $key => $step)
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header bold">
+                                        {{ $step['step'] }}
+                                    </h3>
+                                    <div class="accordion-body">
+                                        {{ $step['text'] }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

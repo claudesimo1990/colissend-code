@@ -1,61 +1,26 @@
 <template>
-    <li class="nav-item dropdown">
-
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">{{ notifications.length }}</span>
-        </a><!-- End Notification Icon -->
-
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-                Vous avez {{ notifications.length }} nouvelle(s) notification(s)
-                <a :href="path"><span class="badge rounded-pill bg-primary p-2 ms-2">tout voir</span></a>
-            </li>
-            <div v-for="(notification, index) in  notifications" :key="index">
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-
-                <li class="notification-item">
-                    <i class="bx bxs-plane-take-off plane-icon text-success"></i>
-                    <div>
-                        <h4>{{ notification.data.title }}</h4>
-                        <p>{{ notification.data.message | preview }}</p>
-                        <p>{{ notification.created_at | ago }}</p>
-                    </div>
-                </li>
-
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-            </div>
-            <li class="dropdown-footer">
-                <a href="#">voir toute(s) notification(s)</a>
-            </li>
-
-        </ul><!-- End Notification Dropdown Items -->
-
-    </li>
+  <div class="alert alert-primary alert-dismissible fade show">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <strong>Primary!</strong> This is a simple primary alert box.
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
 </template>
 
 <script lang="ts">
 
-import {Vue, Component, Prop} from 'vue-property-decorator';
-import store from "../../../store/store";
+import {Vue, Component} from 'vue-property-decorator';
 
 @Component({
     props: {
-        path: String
+        propsnotifications: Array
     }
 })
 export default class NotificationComponent extends Vue {
 
-    get notifications () {
-        return store.getters['notification/notifications'];
-    }
+  notifications = []
 
     mounted(): void {
-        store.dispatch('notification/getNotifications');
+        this.notifications = this.$props.propsnotifications
     }
 
 }

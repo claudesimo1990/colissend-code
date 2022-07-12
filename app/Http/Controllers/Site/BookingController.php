@@ -18,8 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookingController extends Controller
 {
-    private $postRepository;
-    private $userRepository;
+    private PostRepository $postRepository;
+    private UserRepository $userRepository;
 
     public function __construct(PostRepository $postRepository, UserRepository $userRepository)
     {
@@ -31,7 +31,7 @@ class BookingController extends Controller
     {
         $reservation = $re->store($request, $post);
 
-        //Notification::send($post->user, new BookingNotification($reservation, $post));
+        Notification::send($post->user, new BookingNotification($reservation, $post));
 
         return new Response('Votre reservation á été soumise avec success!', 200);
     }
@@ -40,38 +40,39 @@ class BookingController extends Controller
     {
         $post = $this->postRepository->findById($reservation->post_id);
 
-        $reservation->update([
-            'status' => 'PROGRESS'
-        ]);
+        if ($post->kilo <= 0) {
+            // TODO add new post status ARCHIV
+            $post->update([
+                'status' => 'PROGRESS'
+            ]);
+            return redirect()->back()->with('error', 'plus de kilos disponibles sur ce post');
+        }
 
         if ($reservation->status != 'ACCEPTED' && $reservation->status != 'REJECTED') {
             if ($post->type == 'TRAVEL') {
-                if ($reservation->status !== 'ACCEPTED') {
+                $post->update([
+                    'kilo' => (int)$post->kilo -= (int)$reservation->kilo
+                ]);
 
-                    $post->update([
-                        'kilo' => (int)$post->kilo -= (int)$reservation->kilo
-                    ]);
+                $reservation->update([
+                    'status' => 'ACCEPTED'
+                ]);
 
-                    $reservation->update([
-                        'status' => 'ACCEPTED'
-                    ]);
+                $this->totalToPay($reservation);
+                Notification::send($reservation->user, new ReservationValidate($post, $reservation));
 
-                    Notification::send($this->userRepository->findById($reservation->user_id), new ReservationValidate($post, $reservation));
-
-                    return redirect()->back()->with('success', 'La reservation a été validé');
-                }
-                return redirect()->back()->with('error', 'La reservation a déja été validé');
+                return redirect()->back()->with('success', 'La reservation a été validé');
             }
-
             if ($post->type == 'PACKS') {
 
+                $this->totalToPay($reservation);
                 Notification::send($this->userRepository->findById($reservation->user_id), new ReservationValidate($post, $reservation));
 
                 return redirect()->back()->with('success', 'La reservation a été validé');
             }
         }
 
-        return redirect()->back()->with('error', 'Vous ne pouvez plus effectuer cette action');
+        return redirect()->back()->with('error', 'La reservation a déja été validé');
     }
 
     public function reservationExcept(Reservation $reservation): RedirectResponse
@@ -79,18 +80,35 @@ class BookingController extends Controller
         $post = $this->postRepository->findById($reservation->post_id);
 
         if ($reservation->status != 'ACCEPTED' && $reservation->status != 'REJECTED') {
-            if ($reservation->status !== 'REJECTED') {
-                $reservation->update([
-                    'status' => 'REJECTED'
-                ]);
 
-                Notification::send($this->userRepository->findById($reservation->user_id), new ReservationRejected($post));
+            $reservation->update([
+                'status' => 'REJECTED'
+            ]);
 
-                return redirect()->back()->with('success', 'La reservation à été refuser');
-            }
-            return redirect()->back()->with('error', 'La reservation à déja été rejeté');
+            $this->totalToPay($reservation);
+            Notification::send($this->userRepository->findById($reservation->user_id), new ReservationRejected($post));
+
+            return redirect()->back()->with('success', 'La reservation à été refusé');
         }
 
         return redirect()->back()->with('error', 'Vous ne pouvez plus effectuer cette action');
+    }
+
+    public function delete(Reservation $reservation): RedirectResponse
+    {
+        $reservation->delete();
+
+        // TODO Notifier l'utilisateur de la suppression de son post.
+
+        return redirect()->back()->with('success', 'La reservation à été supprimé');
+    }
+
+    private function totalToPay(Reservation $reservation)
+    {
+        $objects = json_decode($reservation->objects);
+        $total = 0;
+        if ($objects->courrier->status){$total += ($objects->courrier->number * ($objects->courrier->price/100));}
+        $total += $reservation->kilo * ($reservation->post->price/100);
+        $reservation->update(['price' => $total]);
     }
 }

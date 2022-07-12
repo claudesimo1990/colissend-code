@@ -19,7 +19,7 @@
       <h3 class="small text-black-50 fw-bolder">Objects à transporter :</h3>
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-6" v-for="object in post.objects" :key="object.id">
+          <div class="col-md-6" v-for="(object, index) in post.objects" :key="object.id + object.type + index">
             <i v-if="object.type === 'Bagages'" class="bi bi-box-seam text-success large-icon"></i>
             <i v-if="object.type === 'Courrier'" class="bi bi-envelope text-success large-icon"></i>
             <span class="text-black-50 small">{{ object.name }} x{{ object.quantity }} ..Poids: {{ object.weight }} ..Prix: {{ object.price }}<i class="bi bi-currency-euro text-dark fw-bolder"></i>/Unité</span>

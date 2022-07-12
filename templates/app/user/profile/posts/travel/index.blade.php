@@ -18,7 +18,7 @@
                         <div class="object border d-flex justify-content-between gap-3">
                             <span>{{ $travel->kilo }} kilos</span>
                             <span>{{ $travel->price }}<i class="bi bi-currency-euro"></i>/kilo</span>
-                            <span><a href="{{ route('post.reservation.list', ['slug' => $travel->slug]) }}">Voir les reservations({{ $travel->reservations->count() }})</a></span>
+                            <span><a href="{{ route('post.reservation.list', ['slug' => $travel->slug]). '?type='. $travel->type  }}">Voir les reservations({{ $travel->reservations->count() }})</a></span>
                         </div>
                     </div>
                 </div>

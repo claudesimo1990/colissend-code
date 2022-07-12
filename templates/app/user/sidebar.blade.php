@@ -40,13 +40,13 @@
         <a href="{{  route('user.posts.bookings') }}" class="nav-link collapsed {{ (request()->routeIs('user.posts.bookings')) ? 'profile-dashboard-nav-active' : '' }}">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                 <i class="bx bxs-business text-success"></i>
-                <span>Reservations</span>
+                <span>Mes Reservations</span>
             </div>
         </a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a href="{{  route('user.posts.payments') }}" class="nav-link collapsed {{ (request()->routeIs('user.posts.payments')) ? 'profile-dashboard-nav-active' : '' }}">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                 <i class="bi bi-currency-euro dash-icon"></i>
                 <span>Mes paiements</span>
@@ -55,7 +55,7 @@
     </li>
 
     <li class="nav-item">
-        <a href="{{ route('user.profile.messages') }}" class="nav-link collapsed {{(request()->routeIs('user.profile.actions')) ||  (request()->routeIs('user.profile.messages')) ? 'profile-dashboard-nav-active' : '' }}">
+        <a href="{{ route('user.profile.messages') }}" class="nav-link collapsed {{(request()->routeIs('user.profile.messages')) ||  (request()->routeIs('user.profile.messages')) ? 'profile-dashboard-nav-active' : '' }}">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                 <i class="bx bxs-message  dash-icon"></i>
                 <span>Messages</span>
@@ -64,7 +64,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a href="{{ route('user.profile.notifications') }}" class="nav-link collapsed {{(request()->routeIs('user.profile.notifications')) ||  (request()->routeIs('user.profile.notifications')) ? 'profile-dashboard-nav-active' : '' }}">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                 <i class="bx bxs-notification  dash-icon"></i>
                 <span>Notifications</span>

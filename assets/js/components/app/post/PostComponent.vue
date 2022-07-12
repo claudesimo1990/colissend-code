@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <section class="section dashboard">
-      <div v-for="post in foundPosts" :key="post.id" class="row card">
+      <div v-for="(post, index) in foundPosts" :key="post.id" class="row card">
         <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
           <div class="">
             <div class="card-body post_card_body mt-2">
