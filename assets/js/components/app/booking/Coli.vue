@@ -41,16 +41,17 @@
           <label class="fw-bold">Message: </label>
           <div class="">{{ post.content }}</div>
         </div>
+        <a class="btn btn-success my-3"  @click.prevent="proposition()" v-if="!showProposal">Faire une proposition</a>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="showProposal">
       <h6 class="card-title-info">Faire ma proposition</h6>
       <div class="proposal d-flex gap-2 border py-4 my-2">
         <input class="border text-end px-2 mx-2" v-model="proposalPrice">
         <button class="btn btn-success plus" @click.prevent="decrement()">-</button>
         <button class="plus btn btn-success" @click.prevent="increment()">+</button>
       </div>
-      <textarea class="form-control mb-2" type="text" rows="3" placeholder="laisser un message..."></textarea>
+      <textarea class="form-control mb-2" type="text" rows="5" v-model="booking.message" placeholder="laisser un message..."></textarea>
       <a href="#" @click="send()" class="btn btn-success">Me proposer</a>
     </div>
   </div>
@@ -78,6 +79,7 @@ export default class Coli extends Vue {
     show: boolean = false;
     errors: any = [];
     objects: any = [];
+    showProposal: boolean = false;
 
     booking: any = {
       message: '',
@@ -138,9 +140,20 @@ export default class Coli extends Vue {
       return total;
     }
 
+    proposition() {
+      this.showProposal = true;
+      this.booking.message = "Bonjour " + this.$props.post.user.firstname + ",\n" +
+          "Votre annonce m’intéresse. Je suis disponible pour effectuer cette livraison.\n" +
+          "Quelles sont les disponibilités de l’expéditeur et du destinataire ?\n" +
+          "Merci de votre réponse !\n" +
+          "A bientôt !\n" +
+          this.$props.auth.firstname + " " + this.$props.auth.lastname
+    }
+
     mounted(): void {
       this.objects = this.$props.post.objects;
-      this.proposalPrice = this.totalToPay
+      this.proposalPrice = this.totalToPay;
+      this.showProposal = false;
     }
   }
 </script>

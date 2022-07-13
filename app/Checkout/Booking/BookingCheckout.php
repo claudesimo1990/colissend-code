@@ -17,13 +17,22 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Symfony\Component\HttpFoundation\Request;
+use Throwable;
 
 class BookingCheckout implements CheckoutInterface
 {
-    private $provider;
+    private PayPalClient $provider;
 
-    private $transactionRepository;
+    /**
+     * @var TransactionRepository
+     */
+    private TransactionRepository $transactionRepository;
 
+    /**
+     * @param TransactionRepository $transactionRepository
+     * @param Reservation $reservation
+     * @throws Throwable
+     */
     public function __construct(TransactionRepository $transactionRepository, Reservation $reservation)
     {
         $provider = new PayPalClient;
@@ -36,6 +45,9 @@ class BookingCheckout implements CheckoutInterface
         $this->reservation = $reservation;
     }
 
+    /**
+     * @throws Throwable
+     */
     public function process(Reservation $reservation): RedirectResponse
     {
         $this->reservation = $reservation;
@@ -50,7 +62,7 @@ class BookingCheckout implements CheckoutInterface
                 [
                     "amount"=> [
                         "currency_code"=> "EUR",
-                        "value"=> $this->sumToBuy($reservation)
+                        "value"=> $reservation->price
                     ],
                     'description' => 'New Reservation'
                 ]
@@ -59,6 +71,7 @@ class BookingCheckout implements CheckoutInterface
 
         if (isset($response['id']) && $response['id'] != null) {
 
+            // redirect to approve href
             foreach ($response['links'] as $links) {
                 if ($links['rel'] == 'approve') {
                     return redirect($links['href'])->send();
@@ -77,6 +90,9 @@ class BookingCheckout implements CheckoutInterface
 
     }
 
+    /**
+     * @throws Throwable
+     */
     public function buySuccess(Request $request, Reservation $reservation): bool
     {
         $response = $this->provider->capturePaymentOrder($request['token']);
@@ -93,10 +109,5 @@ class BookingCheckout implements CheckoutInterface
 
             return false;
         }
-    }
-
-    private function sumToBuy(Reservation $reservation)
-    {
-        return  (int)$reservation->kilo * $reservation->post->price;
     }
 }

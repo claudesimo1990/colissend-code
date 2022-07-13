@@ -15,7 +15,7 @@ class ReservationRejected extends Notification
     /**
      * @var Post
      */
-    private $post;
+    public Post $post;
 
     /**w
      * Create a new notification instance.
@@ -33,7 +33,7 @@ class ReservationRejected extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
@@ -44,7 +44,7 @@ class ReservationRejected extends Notification
      * @param  mixed  $notifiable
      * @return MailMessage
      */
-    public function toMail($notifiable): MailMessage
+    public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Reservation rejetée')
@@ -59,7 +59,7 @@ class ReservationRejected extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable): array
+    public function toArray(mixed $notifiable): array
     {
         return [
             //

@@ -2135,7 +2135,7 @@ var echo = {
     setEcho: function setEcho(state) {
       state.echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
         broadcaster: 'pusher',
-        key: "",
+        key: "myKey",
         cluster: "mt1",
         forceTLS: false,
         wsHost: window.location.hostname,
@@ -2695,6 +2695,7 @@ function (_super) {
     _this.show = false;
     _this.errors = [];
     _this.objects = [];
+    _this.showProposal = false;
     _this.booking = {
       message: '',
       objects: {},
@@ -2753,9 +2754,15 @@ function (_super) {
     configurable: true
   });
 
+  Coli.prototype.proposition = function () {
+    this.showProposal = true;
+    this.booking.message = "Bonjour " + this.$props.post.user.firstname + ",\n" + "Votre annonce m’intéresse. Je suis disponible pour effectuer cette livraison.\n" + "Quelles sont les disponibilités de l’expéditeur et du destinataire ?\n" + "Merci de votre réponse !\n" + "A bientôt !\n" + this.$props.auth.firstname + " " + this.$props.auth.lastname;
+  };
+
   Coli.prototype.mounted = function () {
     this.objects = this.$props.post.objects;
     this.proposalPrice = this.totalToPay;
+    this.showProposal = false;
   };
 
   Coli = __decorate([(0,vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__.Component)({
@@ -3740,7 +3747,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/index.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../store/store */ "./assets/js/store/store.ts");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var __extends = undefined && undefined.__extends || function () {
@@ -3783,31 +3789,25 @@ var __decorate = undefined && undefined.__decorate || function (decorators, targ
 
 
 
-
 var NotificationComponent =
 /** @class */
 function (_super) {
   __extends(NotificationComponent, _super);
 
   function NotificationComponent() {
-    return _super !== null && _super.apply(this, arguments) || this;
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+
+    _this.notifications = [];
+    return _this;
   }
 
-  Object.defineProperty(NotificationComponent.prototype, "notifications", {
-    get: function get() {
-      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["notification/notifications"];
-    },
-    enumerable: false,
-    configurable: true
-  });
-
   NotificationComponent.prototype.mounted = function () {
-    _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('notification/getNotifications');
+    this.notifications = this.$props.propsnotifications;
   };
 
   NotificationComponent = __decorate([(0,vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__.Component)({
     props: {
-      path: String
+      propsnotifications: Array
     }
   })], NotificationComponent);
   return NotificationComponent;
@@ -46622,90 +46622,125 @@ var render = function () {
             _vm._v(" "),
             _c("div", {}, [_vm._v(_vm._s(_vm.post.content))]),
           ]),
+          _vm._v(" "),
+          !_vm.showProposal
+            ? _c(
+                "a",
+                {
+                  staticClass: "btn btn-success my-3",
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.proposition()
+                    },
+                  },
+                },
+                [_vm._v("Faire une proposition")]
+              )
+            : _vm._e(),
         ],
         2
       ),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("h6", { staticClass: "card-title-info" }, [
-        _vm._v("Faire ma proposition"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "proposal d-flex gap-2 border py-4 my-2" }, [
-        _c("input", {
-          directives: [
+    _vm.showProposal
+      ? _c("div", { staticClass: "row" }, [
+          _c("h6", { staticClass: "card-title-info" }, [
+            _vm._v("Faire ma proposition"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "proposal d-flex gap-2 border py-4 my-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.proposalPrice,
+                  expression: "proposalPrice",
+                },
+              ],
+              staticClass: "border text-end px-2 mx-2",
+              domProps: { value: _vm.proposalPrice },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.proposalPrice = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success plus",
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.decrement()
+                  },
+                },
+              },
+              [_vm._v("-")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "plus btn btn-success",
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.increment()
+                  },
+                },
+              },
+              [_vm._v("+")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.booking.message,
+                expression: "booking.message",
+              },
+            ],
+            staticClass: "form-control mb-2",
+            attrs: {
+              type: "text",
+              rows: "5",
+              placeholder: "laisser un message...",
+            },
+            domProps: { value: _vm.booking.message },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.booking, "message", $event.target.value)
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.proposalPrice,
-              expression: "proposalPrice",
-            },
-          ],
-          staticClass: "border text-end px-2 mx-2",
-          domProps: { value: _vm.proposalPrice },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.proposalPrice = $event.target.value
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success plus",
-            on: {
-              click: function ($event) {
-                $event.preventDefault()
-                return _vm.decrement()
+              staticClass: "btn btn-success",
+              attrs: { href: "#" },
+              on: {
+                click: function ($event) {
+                  return _vm.send()
+                },
               },
             },
-          },
-          [_vm._v("-")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "plus btn btn-success",
-            on: {
-              click: function ($event) {
-                $event.preventDefault()
-                return _vm.increment()
-              },
-            },
-          },
-          [_vm._v("+")]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control mb-2",
-        attrs: {
-          type: "text",
-          rows: "3",
-          placeholder: "laisser un message...",
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success",
-          attrs: { href: "#" },
-          on: {
-            click: function ($event) {
-              return _vm.send()
-            },
-          },
-        },
-        [_vm._v("Me proposer")]
-      ),
-    ]),
+            [_vm._v("Me proposer")]
+          ),
+        ])
+      : _vm._e(),
   ])
 }
 var staticRenderFns = []
@@ -46840,7 +46875,7 @@ var render = function () {
                         "div",
                         { staticClass: "text-muted pt-2 ps-1 mx-2 text-wrap" },
                         [
-                          _vm._v(_vm._s(_vm.post.price)),
+                          _vm._v(_vm._s(_vm.post.price / 100)),
                           _c("i", {
                             staticClass:
                               "text-muted bi bi-currency-euro mt-2 text-black fw-bold",
@@ -46905,7 +46940,9 @@ var render = function () {
                                 "text-muted pt-2 ps-1 mx-2 text-wrap",
                             },
                             [
-                              _vm._v(_vm._s(_vm.post.objects.courrier.price)),
+                              _vm._v(
+                                _vm._s(_vm.post.objects.courrier.price / 100)
+                              ),
                               _c("i", {
                                 staticClass:
                                   "text-muted bi bi-currency-euro mt-2 text-black fw-bold",
@@ -48312,100 +48349,34 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "nav-item dropdown" }, [
-    _c(
-      "a",
-      {
-        staticClass: "nav-link nav-icon",
-        attrs: { href: "#", "data-bs-toggle": "dropdown" },
-      },
-      [
-        _c("i", { staticClass: "bi bi-bell" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "badge bg-primary badge-number" }, [
-          _vm._v(_vm._s(_vm.notifications.length)),
-        ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "ul",
-      {
-        staticClass:
-          "dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications",
-      },
-      [
-        _c("li", { staticClass: "dropdown-header" }, [
-          _vm._v(
-            "\n            Vous avez " +
-              _vm._s(_vm.notifications.length) +
-              " nouvelle(s) notification(s)\n            "
-          ),
-          _c("a", { attrs: { href: _vm.path } }, [
-            _c(
-              "span",
-              { staticClass: "badge rounded-pill bg-primary p-2 ms-2" },
-              [_vm._v("tout voir")]
-            ),
-          ]),
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.notifications, function (notification, index) {
-          return _c("div", { key: index }, [
-            _vm._m(0, true),
-            _vm._v(" "),
-            _c("li", { staticClass: "notification-item" }, [
-              _c("i", {
-                staticClass: "bx bxs-plane-take-off plane-icon text-success",
-              }),
-              _vm._v(" "),
-              _c("div", [
-                _c("h4", [_vm._v(_vm._s(notification.data.title))]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(_vm._s(_vm._f("preview")(notification.data.message))),
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(_vm._s(_vm._f("ago")(notification.created_at))),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _vm._m(1, true),
-          ])
-        }),
-        _vm._v(" "),
-        _vm._m(2),
-      ],
-      2
-    ),
-  ])
+  return _c(
+    "div",
+    { staticClass: "alert alert-primary alert-dismissible fade show" },
+    [
+      _c(
+        "svg",
+        {
+          staticClass: "bi flex-shrink-0 me-2",
+          attrs: {
+            width: "24",
+            height: "24",
+            role: "img",
+            "aria-label": "Danger:",
+          },
+        },
+        [_c("use", { attrs: { "xlink:href": "#exclamation-triangle-fill" } })]
+      ),
+      _vm._v(" "),
+      _c("strong", [_vm._v("Primary!")]),
+      _vm._v(" This is a simple primary alert box.\n  "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: { type: "button", "data-bs-dismiss": "alert" },
+      }),
+    ]
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("hr", { staticClass: "dropdown-divider" })])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("hr", { staticClass: "dropdown-divider" })])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "dropdown-footer" }, [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("voir toute(s) notification(s)"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49844,7 +49815,7 @@ var render = function () {
     _c(
       "section",
       { staticClass: "section dashboard" },
-      _vm._l(_vm.foundPosts, function (post) {
+      _vm._l(_vm.foundPosts, function (post, index) {
         return _c("div", { key: post.id, staticClass: "row card" }, [
           _c(
             "a",
@@ -51427,36 +51398,40 @@ var render = function () {
         _c(
           "div",
           { staticClass: "row" },
-          _vm._l(_vm.post.objects, function (object) {
-            return _c("div", { key: object.id, staticClass: "col-md-6" }, [
-              object.type === "Bagages"
-                ? _c("i", {
-                    staticClass: "bi bi-box-seam text-success large-icon",
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              object.type === "Courrier"
-                ? _c("i", {
-                    staticClass: "bi bi-envelope text-success large-icon",
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c("span", { staticClass: "text-black-50 small" }, [
-                _vm._v(
-                  _vm._s(object.name) +
-                    " x" +
-                    _vm._s(object.quantity) +
-                    " ..Poids: " +
-                    _vm._s(object.weight) +
-                    " ..Prix: " +
-                    _vm._s(object.price)
-                ),
-                _c("i", {
-                  staticClass: "bi bi-currency-euro text-dark fw-bolder",
-                }),
-                _vm._v("/Unité"),
-              ]),
-            ])
+          _vm._l(_vm.post.objects, function (object, index) {
+            return _c(
+              "div",
+              { key: object.id + object.type + index, staticClass: "col-md-6" },
+              [
+                object.type === "Bagages"
+                  ? _c("i", {
+                      staticClass: "bi bi-box-seam text-success large-icon",
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                object.type === "Courrier"
+                  ? _c("i", {
+                      staticClass: "bi bi-envelope text-success large-icon",
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-black-50 small" }, [
+                  _vm._v(
+                    _vm._s(object.name) +
+                      " x" +
+                      _vm._s(object.quantity) +
+                      " ..Poids: " +
+                      _vm._s(object.weight) +
+                      " ..Prix: " +
+                      _vm._s(object.price)
+                  ),
+                  _c("i", {
+                    staticClass: "bi bi-currency-euro text-dark fw-bolder",
+                  }),
+                  _vm._v("/Unité"),
+                ]),
+              ]
+            )
           }),
           0
         ),
@@ -51510,7 +51485,7 @@ var render = function () {
         _vm._v(
           _vm._s(_vm.post.kilo) +
             " kilos encore disponibles .... " +
-            _vm._s(_vm.post.price) +
+            _vm._s(_vm.post.price / 100) +
             "€/Kilo"
         ),
       ]),

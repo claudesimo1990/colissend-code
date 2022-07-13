@@ -34,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->configureRateLimiting();
 
@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
                     ->namespace($this->namespace)
                     ->group(base_path('routes/api.php'));
 
-                Route::middleware('web','adminauth')
+                Route::middleware('web')
                     ->prefix('admin')
                     ->namespace($this->namespace)
                     ->group(base_path('routes/admin.php'));
@@ -77,7 +77,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for(
             'api',

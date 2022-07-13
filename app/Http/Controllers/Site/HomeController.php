@@ -8,13 +8,16 @@ use App\Models\Country;
 use App\Models\Gallery;
 use App\Models\User;
 use App\Repository\PostRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
-    public function home(PostRepository $postRepository)
+    public function home(PostRepository $postRepository): Factory|View|Application
     {
         $latestPosts = $postRepository->getLastTreePosts();
         $testimonials = config('users.testimonials');
@@ -30,7 +33,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function howItWorks(int $id)
+    public function howItWorks(int $id): Factory|View|Application
     {
         $section = $this->findSectionWithId(config('users.howItWorks'), $id);
 
@@ -39,7 +42,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function faq()
+    public function faq(): Factory|View|Application
     {
         $faqs = config('users.faqs');
 
@@ -48,22 +51,22 @@ class HomeController extends Controller
         ]);
     }
 
-    public function impressum()
+    public function impressum(): Factory|View|Application
     {
         return view('app.pages.impressum');
     }
 
-    public function about()
+    public function about(): Factory|View|Application
     {
         return view('app.pages.about');
     }
 
-    public function contact()
+    public function contact(): Factory|View|Application
     {
         return view('app.pages.contact');
     }
 
-    public function privacy()
+    public function privacy(): Factory|View|Application
     {
         return view('app.pages.privacy');
     }

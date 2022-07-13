@@ -29,7 +29,7 @@
                 </div>
             </div>
         @empty
-            <p><a href="{{ route('posts.travel.create') }}" class="btn btn-success">Poster une annonce</a></p>
+            <p><a href="{{ route('posts.coli.create') }}" class="btn btn-success">Poster une annonce</a></p>
         @endforelse
     </div>
 

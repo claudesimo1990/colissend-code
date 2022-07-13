@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-2">
-      <h3 class="fw-bolder text-dark text-center">{{ post.kilo }} kilos encore disponibles .... {{ post.price }}&#8364;/Kilo</h3>
+      <h3 class="fw-bolder text-dark text-center">{{ post.kilo }} kilos encore disponibles .... {{ post.price/100 }}&#8364;/Kilo</h3>
     </div>
     <div class="d-flex justify-content-between text-center">
       <div class="text-black-50">

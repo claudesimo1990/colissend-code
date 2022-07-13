@@ -33,7 +33,7 @@
               <div class="list-group-item">
                 <div class="d-flex justify-content-between fw-bold">
                   <div class="text-muted pt-2 ps-1 mx-3 text-wrap">Prix/Kg:</div>
-                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.price }}<i
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.price/100 }}<i
                       class="text-muted bi bi-currency-euro mt-2 text-black fw-bold"></i></div>
                 </div>
               </div>
@@ -49,7 +49,7 @@
               <div v-if="post.objects.courrier.status" class="list-group-item">
                 <div class="d-flex justify-content-between fw-bold">
                   <div class="text-muted pt-2 ps-1 mx-3 text-wrap">Prix/courrier:</div>
-                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.objects.courrier.price }}<i
+                  <div class="text-muted pt-2 ps-1 mx-2 text-wrap">{{ post.objects.courrier.price/100 }}<i
                       class="text-muted bi bi-currency-euro mt-2 text-black fw-bold"></i></div>
                 </div>
               </div>

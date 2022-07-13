@@ -10,12 +10,16 @@ use Illuminate\View\Component;
 
 class Avatar extends Component
 {
+    public function __construct(public $width = null, public $height = null)
+    {
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
      * @return Application|Factory|View
      */
-    public function render()
+    public function render(): View|Factory|Application
     {
         return view('components.avatar');
     }

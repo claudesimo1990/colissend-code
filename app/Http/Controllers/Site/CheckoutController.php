@@ -15,7 +15,7 @@ class CheckoutController extends Controller
     /**
      * @var BookingCheckout
      */
-    private $bookingCheckout;
+    private BookingCheckout $bookingCheckout;
 
     /**
      * @param BookingCheckout $bookingCheckout
@@ -30,6 +30,10 @@ class CheckoutController extends Controller
      */
     public function checkout(Reservation $reservation)
     {
+        if ($reservation->paid) {
+            abort('404', 'Cette action ne peut etre effectuee');
+        }
+
         $this->bookingCheckout->process($reservation);
     }
 
@@ -41,13 +45,20 @@ class CheckoutController extends Controller
         $status = $this->bookingCheckout->buySuccess($request, $reservation);
 
         if ($status) {
-            return redirect()
-                ->route('user.profile.show', ['profile' => Auth::user()->id])
-                ->with('success', 'Votre payement a ete bien effectuer. merci nous vous informerons bientôt.');
+            $reservation->update(['paid' => $status]);
+            return redirect()->route('success');
         }
 
-        return redirect()
-            ->route('user.profile.show', ['profile' => Auth::user()->id])
-            ->with('error', $response['message'] ?? 'Une erreur a ete produite lors du payement..');
+        return redirect()->route('error');
+    }
+
+    public function thank(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('app.user.checkout.success');
+    }
+
+    public function error(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('app.user.checkout.error');
     }
 }

@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile/messages/{message}', [ProfileController::class, 'markAsRead']);
     Route::post('/profile/messages/delete/{message}', [ProfileController::class, 'deleteMessage']);
 
+    Route::get('/profile/notifications', [ProfileController::class, 'notifications'])->name('user.profile.notifications');
+
     // identity files
     Route::post('/profile/files', [IdentityController::class, 'store'])->name('profile.identityFiles.store');
     Route::post('/profile/files/{identity}', [IdentityController::class, 'destroy'])->name('profile.identity.delete');
@@ -39,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile/travels', [UsersPostsController::class, 'travels'])->name('user.posts.travels');
     Route::get('/profile/packs', [UsersPostsController::class, 'packs'])->name('user.posts.packs');
     Route::get('/profile/bookings', [UsersPostsController::class, 'bookings'])->name('user.posts.bookings');
+    Route::get('/profile/payments', [UsersPostsController::class, 'payments'])->name('user.posts.payments');
 
     Route::get('/profile/friend/invitation', [ProfileController::class, 'invitation'])->name('user.friend.invitation');
     Route::post('/profile/friend/invitation', [ProfileController::class, 'invitationSend']);
@@ -46,4 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications', [ProfileController::class, 'notifications'])->name('user.notifications');
     Route::get('cancel-payment/{reservation}', [CheckoutController::class, 'paymentCancel'])->name('cancel.payment');
     Route::get('payment-success/{reservation}', [CheckoutController::class, 'paymentSuccess'])->name('success.payment');
+
+    Route::get('error', [CheckoutController::class, 'error'])->name('error');
+    Route::get('merci', [CheckoutController::class, 'thank'])->name('success');
 });

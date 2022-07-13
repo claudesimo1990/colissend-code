@@ -18,7 +18,7 @@ class NewTransactionCompleted
     /**
      * @var Transaction
      */
-    public $transaction;
+    public Transaction $transaction;
 
     /**
      * Create a new event instance.
@@ -33,9 +33,9 @@ class NewTransactionCompleted
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel
+     * @return Channel|PrivateChannel
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel|PrivateChannel
     {
         return new PrivateChannel('channel-name');
     }

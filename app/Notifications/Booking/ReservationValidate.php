@@ -5,7 +5,6 @@ namespace App\Notifications\Booking;
 use App\Models\Post;
 use App\Models\Reservation;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -16,11 +15,11 @@ class ReservationValidate extends Notification
     /**
      * @var Post
      */
-    private $post;
+    private Post $post;
     /**
      * @var Reservation
      */
-    private $reservation;
+    private Reservation $reservation;
 
     /**
      * Create a new notification instance.
@@ -37,7 +36,7 @@ class ReservationValidate extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param $notifiable
      * @return array
      */
     public function via($notifiable): array
@@ -51,24 +50,14 @@ class ReservationValidate extends Notification
      * @param  mixed  $notifiable
      * @return MailMessage
      */
-    public function toMail($notifiable): MailMessage
+    public function toMail(mixed $notifiable): MailMessage
     {
-        $objects = json_decode($this->reservation->objects);
-        $courrier = $objects->courrier;
-        $total = $this->post->price * $this->reservation->kilo;
-
-        $res = [];
-        if ($courrier->status) $total += $courrier->number * $courrier->price;  $res['courier'] = ['name' => 'courrier', 'number' => $courrier->number, 'price' => $courrier->price];
-        $res['kilo'] = ['name' => 'kilos', 'number' => $this->reservation->kilo, 'price' => $this->post->price];
-        $res['total'] = ['name' => 'Somme à payer', 'number' => 1, 'price' => $total];
-
         return (new MailMessage)
             ->subject('Validation de reservation')
             ->markdown('mail.booking.validate', [
                 'type' => $this->post->type,
-                'id' => $this->reservation->id,
-                'r' => $res,
-                'message' => $this->reservation->message,
+                'r' => $this->reservation,
+                'notifiable' => $notifiable
             ]);
     }
 
@@ -78,7 +67,7 @@ class ReservationValidate extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable): array
+    public function toArray(mixed $notifiable): array
     {
         return [
             //

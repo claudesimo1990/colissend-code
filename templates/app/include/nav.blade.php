@@ -165,7 +165,7 @@
                                 <a class="dropdown-item d-flex align-items-center"
                                    href="{{ route('user.posts.bookings') }}">
                                     <i class="bx bxs-business text-success"></i>
-                                    <span>Reservations</span>
+                                    <span>Mes Reservations</span>
                                 </a>
                             </li>
 

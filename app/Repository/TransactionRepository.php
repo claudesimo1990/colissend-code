@@ -9,17 +9,15 @@
 
 namespace App\Repository;
 
-use App\Events\NewTransactionCompleted;
 use App\Models\Reservation;
 use App\Models\Transaction;
-use Composer\EventDispatcher\Event;
 
 class TransactionRepository
 {
     /**
      * @var Transaction
      */
-    private $transaction;
+    private Transaction $transaction;
 
     /**
      * @param Transaction $transaction
@@ -32,7 +30,7 @@ class TransactionRepository
     /**
      * @return mixed
      */
-    public function all()
+    public function all(): mixed
     {
         return $this->transaction->latest()->paginate(1);
     }
