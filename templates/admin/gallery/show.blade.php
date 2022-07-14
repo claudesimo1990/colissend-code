@@ -48,6 +48,7 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach($photos as $photo)
+{{--                                {{ dd($photo, $gallery) }}--}}
                                 <div class="col-md-4 mt-4">
                                     <div class="card" style="min-width: 18rem;">
                                         <img class="card-img-top" src="{{ $photo->getUrl('thumb') }}" alt="{{ $photo->file_name }}">
@@ -55,7 +56,7 @@
                                             <h5 class="card-title">{{ $photo->file_name }}</h5>
                                             <a href="{{ $photo->getUrl($gallery->tag ?? 'header') }}" class="btn btn-primary mx-2">voir plus</a>
                                             <a href="{{ route('gallery.background', ['gallery' => $gallery->id, 'media' => $photo->id, 'tag' => $gallery->content]) }}" class="btn btn-success">
-                                                @if($gallery->active_img == $photo->getUrl($gallery->content))
+                                                @if($gallery->active_img == $photo->uuid)
                                                     <span class="bi-check-square text-white bg-success"></span>
                                                 @endif
                                                 background

@@ -54,9 +54,21 @@ class GaleriesController extends Controller
         return redirect()->back()->with(['success' => 'sauvegarde reussite!']);
     }
 
-    public function background(Gallery $gallery, Media $media, string $tag = 'header')
+    public function background(Gallery $gallery, int $media, string $tag = 'header')
     {
-        $gallery->update(['active_img' => $media->getFullUrl($tag)]);
+        $media = Media::find($media);
+        $galeries = Gallery::where('content', 'header')->get();
+
+        $galeries->each(function ($current) use ($gallery, $media, $tag){
+
+            if ($gallery->id == $current->id) {
+                $current->update(['active_img' => $media->uuid]);
+            } else {
+                $current->update(['active_img' => null]);
+            }
+
+        });
+
         return redirect()->back()->with(['success' => 'Opreation reussite']);
     }
 

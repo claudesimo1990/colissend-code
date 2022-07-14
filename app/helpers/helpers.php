@@ -67,11 +67,14 @@ if (! function_exists('getHeaderImage')) {
 
     function getHeaderImage()
     {
-        $header = Gallery::where('title', 'header')->where('active_img', '!=', null)->first();
+        $header = Gallery::where('content', 'header')->where('active_img', '!=', null)->first();
+
+        $media = $header->getMedia('galleries')->where('uuid', $header->active_img)->first();
 
         if ($header) {
-            return $header->getFirstMediaUrl('galleries');
+            return $media->getUrl();
         }
+
         return asset('images/about/about.jpg');
     }
 
