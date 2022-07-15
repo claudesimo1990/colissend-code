@@ -15,7 +15,7 @@
                             <div class="card">
                                 <div class="card-body pt-5">
                                     <p>
-                                        {!! $blog->content !!}
+                                        {!! nl2br(e($blog->content)) !!}
                                     </p>
                                 </div>
                             </div>
