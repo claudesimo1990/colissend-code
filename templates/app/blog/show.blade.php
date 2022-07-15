@@ -15,7 +15,7 @@
                             <div class="card">
                                 <div class="card-body pt-5">
                                     <p>
-                                        {{ nl2br($blog->content) }}
+                                        {!! $blog->content !!}
                                     </p>
                                 </div>
                             </div>
