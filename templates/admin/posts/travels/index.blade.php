@@ -37,15 +37,18 @@
                             </thead>
                             <tbody>
                                 @foreach($travels as $travel)
-                                    @php($payment = json_decode($travel->payment))
                                     <tr class="text-center">
-                                        <td class=""><a href="{{ route('admin.users.show', ['user' => $travel->user->id ]) }}">#{{ $travel->user->name }}</a></td>
+                                        <td class=""><a href="{{ route('admin.users.show', ['user' => $travel->user->id ]) }}">#{{ $travel->user->firstname }}</a></td>
                                         <td class="">{{ $travel->from }}</td>
                                         <td class="">{{ $travel->to }}</td>
-                                        <td class=""><a href="{{ $travel->getMedia('travels')->first()->getUrl() }}"><img src="{{  $travel->getMedia('travels')->first()->getUrl('thumb') }}" width="50" height="50" class="rounded avatar"  alt=""></a></td>
-                                        <td class="">{{ $payment->name }} - {{ $payment->infos[0]->value }}</td>
+                                        <td class="">
+                                            <a href="{{ $travel->getMedia('travels')->first()?->getUrl('thumb') }}">
+                                                <img src="{{ $travel->getMedia('travels')->first()?->getUrl('thumb') }}" width="50" height="50" class="rounded avatar"  alt="">
+                                            </a>
+                                        </td>
+                                        <td class="">Paypal</td>
                                         <td class="">{{ $travel->created_at->format('d.m.y') }}</td>
-                                        <td class=" fw-bold text-secondary">{{ $travel->status == 'PROGRESS' ? 'nouveau' : $travel->status  }}</td>
+                                        <td class=" fw-bold text-secondary">{{ $travel->status == 'PROGRESS' ? 'NEW' : $travel->status  }}</td>
                                         <td class="d-flex justify-content-between">
                                             <button type="button" class="btn btn-info text-white rounded-pill">details</button>
                                             <a type="button" href="{{ route('admin.post.accepted', ['post' => $travel->id]) }}" class="btn btn-success rounded-pill text-white">publier</a>

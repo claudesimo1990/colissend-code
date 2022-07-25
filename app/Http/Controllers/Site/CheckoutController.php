@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Site;
 use App\Checkout\Booking\BookingCheckout;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,12 +55,12 @@ class CheckoutController extends Controller
         return redirect()->route('error');
     }
 
-    public function thank(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function thank(): Factory|View|Application
     {
         return view('app.user.checkout.success');
     }
 
-    public function error(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function error(): Factory|View|Application
     {
         return view('app.user.checkout.error');
     }

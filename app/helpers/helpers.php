@@ -72,7 +72,7 @@ if (! function_exists('getHeaderImage')) {
         $media = $header->getMedia('galleries')->where('uuid', $header->active_img)->first();
 
         if ($header) {
-            return $media->getUrl();
+            return $media->toHtml();
         }
 
         return asset('images/about/about.jpg');

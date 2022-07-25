@@ -84,7 +84,7 @@
                             </div>
                           </div>
                           <div class="col-md-4" v-show="takeCourrier">
-                            <ValidationProvider rules="required|numeric" v-slot="{ errors }">
+                            <ValidationProvider rules="numeric" v-slot="{ errors }">
                               <label for="courrier.number" class="form-label">Combien ?</label>
                               <input type="number" name="price" v-model.number="form.transportedObjects.courrier.number" class="form-control" id="courrier.number">
                               <span class="invalid-feedback d-block" role="alert">
@@ -93,7 +93,7 @@
                             </ValidationProvider>
                           </div>
                           <div class="col-md-4" v-show="takeCourrier">
-                            <ValidationProvider rules="required|numeric" v-slot="{ errors }">
+                            <ValidationProvider rules="numeric" v-slot="{ errors }">
                               <label for="courrier.price" class="form-label">Prix unitaire en <i class="bi bi-currency-euro text-dark fw-bolder"></i></label>
                               <input type="number" name="price" v-model.number="form.transportedObjects.courrier.price" class="form-control" id="courrier.price">
                               <span class="invalid-feedback d-block" role="alert">
@@ -105,24 +105,25 @@
                       </div>
                       <div class="col-md-12">
                         <div class="row">
-                          <div class="alert alert-info fw-bold">NB: Pour le moment nous n'acceptons que des payments avec paypal</div>
-                          <label class="col-sm-12 col-form-label">Comment voulez-vous recevoir votre argent ?</label>
-                          <div class="col-sm-12">
-                            <div class="row">
-                              <div class="col-xs-12 col-sm-12 col-md-12" v-for="payment in form.payments" :id="payment.id">
-                                <div class="input-group mb-3 border">
-                                  <div class="form-check form-switch pt-1 mx-3">
-                                    <input class="form-check-input" @change="paymentSelected(payment)" v-model="payment.value" type="checkbox" :disabled="payment.status === false" :id="'flexSwitchCheckPayment-'+ payment.id">
-                                    <label class="form-check-label fw-bolder" :for="'flexSwitchCheckPayment-'+ payment.id">{{ payment.name }}</label>
-                                  </div>
-                                  <span v-if="payment.value" v-for="info in payment.infos" class="d-flex justify-content-between">
-                                    <span :class="'input-group-text text-white bg-success'">{{ info.label }}</span>
-                                    <input type="text" class="form-control" v-model="info.value" :placeholder="info.placeholder" aria-label="Server">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
+                          <div class="alert alert-info fw-bold">NB: Pour le moment nous n'acceptons que des payments avec paypal, acceder a votre espace paypal pour remplir vos informations paypal, Enfin de rentrer en pocession de vos recettes.
                           </div>
+<!--                          <label class="col-sm-12 col-form-label">Comment voulez-vous recevoir votre argent ?</label>-->
+<!--                          <div class="col-sm-12">-->
+<!--                            <div class="row">-->
+<!--                              <div class="col-xs-12 col-sm-12 col-md-12" v-for="payment in form.payments" :id="payment.id">-->
+<!--                                <div class="input-group mb-3 border">-->
+<!--                                  <div class="form-check form-switch pt-1 mx-3">-->
+<!--                                    <input class="form-check-input" @change="paymentSelected(payment)" v-model="payment.value" type="checkbox" :disabled="payment.status === false" :id="'flexSwitchCheckPayment-'+ payment.id">-->
+<!--                                    <label class="form-check-label fw-bolder" :for="'flexSwitchCheckPayment-'+ payment.id">{{ payment.name }}</label>-->
+<!--                                  </div>-->
+<!--                                  <span v-if="payment.value" v-for="info in payment.infos" class="d-flex justify-content-between">-->
+<!--                                    <span :class="'input-group-text text-white bg-success'">{{ info.label }}</span>-->
+<!--                                    <input type="text" class="form-control" v-model="info.value" :placeholder="info.placeholder" aria-label="Server">-->
+<!--                                  </span>-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
                         </div>
                       </div>
                       <div class="col-md-12">

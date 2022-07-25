@@ -50113,7 +50113,7 @@ var render = function () {
             staticClass: "alert alert-success text-center",
             attrs: { role: "alert" },
           },
-          [_vm._v("\n        " + _vm._s(_vm.message) + "\n    ")]
+          [_vm._v("\n            " + _vm._s(_vm.message) + "\n        ")]
         )
       : _vm._e(),
     _vm._v(" "),
@@ -50593,7 +50593,7 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                            J' accepte aussi les courriers\n                          "
+                                        "\n                                J' accepte aussi les courriers\n                              "
                                       ),
                                     ]
                                   ),
@@ -50659,7 +50659,7 @@ var render = function () {
                                 },
                                 [
                                   _c("ValidationProvider", {
-                                    attrs: { rules: "required|numeric" },
+                                    attrs: { rules: "numeric" },
                                     scopedSlots: _vm._u(
                                       [
                                         {
@@ -50766,7 +50766,7 @@ var render = function () {
                                 },
                                 [
                                   _c("ValidationProvider", {
-                                    attrs: { rules: "required|numeric" },
+                                    attrs: { rules: "numeric" },
                                     scopedSlots: _vm._u(
                                       [
                                         {
@@ -50873,230 +50873,10 @@ var render = function () {
                                 { staticClass: "alert alert-info fw-bold" },
                                 [
                                   _vm._v(
-                                    "NB: Pour le moment nous n'acceptons que des payments avec paypal"
+                                    "NB: Pour le moment nous n'acceptons que des payments avec paypal, acceder a votre espace paypal pour remplir vos informations paypal, Enfin de rentrer en pocession de vos recettes.\n                          "
                                   ),
                                 ]
                               ),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                { staticClass: "col-sm-12 col-form-label" },
-                                [
-                                  _vm._v(
-                                    "Comment voulez-vous recevoir votre argent ?"
-                                  ),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-sm-12" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row" },
-                                  _vm._l(_vm.form.payments, function (payment) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "col-xs-12 col-sm-12 col-md-12",
-                                        attrs: { id: payment.id },
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "input-group mb-3 border",
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "form-check form-switch pt-1 mx-3",
-                                              },
-                                              [
-                                                _c("input", {
-                                                  directives: [
-                                                    {
-                                                      name: "model",
-                                                      rawName: "v-model",
-                                                      value: payment.value,
-                                                      expression:
-                                                        "payment.value",
-                                                    },
-                                                  ],
-                                                  staticClass:
-                                                    "form-check-input",
-                                                  attrs: {
-                                                    type: "checkbox",
-                                                    disabled:
-                                                      payment.status === false,
-                                                    id:
-                                                      "flexSwitchCheckPayment-" +
-                                                      payment.id,
-                                                  },
-                                                  domProps: {
-                                                    checked: Array.isArray(
-                                                      payment.value
-                                                    )
-                                                      ? _vm._i(
-                                                          payment.value,
-                                                          null
-                                                        ) > -1
-                                                      : payment.value,
-                                                  },
-                                                  on: {
-                                                    change: [
-                                                      function ($event) {
-                                                        var $$a = payment.value,
-                                                          $$el = $event.target,
-                                                          $$c = $$el.checked
-                                                            ? true
-                                                            : false
-                                                        if (
-                                                          Array.isArray($$a)
-                                                        ) {
-                                                          var $$v = null,
-                                                            $$i = _vm._i(
-                                                              $$a,
-                                                              $$v
-                                                            )
-                                                          if ($$el.checked) {
-                                                            $$i < 0 &&
-                                                              _vm.$set(
-                                                                payment,
-                                                                "value",
-                                                                $$a.concat([
-                                                                  $$v,
-                                                                ])
-                                                              )
-                                                          } else {
-                                                            $$i > -1 &&
-                                                              _vm.$set(
-                                                                payment,
-                                                                "value",
-                                                                $$a
-                                                                  .slice(0, $$i)
-                                                                  .concat(
-                                                                    $$a.slice(
-                                                                      $$i + 1
-                                                                    )
-                                                                  )
-                                                              )
-                                                          }
-                                                        } else {
-                                                          _vm.$set(
-                                                            payment,
-                                                            "value",
-                                                            $$c
-                                                          )
-                                                        }
-                                                      },
-                                                      function ($event) {
-                                                        return _vm.paymentSelected(
-                                                          payment
-                                                        )
-                                                      },
-                                                    ],
-                                                  },
-                                                }),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "label",
-                                                  {
-                                                    staticClass:
-                                                      "form-check-label fw-bolder",
-                                                    attrs: {
-                                                      for:
-                                                        "flexSwitchCheckPayment-" +
-                                                        payment.id,
-                                                    },
-                                                  },
-                                                  [_vm._v(_vm._s(payment.name))]
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _vm._l(
-                                              payment.infos,
-                                              function (info) {
-                                                return payment.value
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "d-flex justify-content-between",
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            class:
-                                                              "input-group-text text-white bg-success",
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(info.label)
-                                                            ),
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c("input", {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value: info.value,
-                                                              expression:
-                                                                "info.value",
-                                                            },
-                                                          ],
-                                                          staticClass:
-                                                            "form-control",
-                                                          attrs: {
-                                                            type: "text",
-                                                            placeholder:
-                                                              info.placeholder,
-                                                            "aria-label":
-                                                              "Server",
-                                                          },
-                                                          domProps: {
-                                                            value: info.value,
-                                                          },
-                                                          on: {
-                                                            input: function (
-                                                              $event
-                                                            ) {
-                                                              if (
-                                                                $event.target
-                                                                  .composing
-                                                              ) {
-                                                                return
-                                                              }
-                                                              _vm.$set(
-                                                                info,
-                                                                "value",
-                                                                $event.target
-                                                                  .value
-                                                              )
-                                                            },
-                                                          },
-                                                        }),
-                                                      ]
-                                                    )
-                                                  : _vm._e()
-                                              }
-                                            ),
-                                          ],
-                                          2
-                                        ),
-                                      ]
-                                    )
-                                  }),
-                                  0
-                                ),
-                              ]),
                             ]),
                           ]),
                           _vm._v(" "),
@@ -51263,7 +51043,7 @@ var render = function () {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                          En cochant sur cette case vous acceptez nos "
+                                                    "\n                              En cochant sur cette case vous acceptez nos "
                                                   ),
                                                   _c(
                                                     "a",

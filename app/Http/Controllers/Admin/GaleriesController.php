@@ -48,7 +48,9 @@ class GaleriesController extends Controller
     public function albums(Gallery $gallery, Request $request): RedirectResponse
     {
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $gallery->addMediaFromRequest('image')->toMediaCollection('galleries');
+            $gallery
+                ->addMediaFromRequest('image')->toMediaCollection('galleries')
+                ->withResponsiveImages();
         }
 
         return redirect()->back()->with(['success' => 'sauvegarde reussite!']);

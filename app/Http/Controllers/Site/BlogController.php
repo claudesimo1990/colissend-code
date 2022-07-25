@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends Controller
 {
 
-    public function index(Request $request)
+    public function index(Request $request): Factory|View|Application
     {
         $blogs = Blog::latest()->paginate(4);
 
@@ -25,7 +28,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(Blog $blog)
+    public function show(Blog $blog): Factory|View|Application
     {
         return view('app.blog.show', [
             'blog' => $blog

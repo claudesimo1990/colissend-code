@@ -40,16 +40,17 @@ class BookingController extends Controller
     {
         $post = $this->postRepository->findById($reservation->post_id);
 
-        if ($post->kilo <= 0) {
-            // TODO add new post status ARCHIV
-            $post->update([
-                'status' => 'PROGRESS'
-            ]);
-            return redirect()->back()->with('error', 'plus de kilos disponibles sur ce post');
-        }
-
         if ($reservation->status != 'ACCEPTED' && $reservation->status != 'REJECTED') {
             if ($post->type == 'TRAVEL') {
+
+                if ($post->kilo <= 0) {
+                    // TODO add new post status ARCHIV
+                    $post->update([
+                        'status' => 'PROGRESS'
+                    ]);
+                    return redirect()->back()->with('error', 'plus de kilos disponibles sur ce post');
+                }
+
                 $post->update([
                     'kilo' => (int)$post->kilo -= (int)$reservation->kilo
                 ]);

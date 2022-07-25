@@ -54,7 +54,7 @@ class PostRepository
             'kilo' => $request->get('kilo'),
             'objects' => $request->get('objects'),
             'payment' => $request->get('payment'),
-            'price' => $request->get('price'),
+            'price' => $request->get('price')/100,
             'company' => $request->get('company'),
             'status' => 'PROGRESS'
         ]);
@@ -98,7 +98,7 @@ class PostRepository
             ->get();
     }
 
-    public function storeColi(PostRequest $request)
+    public function storeColi(PostRequest $request): Post
     {
         $post = $this->post->create(
         [
@@ -120,5 +120,7 @@ class PostRepository
         if (request()->hasFile('coli') && request()->file('coli')->isValid()) {
             $post->addMediaFromRequest('coli')->toMediaCollection('colis');
         }
+
+        return $post;
     }
 }

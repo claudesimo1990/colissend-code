@@ -1,4 +1,5 @@
-<header class="bg-dark py-5 header-image page-header" style="background: url({{ getHeaderImage() }}) no-repeat; position: relative; background-size: cover;">
+<header class="py-5 header-image page-header">
+    {!! getHeaderImage() !!}
     <div class="container px-5">
         <div class="row gx-5 search-card-box pt-5 align-items-center justify-content-center">
             <div class="col-lg-8 gx-5 col-xl-7 col-xxl-6">
