@@ -169,6 +169,13 @@ import {Vue, Component, Watch} from 'vue-property-decorator'
 import ContactComponent from "../shared/ContactComponent.vue";
 import BookMessage from "../chat/BookMessage.vue";
 import axios from "axios";
+import toast from "vue-toastification";
+
+Vue.use(toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true
+})
 
 @Component({
   components: {ValidationProvider, ValidationObserver, ContactComponent, BookMessage},
@@ -238,8 +245,10 @@ export default class Travel extends Vue {
     axios.post('/post/booking/' + this.$props.post.id, this.booking).then((response) => {
 
       this.show = false;
-      this.success = true;
-      this.message = response.data;
+
+      this.$toast.success(response.data, {
+        timeout: 2000
+      });
 
       setTimeout(function() {
         window.location.reload();
@@ -247,8 +256,12 @@ export default class Travel extends Vue {
       }, 2000);
 
     }).catch((error) => {
-      this.errors = error.response.data.errors;
       this.show = false;
+      if(error.response.data){
+        this.$toast.error(error.response.data.message, {
+          timeout: 2000
+        });
+      }
     })
   }
 

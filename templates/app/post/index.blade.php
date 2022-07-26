@@ -2,6 +2,10 @@
 
 @section('title')Colissend | annonces @endsection
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
+
 @section('app')
 
    <div class="container">

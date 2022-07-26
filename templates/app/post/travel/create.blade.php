@@ -2,6 +2,10 @@
 
 @section('title')Colissend | poster votre annonce voyage @endsection
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
+
 @section('app')
 
     <div class="container py-5">

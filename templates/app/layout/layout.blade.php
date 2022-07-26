@@ -2,8 +2,6 @@
 
 @section('stylesheets')
 
-    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
-
     @yield('style')
 
 @endsection

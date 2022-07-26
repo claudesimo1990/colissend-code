@@ -52,7 +52,7 @@
         <button class="plus btn btn-success" @click.prevent="increment()">+</button>
       </div>
       <textarea class="form-control mb-2" type="text" rows="5" v-model="booking.message" placeholder="laisser un message..."></textarea>
-      <a href="#" @click="send()" class="btn btn-success">Me proposer</a>
+      <a href="#" @click="send()" class="btn btn-success">Me proposer <span v-if="show" class="spinner-grow float-end" role="status"></span></a>
     </div>
   </div>
 </template>
@@ -63,6 +63,13 @@ import { Vue, Component } from 'vue-property-decorator'
 import ContactComponent from "../shared/ContactComponent.vue";
 import axios from "axios";
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import toast from "vue-toastification";
+
+Vue.use(toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true
+})
 
 @Component({
   components: { ContactComponent, ValidationProvider, ValidationObserver},
@@ -107,13 +114,15 @@ export default class Coli extends Vue {
       this.booking.objects = JSON.stringify(this.objects);
       this.booking.price = this.proposalPrice;
       this.booking.kilo = this.$props.post.kilo;
-      this.booking.travel = this.$props.post.id;
+      this.booking.travel = this.$props.post.id
 
       axios.post('/post/booking/' + this.$props.post.id, this.booking).then((response) => {
 
         this.show = false;
-        this.success = true;
-        this.message = response.data;
+
+        this.$toast.success(response.data, {
+          timeout: 2000
+        });
 
         setTimeout(function() {
           window.location.reload();
@@ -121,8 +130,12 @@ export default class Coli extends Vue {
         }, 2000);
 
       }).catch((error) => {
-        this.errors = error.response.data.errors;
-        this.show = false;
+        if(error.response.data){
+          this.$toast.error(error.response.data.message, {
+            timeout: 2000
+          });
+          this.show = false;
+        }
       })
     }
 

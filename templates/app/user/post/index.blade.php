@@ -1,5 +1,10 @@
 @extends('app.user.dashboard')
 
+@section('title')Colissend | Profile @endsection
+
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
 
 @section('profile')
 

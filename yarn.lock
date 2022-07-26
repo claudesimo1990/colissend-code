@@ -5561,11 +5561,6 @@
   "resolved" "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
   "version" "1.1.2"
 
-"vue-chat-scroll@^2.0.0-alpha.4":
-  "integrity" "sha512-ChtlhST7Si4swS+J9HlOPVR0+RAUW/54JR3utu+SOy8yPknQIX2iUyNtlC8XI6AYH3RKLtF9sQz3frU6Hbmakg=="
-  "resolved" "https://registry.npmjs.org/vue-chat-scroll/-/vue-chat-scroll-2.0.0-alpha.4.tgz"
-  "version" "2.0.0-alpha.4"
-
 "vue-class-component@*", "vue-class-component@^7.2.6":
   "integrity" "sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w=="
   "resolved" "https://registry.npmjs.org/vue-class-component/-/vue-class-component-7.2.6.tgz"

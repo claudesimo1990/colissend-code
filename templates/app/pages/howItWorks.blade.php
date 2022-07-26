@@ -2,6 +2,10 @@
 
 @section('title')Colissend | Comment ca marche @endsection
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
+
 @section('app')
 
     <x-header page="page-howItWork" img="" title="{{ $section['title'] }}"/>

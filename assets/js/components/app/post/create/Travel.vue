@@ -161,6 +161,13 @@ import InputLocation from "../../shared/form/InputLocation.vue";
 import {ValidationProvider, ValidationObserver} from 'vee-validate';
 
 import axios from "axios";
+import toast from "vue-toastification";
+
+Vue.use(toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true
+})
 
 @Component({
     components: {

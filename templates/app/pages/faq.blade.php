@@ -2,7 +2,6 @@
 
 @section('title')Colissend | FAQ @endsection
 
-
 @section('app')
 
     <x-header page="page-howItWork" img="" title="Questions fréquemment posées"/>

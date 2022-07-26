@@ -2,6 +2,9 @@
 
 @section('title')Colissend | A-propos de nous @endsection
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
 
 @section('app')
 

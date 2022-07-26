@@ -10,20 +10,11 @@ import ColiComponent from "../components/app/post/create/Coli.vue";
 import ChatComponent from "../components/app/chat/ChatComponent.vue";
 import MessagesComponent from "../components/app/user/Messages.vue";
 import CookieComponent from "../components/app/CookieComponent.vue";
-import toast from 'vue-toastification';
 
 require("../../js/utilities/validator");
 
 import filters from "../utilities/filters";
-import VueChatScroll from 'vue-chat-scroll';
-
-Vue.use(VueChatScroll);
 Vue.use(filters)
-Vue.use(toast, {
-    transition: "Vue-Toastification__bounce",
-    maxToasts: 20,
-    newestOnTop: true
-})
 
 const app = new Vue({
     components: {

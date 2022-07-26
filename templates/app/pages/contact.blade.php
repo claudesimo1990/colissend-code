@@ -2,6 +2,10 @@
 
 @section('title')Colissend | Contactez-nous @endsection
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
+
 @section('app')
 
     <x-header page="page-howItWork" img="" title="Nous somme a l'ecoute de vos preocupations"/>

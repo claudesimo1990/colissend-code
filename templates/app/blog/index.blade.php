@@ -1,5 +1,8 @@
 @extends('app.layout.layout')
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
 
 @section('app')
 

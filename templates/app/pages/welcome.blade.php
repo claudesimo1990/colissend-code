@@ -1,5 +1,9 @@
 @extends('app.layout.layout')
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/homeController.css') }}">
+@endsection
+
 @section('app')
 
     @section('header') @include('app.include.header')
