@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
-class GenerateImportancesUsers extends Command
+class UsersGenerator extends Command
 {
     /**
      * The name and signature of the console command.
@@ -37,7 +37,7 @@ class GenerateImportancesUsers extends Command
      * Execute the console command.
      *
      */
-    public function handle()
+    public function handle(): int
     {
         User::create([
             'firstname' => 'Jean Claude',
@@ -49,12 +49,20 @@ class GenerateImportancesUsers extends Command
             'remember_token' => null,
         ]);
 
+        $this->line('############ Test user ##########', 'info');
+        $this->line('email: '. 'claudesimo1990@gmail.com', 'info');
+        $this->line('password: '. 'password', 'info');
+
         Admin::create([
             'name' => 'Claude Simo',
             'email' => 'admin@admin.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ]);
+
+        $this->line('############ admin ##########', 'info');
+        $this->line('email: '. 'admin@admin.com', 'info');
+        $this->line('password: '. 'password', 'info');
 
         return Command::SUCCESS;
     }

@@ -7,9 +7,6 @@
                 </div>
             </div>
         </div>
-        <div v-if="success" class="alert alert-success text-center" role="alert">
-            {{ message }}
-        </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"></h5>
@@ -159,8 +156,8 @@
 <script lang="ts">
 
 import {Vue, Component, Watch} from 'vue-property-decorator'
-import InputDate from "../shared/form/InputDate.vue";
-import InputLocation from "../shared/form/InputLocation.vue";
+import InputDate from "../../shared/form/InputDate.vue";
+import InputLocation from "../../shared/form/InputLocation.vue";
 import {ValidationProvider, ValidationObserver} from 'vee-validate';
 
 import axios from "axios";
@@ -179,7 +176,7 @@ import axios from "axios";
       privacy: String
   }
 })
-export default class TravelComponent extends Vue {
+export default class Travel extends Vue {
 
     form: any = {
         from: null,
@@ -204,7 +201,6 @@ export default class TravelComponent extends Vue {
     };
     description: String = '';
     success: boolean = false;
-    message: string = '';
     file: any = {};
     response: any = {};
     posted: boolean = false;
@@ -265,20 +261,20 @@ export default class TravelComponent extends Vue {
 
         axios.post('/post/travel/create', formData , config)
             .then((response)  => {
-
-                this.success = true;
-                this.message = response.data;
-
+              this.$toast.success(response.data, {
+                timeout: 2000
+              });
               setTimeout(function() {
                 window.location.reload();
-
               }, 2000);
             })
-            .catch(function (error) {
-                if(error.response.data){
-                    console.log(error.response.data.errors)
-                }
-            });
+            .catch((error)  => {
+            if(error.response.data){
+              this.$toast.error(error.response.data.errors, {
+                timeout: 2000
+              });
+            }
+      });
 
     }
 

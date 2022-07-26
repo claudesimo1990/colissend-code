@@ -121,6 +121,19 @@
                 <textarea class="form-control" v-model="form.message" placeholder="Laissez un message..." id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
             </div>
+            <div class="col-md-12 my-2">
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <div class="form-check">
+                  <input class="form-check-input" v-model="form.privacy" type="checkbox" id="gridCheck2">
+                  <label class="form-check-label" for="gridCheck2">
+                    En cochant sur cette case vous acceptez nos <a :href="privacy">conditions d'utlisations</a>
+                  </label>
+                  <span class="invalid-feedback d-block" role="alert">
+                              <small>{{ errors[0] }}</small>
+                            </span>
+                </div>
+              </ValidationProvider>
+            </div>
             <input type="submit" class="btn btn-success d-flex justify-content-center align-items-center" value="Poster votre annonce">
           </form>
         </ValidationObserver>
@@ -132,8 +145,8 @@
 <script lang="ts">
 
   import {Vue, Component, Watch} from 'vue-property-decorator'
-  import InputDate from "../shared/form/InputDate.vue";
-  import InputLocation from "../shared/form/InputLocation.vue";
+  import InputDate from "../../shared/form/InputDate.vue";
+  import InputLocation from "../../shared/form/InputLocation.vue";
   import {ValidationProvider, ValidationObserver} from 'vee-validate';
 
   import axios from "axios";
@@ -149,7 +162,7 @@
       objects: String
     }
   })
-export default class ColiComponent extends Vue {
+export default class Coli extends Vue {
 
     form: any = {
       from: null,
@@ -160,6 +173,7 @@ export default class ColiComponent extends Vue {
       price: null,
       coliImg: null,
       message: null,
+      privacy: null,
       transportedObjects: []
     };
     types: any = [
@@ -210,19 +224,19 @@ export default class ColiComponent extends Vue {
 
       axios.post('/post/coli/create', formData , config)
           .then((response)  => {
-
-            this.success = true;
-            this.message = response.data;
-
+            this.$toast.success(response.data, {
+              timeout: 2000
+            });
             setTimeout(function() {
               window.location.reload();
-
             }, 2000);
           })
-          .catch(function (error) {
+          .catch((error)  => {
             if(error.response.data){
-              console.log(error.response.data.errors)
-          }
+              this.$toast.error(error.response.data.errors, {
+                timeout: 2000
+              });
+            }
       });
     }
 
