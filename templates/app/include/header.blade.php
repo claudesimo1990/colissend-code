@@ -1,4 +1,4 @@
-<header class="py-5 header-image page-header">
+<header class="header-image page-header">
     {!! getHeaderImage() !!}
     <div class="container px-5">
         <div class="row gx-5 search-card-box pt-5 align-items-center justify-content-center">

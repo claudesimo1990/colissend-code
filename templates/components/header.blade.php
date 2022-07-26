@@ -1,5 +1,5 @@
 <div>
-    <div class="py-5 header-image page-header contact-header">
+    <div class="header-image page-header contact-header">
         {!! getContactImage() !!}
         <div class="container">
             <div class="row">
