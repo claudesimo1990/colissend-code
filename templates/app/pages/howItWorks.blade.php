@@ -9,15 +9,15 @@
             <div class="card-block bg-white mb30">
                 <div class="section-title mb-0 dashboard">
                     <div class="activity">
-                        <h2 class="card-title">{{ $section['title'] }}</h2>
                         <p class="mb-4">{{ $section['text'] }}</p>
                         <div class="accordion accordion-flush">
                             @foreach($section['steps'] as $key => $step)
-                                <div class="accordion-item">
-                                    <h3 class="accordion-header bold">
-                                        {{ $step['step'] }}
-                                    </h3>
-                                    <div class="accordion-body">
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="fw-bold">{{ $step['step'] }}</h4>
+                                    </div>
+                                    <div class="card-body py-1">
                                         {{ $step['text'] }}
                                     </div>
                                 </div>

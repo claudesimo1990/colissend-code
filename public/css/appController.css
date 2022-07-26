@@ -153,6 +153,10 @@
   z-index: -1;
 }
 
+.contact-header {
+  min-height: 30rem;
+}
+
 .pub img {
   width: 80px;
   float: left;

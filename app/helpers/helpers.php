@@ -80,10 +80,12 @@ if (! function_exists('getHeaderImage')) {
 
     function getContactImage()
     {
-        $contact = Gallery::where('title', 'contact')->first();
+        $contact = Gallery::where('content', 'header')->where('active_img', '!=', null)->first();
+
+        $media = $contact->getMedia('galleries')->where('uuid', $contact->active_img)->first();
 
         if ($contact) {
-            return $contact->active_img;
+            return $media->toHtml();
         }
         return asset('images/about/about.jpg');
     }
