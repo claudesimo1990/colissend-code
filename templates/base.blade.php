@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="keywords" content="@yield('meta_keywords','some default keywords')">
-    <meta name="description" content="@yield('meta_description','my custom homepage')">
+    <meta name="description" content="@yield('meta_description','Faciliter vous la vente de vos kilos Et l\'envoi de vos Colis en toute securité vers multiples destinations.')">
     <link rel="canonical" href="{{ url()->current() }}"/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/images/colissend/favicon/apple-touch-icon.png') }}">
@@ -17,7 +17,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <title>@yield('title','Avec Colissend, Cheminer vos colis en toute sécurité et rentabiliser vos voyages en vendant vos kilos')</title>
+    <title>@yield('title','Colissend | Faciliter vous la vente de vos kilos Et l\'envoi de vos Colis en toute securité vers multiples destinations.')</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

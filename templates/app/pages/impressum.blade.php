@@ -1,9 +1,6 @@
 @extends('app.layout.layout')
 
-@section('style')
-
-@endsection
-
+@section('title')Colissend | Impressum @endsection
 
 @section('app')
 

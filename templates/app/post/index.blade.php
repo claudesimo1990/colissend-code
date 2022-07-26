@@ -1,5 +1,6 @@
 @extends('app.layout.layout')
 
+@section('title')Colissend | annonces @endsection
 
 @section('app')
 

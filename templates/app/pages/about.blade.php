@@ -1,8 +1,6 @@
 @extends('app.layout.layout')
 
-@section('style')
-
-@endsection
+@section('title')Colissend | A-propos de nous @endsection
 
 
 @section('app')

@@ -1,5 +1,7 @@
 @extends('app.layout.layout')
 
+@section('title')Colissend | Comment ca marche @endsection
+
 @section('app')
 
     <x-header page="page-howItWork" img="" title="{{ $section['title'] }}"/>

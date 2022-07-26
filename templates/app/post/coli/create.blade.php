@@ -1,5 +1,6 @@
 @extends('app.layout.layout')
 
+@section('title')Colissend | poster votre annonce coli @endsection
 
 @section('app')
 

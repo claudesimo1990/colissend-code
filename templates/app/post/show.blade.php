@@ -1,5 +1,6 @@
 @extends('app.layout.layout')
 
+@section('title')Colissend | {{ $post->from }} => {{ $post->to }} @endsection
 
 @section('app')
 
