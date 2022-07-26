@@ -41,10 +41,10 @@
 
         @yield('app')
 
-    </div>
+        <div>
+            @include('app.include.footer')
+        </div>
 
-    <div>
-        @include('app.include.footer')
     </div>
 
     @if(Auth::check())

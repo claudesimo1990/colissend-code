@@ -46479,7 +46479,7 @@ var render = function () {
     [
       _c("cookie-law", {
         attrs: {
-          buttonText: "accepter",
+          buttonText: "Accepter",
           message:
             "Bienvenue sur Colissend, nous utilisons des cookies sur notre site. veuillez valider pour continuer",
           theme: "dark-lime",

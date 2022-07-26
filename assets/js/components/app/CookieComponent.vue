@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <cookie-law buttonText="accepter" message="Bienvenue sur Colissend, nous utilisons des cookies sur notre site. veuillez valider pour continuer" theme="dark-lime"></cookie-law>
+    <cookie-law buttonText="Accepter" message="Bienvenue sur Colissend, nous utilisons des cookies sur notre site. veuillez valider pour continuer" theme="dark-lime"></cookie-law>
   </footer>
 </template>
 
