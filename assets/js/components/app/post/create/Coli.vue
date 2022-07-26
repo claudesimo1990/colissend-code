@@ -129,8 +129,8 @@
                     En cochant sur cette case vous acceptez nos <a :href="privacy">conditions d'utlisations</a>
                   </label>
                   <span class="invalid-feedback d-block" role="alert">
-                              <small>{{ errors[0] }}</small>
-                            </span>
+                      <small>{{ errors[0] }}</small>
+                  </span>
                 </div>
               </ValidationProvider>
             </div>
@@ -159,7 +159,8 @@
       ValidationObserver: ValidationObserver
     },
     props: {
-      objects: String
+      objects: String,
+      privacy: String
     }
   })
 export default class Coli extends Vue {

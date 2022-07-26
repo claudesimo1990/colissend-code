@@ -4582,7 +4582,8 @@ function (_super) {
       ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_4__.ValidationObserver
     },
     props: {
-      objects: String
+      objects: String,
+      privacy: String
     }
   })], Coli);
   return Coli;

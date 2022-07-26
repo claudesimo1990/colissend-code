@@ -16,7 +16,8 @@
            <div class="col-sm-12 col-md-3 mt-4">
                @foreach($pubs as $pub)
                    <div class="card">
-                       <div class="card-body pb-0">
+                       <div class="alert alert-secondary">PUB</div>
+                       <div class="card-body pb-0 mt-1">
                            <div class="pub">
                                <a href="{{ $pub->link }}">
                                    <div class="post-item clearfix">
