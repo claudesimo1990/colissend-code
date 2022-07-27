@@ -15,6 +15,7 @@ use App\Models\Reservation;
 use App\Repository\TransactionRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use JetBrains\PhpStorm\NoReturn;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
@@ -51,6 +52,10 @@ class BookingCheckout implements CheckoutInterface
     public function process(Reservation $reservation): RedirectResponse
     {
         $this->reservation = $reservation;
+
+        if (!empty(config('paypal')['price'])) {
+            $reservation->price = config('paypal')['price'];
+        }
 
         $response = $this->provider->createOrder([
             "intent"=> "CAPTURE",
