@@ -79,12 +79,12 @@ class BookingCheckout implements CheckoutInterface
             }
 
             return redirect()
-                ->route('user.profile.show', ['profile', Auth::id()])
+                ->route('error')
                 ->with('error', 'Something went wrong.');
 
         } else {
             return redirect()
-                ->route('user.profile.show', ['profile', Auth::id()])
+                ->route('error')
                 ->with('error', $response['message'] ?? 'Something went wrong.');
         }
 
