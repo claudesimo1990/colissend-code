@@ -1,19 +1,21 @@
 @extends('app.layout.layout')
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
+
 @section('app')
-<div class="container mt-5">
+<div class="container my-5 py-5">
     <div class="row justify-content-center">
+        <h1 class="text-dark text-center mb-4">{{ __('passwords.Reset Password') }}</h1>
         <div class="col-md-8">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="card">
-                <div class="card-header">{{ __('passwords.Reset Password') }}</div>
-
-                <div class="card-body mt-4">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
+                <div class="card-body py-5">
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 

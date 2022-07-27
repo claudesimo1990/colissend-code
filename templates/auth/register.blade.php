@@ -1,5 +1,9 @@
 @extends('app.layout.layout')
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ mix('css/appController.css') }}">
+@endsection
+
 @section('app')
     <div class="container my-5 py-5">
         <div class="row justify-content-center">
@@ -92,9 +96,12 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="d-flex justify-content-center align-items-center text-muted text-center flex-column">
-                            Vos données personnelles (email et nom d'utilisateur) ne sont utilisées qu'à des fins d'authentification et ne sont pas partagées avec des tiers
-                            <a class="text-success" href="{{ route('privacy') }}">(En savoir plus)</a>.</div>
+                        <div class="text-muted text-center border">
+                            <p class="text-start p-2">
+                                Vos données personnelles (email et nom d'utilisateur) ne sont utilisées qu'à des fins d'authentification et ne sont pas partagées avec des tiers
+                                <a class="text-success" href="{{ route('privacy') }}">(En savoir plus)</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

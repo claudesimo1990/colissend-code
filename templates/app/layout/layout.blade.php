@@ -18,30 +18,32 @@
 
 @section('content')
 
-    <div id="app" class="min-vh-100">
+    <div id="app">
 
-        @include('app.include.nav')
+        <div class="min-vh-100">
 
-        @yield('header')
+            @include('app.include.nav')
 
-        <div class="container text-center">
-            @if(session('success'))
-                <div class="alert alert-success mt-5">
-                    {!! session('success') !!}
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-danger mt-5">
-                    {!! session('error') !!}
-                </div>
-            @endif
+            @yield('header')
+
+            <div class="container text-center">
+                @if(session('success'))
+                    <div class="alert alert-success mt-5">
+                        {!! session('success') !!}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger mt-5">
+                        {!! session('error') !!}
+                    </div>
+                @endif
+            </div>
+
+            @yield('app')
+
         </div>
 
-        @yield('app')
-
-        <div>
-            @include('app.include.footer')
-        </div>
+        @include('app.include.footer')
 
     </div>
 
