@@ -225,7 +225,7 @@
                     <div class="carousel-inner">
                         @foreach($destinations as $key => $destination)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img src="{{ $destination->getFirstMediaUrl('galleries', 'destinations') }}" class="" alt="{{ $destination->title }}-img">
+                                <img src="{{ $destination->getFirstMediaUrl('galleries', 'destinations') }}" width="" height="" class="" alt="{{ $destination->title }}-img">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h2 class="text-uppercase fw-bolder">{{ $destination->title }}</h2>
                                 </div>

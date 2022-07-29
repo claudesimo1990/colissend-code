@@ -49,8 +49,7 @@ class GaleriesController extends Controller
     {
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $gallery
-                ->addMediaFromRequest('image')->toMediaCollection('galleries')
-                ->withResponsiveImages();
+                ->addMediaFromRequest('image')->toMediaCollection('galleries');
         }
 
         return redirect()->back()->with(['success' => 'sauvegarde reussite!']);
@@ -77,6 +76,13 @@ class GaleriesController extends Controller
     public function destroy(Gallery $gallery)
     {
         $gallery->delete();
+
+        return redirect()->back()->with(['success' => 'sauvegarde reussite!']);
+    }
+
+    public function deleteMedia(Media $media)
+    {
+        $media->delete();
 
         return redirect()->back()->with(['success' => 'sauvegarde reussite!']);
     }

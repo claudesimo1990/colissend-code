@@ -61,6 +61,9 @@
                                                 @endif
                                                 background
                                             </a>
+                                            <a href="{{ route('gallery.media.delete', ['media' => $photo]) }}" class="btn btn-danger">
+                                                delete
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

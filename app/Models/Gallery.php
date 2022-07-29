@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -17,34 +18,10 @@ class Gallery extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('header')
-            ->width(1425)
-            ->height(720)
-            ->crop('crop-center', 1425, 720)
-            ->sharpen(10)
-            ->withResponsiveImages()
-            ->format('jpg');
+        $this->addMediaConversion('thumb')->crop(Manipulations::CROP_CENTER, 100, 100)->withResponsiveImages();
+        $this->addMediaConversion('header')->crop(Manipulations::CROP_CENTER, 1425, 720)->withResponsiveImages();
+        $this->addMediaConversion('contact')->crop(Manipulations::CROP_CENTER, 1425, 398)->withResponsiveImages();
+        $this->addMediaConversion('destinations')->crop(Manipulations::CROP_CENTER, 800, 400)->withResponsiveImages();
 
-        $this->addMediaConversion('contact')
-            ->width(1425)
-            ->height(398)
-            ->crop('crop-center', 1425, 398)
-            ->sharpen(10)
-            ->withResponsiveImages()
-            ->format('jpg');
-
-        $this->addMediaConversion('destinations')
-            ->width(800)
-            ->height(400)
-            ->crop('crop-center', 800, 400)
-            ->sharpen(10)
-            ->withResponsiveImages()
-            ->format('jpg');
-
-        $this->addMediaConversion('thumb')
-            ->width(368)
-            ->height(232)
-            ->sharpen(10)
-            ->format('jpg');
     }
 }

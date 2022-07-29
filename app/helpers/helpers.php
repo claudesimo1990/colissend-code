@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 if (! function_exists('render')) {
 
@@ -69,10 +70,11 @@ if (! function_exists('getHeaderImage')) {
     {
         $header = Gallery::where('content', 'header')->where('active_img', '!=', null)->first();
 
+        /** @var Media $media */
         $media = $header->getMedia('galleries')->where('uuid', $header->active_img)->first();
 
         if ($header) {
-            return $media->toHtml();
+            return $media('header');
         }
 
         return asset('images/about/about.jpg');
@@ -85,9 +87,18 @@ if (! function_exists('getHeaderImage')) {
         $media = $contact->getMedia('galleries')->where('uuid', $contact->active_img)->first();
 
         if ($contact) {
-            return $media->toHtml();
+            return $media('contact');
         }
         return asset('images/about/about.jpg');
+    }
+
+    function getDestinationMedia(Gallery $destination) {
+
+        $media = $destination->getMedia('galleries')->first();
+
+        if ($media) {
+            return $media('destinations');
+        }
     }
 
 }

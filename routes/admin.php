@@ -30,10 +30,11 @@ Route::group(['middleware' => 'adminauth'], function () {
 
     Route::get('/gallery/show/{gallery}', [GaleriesController::class, 'show'])->name('admin.gallery.show');
 
-    Route::post('/gallery/{gallery}/delete', [GaleriesController::class, 'destroy'])->name('admin.gallery.delete');
+    Route::get('/gallery/{gallery}/delete', [GaleriesController::class, 'destroy'])->name('admin.gallery.delete');
 
 
     Route::get('/gallery/{gallery}/{media}/{tag}', [GaleriesController::class, 'background'])->name('gallery.background');
+    Route::get('/gallery/{media}', [GaleriesController::class, 'deleteMedia'])->name('gallery.media.delete');
 
 
     Route::post('/gallery/{gallery}/album/create', [GaleriesController::class, 'albums'])->name('admin.gallery.albums.index');

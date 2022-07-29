@@ -3,7 +3,7 @@
     <div class="container px-5">
 
         <a class="navbar-brand" href="{{ route('welcome') }}">
-            <img src="{{ asset('images/colissend/logo.svg') }}" width="150px" alt="colissend-logo">
+            <img src="{{ asset('images/colissend/logo.svg') }}" width="150px" height="auto" alt="colissend-logo">
         </a>
 
         <button class="navbar-toggler" type="button"
