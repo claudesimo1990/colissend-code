@@ -67,6 +67,19 @@
             </ul>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav-blog" data-bs-toggle="collapse" href="#" aria-expanded="false">
+                <i class="bi bi-menu-button-wide"></i><span>Shop</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav-blog" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('admin.shop.products.index') }}">
+                        <i class="bi bi-circle"></i><span>Products</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
 
 </aside>

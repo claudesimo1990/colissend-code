@@ -6,19 +6,21 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-json": "*",
         "beyondcode/laravel-websockets": "^1.12",
+        "darryldecode/cart": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel-lang/lang": "~8.0",
         "laravel/framework": "^8.12",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^2.14.1",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "pusher/pusher-php-server": "^5.0.0",
         "spatie/laravel-medialibrary": "^9.6.0",
         "srmklive/paypal": "^3.0",
-      "ext-json": "*"
+        "stripe/stripe-php": "^8.12"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Darryldecode\Cart\Cart;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 

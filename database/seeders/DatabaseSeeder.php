@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use App\Models\Blog;
 use App\Models\Message;
+use App\Models\Order;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Pub;
 use App\Models\Reservation;
@@ -139,17 +141,29 @@ class DatabaseSeeder extends Seeder
 //
 //        dd($r->toArray());
 
-        Post::all()->each(function ($post) {
-            Reservation::factory(5)->create([
-                'user_id' => User::find(4)->id,
-                'post_id' => $post->id,
-                'kilo' => $post->kilo,
-                'price' => $post->price,
-                'status' => 'DRAFT',
-                'paid' => false,
-                'objects' => json_encode($post->objects)
-            ]);
-        });
+//        Post::all()->each(function ($post) {
+//            Reservation::factory(5)->create([
+//                'user_id' => User::find(4)->id,
+//                'post_id' => $post->id,
+//                'kilo' => $post->kilo,
+//                'price' => $post->price,
+//                'status' => 'DRAFT',
+//                'paid' => false,
+//                'objects' => json_encode($post->objects)
+//            ]);
+//        });
+
+        User::factory()
+            ->count(10)
+            ->has(
+                Order::factory()
+                    ->count(3)
+                    ->hasAttached(
+                        Product::factory()->count(5),
+                        ['price' => rand(100, 500), 'quantity' => rand(1, 3)]
+                    )
+            )
+            ->create();
 
     }
 }

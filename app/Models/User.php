@@ -73,7 +73,7 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Message::class, 'to');
     }
 
-    public function identities()
+    public function identities(): HasMany
     {
         return $this->hasMany(Identity::class);
     }
@@ -98,7 +98,7 @@ class User extends Authenticatable implements HasMedia
         return $this->posts()->where('type', 'PACKS')->get(['*']);
     }
 
-    public function reservations()
+    public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class, 'user_id');
     }
@@ -119,5 +119,10 @@ class User extends Authenticatable implements HasMedia
 
         $this->addMediaConversion('post')
             ->crop('crop-center', 100, 100);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

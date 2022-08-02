@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
-    <div class="container px-5">
+    <div class="container">
 
         <a class="navbar-brand" href="{{ route('welcome') }}">
             <img src="{{ asset('images/colissend/logo.svg') }}" width="150px" height="auto" alt="colissend-logo">
@@ -66,6 +66,14 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link nav-item {{ (request()->routeIs('shop.index')) ? 'active' : '' }}"
+                       aria-current="page" href="{{ route('shop.index') }}">
+                        <i class="bi bi-shop"></i>
+                        Shop
+                    </a>
+                </li>
+
                 @guest()
 
                     <li class="nav-item">
@@ -99,7 +107,6 @@
                             </a>
                         </li>
                     @endif
-
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
@@ -198,6 +205,9 @@
                             </li>
                         </ul>
                     </li>
+
+                    <x-shopping-cart></x-shopping-cart>
+
                 @endguest
             </ul>
         </div>

@@ -16,6 +16,7 @@ class header extends Component
     /**
      * @param $page
      * @param $title
+     * @param $img
      */
     public function __construct($page, $title, $img)
     {

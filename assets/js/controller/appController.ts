@@ -10,6 +10,7 @@ import ColiComponent from "../components/app/post/create/Coli.vue";
 import ChatComponent from "../components/app/chat/ChatComponent.vue";
 import MessagesComponent from "../components/app/user/Messages.vue";
 import CookieComponent from "../components/app/CookieComponent.vue";
+import AddToCart from "../components/app/shop/AddToCart.vue";
 
 require("../../js/utilities/validator");
 
@@ -27,6 +28,7 @@ const app = new Vue({
         ColiComponent: ColiComponent,
         ChatComponent: ChatComponent,
         MessagesComponent: MessagesComponent,
-        CookieComponent: CookieComponent
+        CookieComponent: CookieComponent,
+        AddToCart: AddToCart
     }
 }).$mount('#app');
