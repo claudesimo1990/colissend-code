@@ -5,11 +5,13 @@ namespace App\Repository;
 use App\Http\Requests\Site\PostRequest;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostRepository
 {
@@ -20,18 +22,20 @@ class PostRepository
         $this->post = $post;
     }
 
-    public function posts()
+    public function posts(): LengthAwarePaginator
     {
-        return $this->post
-            ->latest()
-            ->where('status','ACCEPTED')
+        return Post::whereStatus('ACCEPTED')
             ->with('user')
-            ->get();
+            ->orderBy('created_at', 'DESC')
+            ->paginate(5);
     }
 
-    public function findById(int $id)
+    public function findById(int $id): Post
     {
-        return $this->post->with('user')->find($id);
+        /** @var Post $post */
+        $post = $this->post->with('user')->find($id);
+
+        return $post;
     }
 
     public function showPost(string $slug)

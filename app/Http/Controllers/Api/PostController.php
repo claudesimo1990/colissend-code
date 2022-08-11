@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Repository\PostRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,12 +25,12 @@ class PostController extends Controller
     }
 
     /**
-     *get All latest posts
-     * @return Response
+     *  get All latest posts
+     * @return LengthAwarePaginator
      */
-    public function posts(): Response
+    public function posts(): LengthAwarePaginator
     {
-        return new Response($this->postRepository->posts(), 200);
+        return $this->postRepository->posts();
     }
 
     /**

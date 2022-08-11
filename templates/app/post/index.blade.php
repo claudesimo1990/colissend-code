@@ -15,7 +15,9 @@
 
                <search-component location="posts"></search-component>
 
-               <post-component></post-component>
+               <div class="container">
+                   <posts></posts>
+               </div>
 
            </div>
            <div class="col-sm-12 col-md-3 mt-4">

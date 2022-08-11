@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * Post Class
+ * @mixin IdeHelperPost
  */
 class Post extends Model implements HasMedia
 {

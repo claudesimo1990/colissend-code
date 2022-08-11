@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Profile;
 
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
@@ -52,6 +56,11 @@ class User extends Authenticatable implements HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
 
     public function posts(): HasMany
     {

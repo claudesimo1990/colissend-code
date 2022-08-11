@@ -10,12 +10,12 @@
 namespace App\Checkout\Booking;
 
 use App\Checkout\CheckoutInterface;
+use App\Checkout\Payment\paypal;
+use App\DTO\CheckoutCartDTOInterface;
 use App\Events\NewTransactionCompleted;
 use App\Models\Reservation;
 use App\Repository\TransactionRepository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use JetBrains\PhpStorm\NoReturn;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
@@ -28,51 +28,31 @@ class BookingCheckout implements CheckoutInterface
      * @var TransactionRepository
      */
     private TransactionRepository $transactionRepository;
+    private paypal $paypal;
 
     /**
      * @param TransactionRepository $transactionRepository
      * @param Reservation $reservation
+     * @param paypal $paypal
      * @throws Throwable
      */
-    public function __construct(TransactionRepository $transactionRepository, Reservation $reservation)
+    public function __construct(TransactionRepository $transactionRepository, Reservation $reservation, paypal $paypal)
     {
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $token = $provider->getAccessToken();
-        $provider->setAccessToken($token);
-
-        $this->provider = $provider;
         $this->transactionRepository = $transactionRepository;
         $this->reservation = $reservation;
+        $this->paypal = $paypal;
     }
 
     /**
      * @throws Throwable
      */
-    public function process(Reservation $reservation): RedirectResponse
+    public function process(CheckoutCartDTOInterface $checkoutCartDTO): RedirectResponse
     {
-        $this->reservation = $reservation;
-
         if (!empty(config('paypal')['price'])) {
-            $reservation->price = config('paypal')['price'];
+            $this->reservation->price = config('paypal')['price'];
         }
 
-        $response = $this->provider->createOrder([
-            "intent"=> "CAPTURE",
-            "application_context" => [
-                "return_url" => route('success.payment', ['reservation' => $reservation]),
-                "cancel_url" => route('cancel.payment', ['reservation' => $reservation]),
-            ],
-            "purchase_units"=> [
-                [
-                    "amount"=> [
-                        "currency_code"=> "EUR",
-                        "value"=> $reservation->price
-                    ],
-                    'description' => 'New Reservation'
-                ]
-            ],
-        ]);
+        $response = $this->paypal->provider()->createOrder($checkoutCartDTO->orders());
 
         if (isset($response['id']) && $response['id'] != null) {
 

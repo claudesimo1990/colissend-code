@@ -1,45 +1,43 @@
 <template>
-  <div class="container">
-    <section class="section dashboard">
-      <div v-for="(post, index) in foundPosts" :key="post.id" class="row card">
-        <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
-          <div class="">
-            <div class="card-body post_card_body mt-2">
-              <div class="row">
-                <div class="col-lg-4 bg-success-light">
-                  <user-card-component :user="post.user" :created="post.created_at|ago" branch="post" :type="post.type" :thumb="true"></user-card-component>
-                </div>
-                <div class="col-lg-8">
-                  <Travel v-if="post.type === 'TRAVEL'" :post="post"></Travel>
-                  <Coli v-if="post.type === 'PACKS'" :post="post"></Coli>
-                </div>
-              </div>
+  <div class="row card">
+    <a :href="'/post/'+ post.slug + '?id=' + post.id" class="">
+      <div class="">
+        <div class="card-body post_card_body mt-2">
+          <div class="row">
+            <div class="col-lg-4 bg-success-light">
+              <user-card-component :user="post.user" :created="post.created_at|ago" branch="post" :type="post.type" :thumb="true"></user-card-component>
+            </div>
+            <div class="col-lg-8">
+              <Travel v-if="post.type === 'TRAVEL'" :post="post"></Travel>
+              <Coli v-if="post.type === 'PACKS'" :post="post"></Coli>
             </div>
           </div>
-        </a>
+        </div>
       </div>
-    </section>
+    </a>
   </div>
 </template>
 
 <script lang="ts">
 
-import axios from 'axios';
 import {Vue, Component} from 'vue-property-decorator';
 import UserCardComponent from "../shared/UserCardComponent.vue";
 import Travel from "./travel.vue";
 import Coli from "./coli.vue";
 import store from "../../../store/store";
 
-Vue.component('pagination', require('laravel-vue-pagination'));
-
 @Component({
-  components: {UserCardComponent, Travel, Coli}
+  components: {
+    UserCardComponent,
+    Travel,
+    Coli
+  },
+  props: {
+    post: {}
+  }
 })
 
 export default class PostComponent extends Vue {
-
-  laravelData: any = {};
 
   get foundPosts() {
     return store.getters['post/posts'];
@@ -47,13 +45,6 @@ export default class PostComponent extends Vue {
 
   get getCountFound() {
     return store.getters['post/getSearchCount'];
-  }
-
-  async getResults(page = 1) {
-    await axios.get('api/posts?page=' + page)
-        .then(response => {
-          this.laravelData = response;
-        });
   }
 
 }

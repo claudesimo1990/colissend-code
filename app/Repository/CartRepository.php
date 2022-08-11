@@ -42,9 +42,12 @@ class CartRepository
             ->content()
             ->map(function ($orderItem) {
                 return [
+                    'id' => $orderItem->id,
                     'name' => $orderItem->name,
                     'quantity' => $orderItem->quantity,
                     'price' => $orderItem->price,
+                    'total' => ($orderItem->price * $orderItem->quantity),
+                    'product' => $orderItem->associatedModel,
                 ];
             })
             ->toJson();
@@ -62,7 +65,7 @@ class CartRepository
             ->getTotal();
     }
 
-    public function decreaseQuantity(int $rowId)
+    public function decreaseQuantity(int $rowId): bool|int
     {
         if ($this->getItem($rowId)->quantity === 1) {
             return $this->delete($rowId);
@@ -72,14 +75,18 @@ class CartRepository
             ->update($rowId, array(
                 'quantity' => - 1
             ));
+
+        return true;
     }
 
-    public function increaseQuantity(int $rowId): void
+    public function increaseQuantity(int $rowId): bool
     {
         \Cart::session(auth()->user()->id)
             ->update($rowId, array(
                 'quantity' => + 1
             ));
+
+        return true;
     }
 
     public function clear()

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 import SearchComponent from "../components/app/shared/SearchComponent.vue";
-import PostComponent from "./../components/app/post/PostComponent.vue";
+import Posts from "./../components/app/post/Posts.vue";
 import PostBookingComponent from "./../components/app/post/PostBookingComponent.vue";
 import MessageComponent from "../components/app/nav/MessageComponent.vue";
 import NotificationComponent from "../components/app/nav/NotificationComponent.vue";
@@ -10,7 +10,7 @@ import ColiComponent from "../components/app/post/create/Coli.vue";
 import ChatComponent from "../components/app/chat/ChatComponent.vue";
 import MessagesComponent from "../components/app/user/Messages.vue";
 import CookieComponent from "../components/app/CookieComponent.vue";
-import AddToCart from "../components/app/shop/AddToCart.vue";
+import ShoppingCart from "../components/app/shop/ShoppingCart.vue";
 
 require("../../js/utilities/validator");
 
@@ -20,7 +20,7 @@ Vue.use(filters)
 const app = new Vue({
     components: {
         searchComponent: SearchComponent,
-        PostComponent: PostComponent,
+        Posts: Posts,
         PostBookingComponent: PostBookingComponent,
         MessageComponent: MessageComponent,
         NotificationComponent: NotificationComponent,
@@ -29,6 +29,6 @@ const app = new Vue({
         ChatComponent: ChatComponent,
         MessagesComponent: MessagesComponent,
         CookieComponent: CookieComponent,
-        AddToCart: AddToCart
+        ShoppingCart: ShoppingCart
     }
 }).$mount('#app');

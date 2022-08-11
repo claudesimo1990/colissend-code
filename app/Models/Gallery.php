@@ -9,6 +9,9 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+/**
+ * @mixin IdeHelperGallery
+ */
 class Gallery extends Model implements HasMedia
 {
     use HasFactory;

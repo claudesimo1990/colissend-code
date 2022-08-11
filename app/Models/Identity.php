@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @mixin IdeHelperIdentity
+ */
 class Identity extends Model implements HasMedia
 {
     use HasFactory;

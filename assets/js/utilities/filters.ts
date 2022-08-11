@@ -33,5 +33,12 @@ export default {
             return moment(value).locale("fr").fromNow();
         })
 
+        Vue.filter('formattedPrice', function formattedPrice(value) {
+            if (!value) {
+                return ''
+            }
+            return (value/100) + '€';
+        })
+
     }
 }

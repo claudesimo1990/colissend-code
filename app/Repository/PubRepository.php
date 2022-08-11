@@ -21,6 +21,6 @@ class PubRepository
 
     public function pubs()
     {
-        return $this->pub->latest()->get();
+        return $this->pub->latest()->limit(3)->get();
     }
 }

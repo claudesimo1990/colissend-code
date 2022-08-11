@@ -19,9 +19,6 @@
 
     <title>@yield('title','Colissend | Faciliter vous la vente de vos kilos Et l\'envoi de vos Colis en toute securité vers multiples destinations.')</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/baseController.css') }}">
 

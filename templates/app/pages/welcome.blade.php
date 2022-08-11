@@ -193,12 +193,14 @@
 
                 <div class="row py-5">
                     @foreach($howItWorks as $howItWork)
-                        <div class="col-sm-12 col-xs-12 col-lg-6">
-                            <div class="card" style="min-height: 200px">
-                                <div class="card-body text-center">
+                        <div class="col-sm-12 col-xs-12 col-lg-3">
+                            <div class="card text-center" style="height: 300px">
+                                <div class="card-title">
                                     <h5 class="card-title">{{ $howItWork['title'] }}</h5>
-                                    <p class="card-text">{{ $howItWork['text'] }}</p>
-                                    <a href="{{ route($howItWork['link'], ['id' => $howItWork['id']]) }}" class="btn btn-success">En savoir plus</a>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="card-text small">{{ $howItWork['text'] }}</div>
+                                    <a href="{{ route($howItWork['link'], ['id' => $howItWork['id']]) }}" class="btn btn-success" style="position: absolute;bottom: 20px">En savoir plus</a>
                                 </div>
                             </div>
                         </div>

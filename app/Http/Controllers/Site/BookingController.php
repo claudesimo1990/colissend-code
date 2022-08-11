@@ -62,14 +62,18 @@ class BookingController extends Controller
                 $this->totalToPay($reservation);
                 Notification::send($reservation->user, new ReservationValidate($post, $reservation));
 
-                return redirect()->back()->with('success', 'La reservation a été validé');
+                return redirect()->route('post.reservation.list', ['slug' => $reservation->post->slug, 'type' => 'TRAVEL'])->with('success', 'La reservation a été validé');
+
             }
             if ($post->type == 'PACKS') {
 
-                $this->totalToPay($reservation);
+                $reservation->update([
+                    'status' => 'ACCEPTED'
+                ]);
+
                 Notification::send($this->userRepository->findById($reservation->user_id), new ReservationValidate($post, $reservation));
 
-                return redirect()->back()->with('success', 'La reservation a été validé');
+                return redirect()->route('post.reservation.list', ['slug' => $reservation->post->slug, 'type' => 'PACKS'])->with('success', 'La reservation a été validé');
             }
         }
 
@@ -86,7 +90,6 @@ class BookingController extends Controller
                 'status' => 'REJECTED'
             ]);
 
-            $this->totalToPay($reservation);
             Notification::send($this->userRepository->findById($reservation->user_id), new ReservationRejected($post));
 
             return redirect()->back()->with('success', 'La reservation à été refusé');

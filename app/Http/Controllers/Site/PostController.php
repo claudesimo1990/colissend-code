@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 class PostController extends Controller
 {
 
-    public function index(PubRepository $pubRepository)
+    public function index(PubRepository $pubRepository, PostRepository $postRepository)
     {
-        return view('app.post.index', array(
+        return view('app.post.index', [
             'pubs' => $pubRepository->pubs()
-        ));
+        ]);
     }
 
     public function travel()

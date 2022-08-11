@@ -1,8 +1,8 @@
 @extends('app.user.dashboard')
 
 @php
-$type = app()->request->get('type');
-$reservations = $post->reservations()->paginate(3);
+    $type = app()->request->get('type');
+    $reservations = $post->reservations()->orderBy('updated_at', 'DESC')->paginate(3);
 @endphp
 
 @section('back-button')
@@ -25,8 +25,13 @@ $reservations = $post->reservations()->paginate(3);
                            <x-avatar width="36" height="36" class="rounded-circle d-none d-sm-block"></x-avatar>
                            {{ $reservation->user->firstname }} {{ $reservation->user->lastname }}
                        </div>
+                       @if($reservation->paid)
+                           <div class="small badge text-black">
+                               DEJA PAYER
+                           </div>
+                       @endif
                        <div class="small">
-                           {{ agoDate($reservation->created_at) }}
+                           {{ agoDate($reservation->updated_at) }}
                        </div>
                    </div>
                    <div class="card-body">
@@ -39,24 +44,26 @@ $reservations = $post->reservations()->paginate(3);
                        <div class="row">
                            <div class="col-8 card-text small">{{ $reservation->message }}.</div>
                            <div class="col-4 d-flex align-items-center">
-                               <form action="{{ route('booking-validate', $reservation->id) }}" method="get">
-                                   @csrf
-                                   <button type="submit" class="btn btn-link text-success">accepter</button>
-                               </form>
-                               <form action="{{ route('booking-validate', $reservation->id) }}" method="get">
-                                   @csrf
-                                   <button type="submit" class="btn btn-link text-info">refuser</button>
-                               </form>
+                               @if($reservation->status  == 'PROGRESS')
+                                   <form action="{{ route('booking-validate', $reservation->id) }}" method="get">
+                                       @csrf
+                                       <button type="submit" class="btn btn-link text-success">Accepter</button>
+                                   </form>
+                                   <form action="{{ route('booking-except', $reservation->id) }}" method="get">
+                                       @csrf
+                                       <button type="submit" class="btn btn-link text-info">Refuser</button>
+                                   </form>
+                               @endif
                                <form action="{{ route('booking-delete', $reservation->id) }}" method="get">
                                    @csrf
-                                   <button type="submit" class="btn btn-link text-danger">supprimer</button>
+                                   <button type="submit" class="btn btn-link text-danger">Supprimer</button>
                                </form>
                            </div>
                        </div>
                    </div>
                </li>
             @empty
-                il y'a pas encore aucune reservation sur ce post.
+                il y'a encore aucune reservation sur ce post.
             @endforelse
         </ul>
         {{ $reservations->links('pagination.custom') }}

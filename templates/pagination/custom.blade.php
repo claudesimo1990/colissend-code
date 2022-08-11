@@ -3,11 +3,11 @@
         <ul class="pagination">
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled" aria-label="@lang('pagination.previous')">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Precedent</a>
                 </li>
             @else
                 <li class="page-item" aria-label="@lang('pagination.previous')">
-                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" tabindex="-1" aria-disabled="true">Previous</a>
+                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" tabindex="-1" aria-disabled="true">Precedent</a>
                 </li>
             @endif
             @foreach ($elements as $element)
@@ -33,7 +33,7 @@
             @endforeach
             @if ($paginator->hasMorePages())
                 <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Next</a>
+                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Suivant</a>
                 </li>
             @endif
         </ul>

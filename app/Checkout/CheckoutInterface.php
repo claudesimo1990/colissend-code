@@ -9,9 +9,9 @@
 
 namespace App\Checkout;
 
-use App\Models\Reservation;
+use App\DTO\CheckoutCartDTOInterface;
 
 interface CheckoutInterface
 {
-    public function process(Reservation $reservation);
+    public function process(CheckoutCartDTOInterface $checkoutCartDTO);
 }

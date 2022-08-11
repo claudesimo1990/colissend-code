@@ -9,12 +9,17 @@ use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @mixin IdeHelperProduct
+ */
 class Product extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
 
     protected $guarded = [];
+
+    protected $appends = ['image'];
 
     public function orders(): BelongsToMany
     {
@@ -33,9 +38,14 @@ class Product extends Model implements HasMedia
         ->singleFile();
     }
 
-    /**
-     * @throws InvalidManipulation
-     */
+    public function getImageAttribute()
+    {
+        $media = $this->getMedia('products')->first();
+        $media->setAttribute('class', 'responsive');
+
+        return $media('thumb')->toHtml();
+    }
+
     public function registerAllMediaConversions(): void
     {
         $this->addMediaConversion('details')

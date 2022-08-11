@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         App\Providers\CartServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 

@@ -158,6 +158,22 @@ return [
             ]
         ],
         [
+            'id' => 1,
+            'title' => 'Placer votre annonce',
+            'text' => "Vous souhaiter publier une annonce? cliquer sur publier une annonce",
+            'link' => "howItWorks",
+            'steps' => [
+                ['step' => 'Etape 1', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
+                ['step' => 'Etape 2', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-danger'],
+                ['step' => 'Etape 3', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-info'],
+                ['step' => 'Etape 4', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-warning'],
+                ['step' => 'Etape 5', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-muted'],
+                ['step' => 'Etape 6', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
+                ['step' => 'Etape 7', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-warning'],
+                ['step' => 'Etape 8', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-muted'],
+            ],
+        ],
+        [
             'id' => 2,
             'title' => 'Recevoir des propositions',
             'text' => "Avec Colissend, lorsque vous publiez votre annonce, elle est visible par de potentiels expéditeurs qui pourront vous contacter directement.",
@@ -176,22 +192,6 @@ return [
             ],
         [
             'id' => 3,
-            'title' => 'Placer votre annonce',
-            'text' => "Vous souhaiter publier une annonce? cliquer sur publier une annonce",
-            'link' => "howItWorks",
-            'steps' => [
-                ['step' => 'Etape 1', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
-                ['step' => 'Etape 2', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-danger'],
-                ['step' => 'Etape 3', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-info'],
-                ['step' => 'Etape 4', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-warning'],
-                ['step' => 'Etape 5', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-muted'],
-                ['step' => 'Etape 6', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-success'],
-                ['step' => 'Etape 7', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-warning'],
-                ['step' => 'Etape 8', 'text' => "La France est un pays attachant avec de magnifiques monuments et une savoureuse gastronomie. C'est pourquoi parler français lors de ses voyages ou pour nouer des relations professionnelles demeure un vrai plus !", 'color' => 'text-muted'],
-            ],
-        ],
-        [
-            'id' => 4,
             'title' => 'Percevez votre commission',
             'text' => "Pour plus de tranquilité pour le voyageur et l'expéditeur,les fonds sont débloqués à reception du colis",
             'link' => "howItWorks",

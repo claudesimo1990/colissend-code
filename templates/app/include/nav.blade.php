@@ -58,13 +58,13 @@
                     </a>
                 </li>-->
 
-                <li class="nav-item">
-                    <a class="nav-link nav-item {{ (request()->routeIs('blog.index')) ? 'active' : '' }}"
-                       aria-current="page" href="{{ route('blog.index') }}">
-                        <i class="bi bi-book"></i>
-                        Blog
-                    </a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link nav-item {{ (request()->routeIs('blog.index')) ? 'active' : '' }}"--}}
+{{--                       aria-current="page" href="{{ route('blog.index') }}">--}}
+{{--                        <i class="bi bi-book"></i>--}}
+{{--                        Blog--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
                 <li class="nav-item">
                     <a class="nav-link nav-item {{ (request()->routeIs('shop.index')) ? 'active' : '' }}"

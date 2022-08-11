@@ -24,7 +24,7 @@ class UsersPostsController extends Controller
 
     public function bookings(): Factory|View|Application
     {
-        $reservations = Auth::user()->reservations()->paginate(5);
+        $reservations = Auth::user()->reservations()->orderBy('updated_at', 'DESC')->paginate(10);
         return view('app.user.profile.posts.booking', compact('reservations'));
     }
 

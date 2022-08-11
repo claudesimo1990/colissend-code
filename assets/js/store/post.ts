@@ -19,7 +19,7 @@ const post = {
                 return;
             }
             axios.get('/api/posts').then((response) => {
-                state.posts = response.data;
+                state.posts = response.data.data;
             }).catch((error) => {
                 console.log(error)
             });
@@ -27,8 +27,8 @@ const post = {
 
         searchPostWithKeys(state: any, payload: string) {
             axios.post('/api/posts', payload).then((response) => {
-                state.searchCount = response.data.length;
-                state.searchedPost = response.data;
+                state.searchCount = response.data.data.length;
+                state.searchedPost = response.data.data;
             }).catch((error) => {
                 console.log(error)
             });
@@ -36,7 +36,7 @@ const post = {
 
         results(state: any, payload: any) {
             axios.get('/api/posts/' + payload).then((response) => {
-                state.results = response.data;
+                state.results = response.data.data;
             }).catch((error) => {
                 console.log(error)
             });

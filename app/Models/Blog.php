@@ -8,6 +8,9 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+/**
+ * @mixin IdeHelperBlog
+ */
 class Blog extends Model implements HasMedia
 {
     use HasFactory;
