@@ -28,8 +28,8 @@ class ShopCheckoutCartDTO implements CheckoutCartDTOInterface
         return [
             "intent"=> "CAPTURE",
             "application_context" => [
-                "return_url" => route('success.payment', ['reservation' => 1]),
-                "cancel_url" => route('cancel.payment', ['reservation' => 1]),
+                "return_url" => route('shop.success.payment', ['order' => $this->order->id]),
+                "cancel_url" => route('shop.cancel.payment', ['order' => $this->order->id]),
             ],
             "purchase_units"=> [
                 [
@@ -37,7 +37,7 @@ class ShopCheckoutCartDTO implements CheckoutCartDTOInterface
                         "currency_code"=> "EUR",
                         "value" => $this->totalPrice()
                     ],
-                    'description' => 'New Reservation'
+                    'description' => 'Payment de la commande N°' . $this->order->order_number
                 ]
             ],
         ];
@@ -53,7 +53,7 @@ class ShopCheckoutCartDTO implements CheckoutCartDTOInterface
 
     public function totalPrice(): float
     {
-        return 10.00;
+        return 3.00;
     }
 
     public function init($object)

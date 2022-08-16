@@ -12,8 +12,11 @@ use App\Repository\CartRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\HttpFoundation\Request;
+use Throwable;
 
 /**
  * @author Claude Simo <jeanclaude.simo@abus-kransysteme.de>
@@ -23,13 +26,16 @@ use Symfony\Component\HttpFoundation\Request;
 class ShopController extends Controller
 {
     private CartRepository $cartRepository;
+    private ShopCheckout $shopCheckout;
 
     /**
      * @param CartRepository $cartRepository
+     * @param ShopCheckout $shopCheckout
      */
-    public function __construct(CartRepository $cartRepository)
+    public function __construct(CartRepository $cartRepository, ShopCheckout $shopCheckout)
     {
         $this->cartRepository = $cartRepository;
+        $this->shopCheckout = $shopCheckout;
     }
 
     public function index(): Factory|View|Application
@@ -46,7 +52,7 @@ class ShopController extends Controller
         return view('app.shop.cart');
     }
 
-    public function add(Request $request): \Illuminate\Http\RedirectResponse
+    public function add(Request $request): RedirectResponse
     {
         $product = Product::find($request->get('product'));
 
@@ -60,6 +66,9 @@ class ShopController extends Controller
         return view('app.shop.checkout');
     }
 
+    /**
+     * @throws Throwable
+     */
     public function checkout(OrderRequest $orderRequest, ShopCheckout $shopCheckout, ShopCheckoutCartDTO $shopCheckoutCartDTO, CartRepository $cartRepository)
     {
         $items = collect(json_decode($this->cartRepository->jsonOrderItems()));
@@ -98,6 +107,21 @@ class ShopController extends Controller
         $token = substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
 
         return $token;
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[NoReturn] public function paymentSuccess(Request $request, Order $order): RedirectResponse
+    {
+        $status = $this->shopCheckout->buySuccess($request, $order);
+
+        if ($status) {
+            $order->update(['status' => 'success']);
+            return redirect()->route('success');
+        }
+
+        return redirect()->route('error');
     }
 
 }

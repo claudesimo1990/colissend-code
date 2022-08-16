@@ -35,7 +35,7 @@ class TransactionRepository
         return $this->transaction->latest()->paginate(1);
     }
 
-    public function create($response, Reservation $reservation)
+    public function create($response, $reservation)
     {
         $shipping = $response['purchase_units'][0]['shipping'];
         $payer = $response["payer"];

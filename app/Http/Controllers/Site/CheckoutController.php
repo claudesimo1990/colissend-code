@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Checkout\Booking\BookingCheckout;
+use App\DTO\BookingCheckoutCartDTO;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Contracts\Foundation\Application;
@@ -31,13 +32,15 @@ class CheckoutController extends Controller
     /**
      * @throws Throwable
      */
-    public function checkout(Reservation $reservation)
+    public function checkout(BookingCheckout $bookingCheckout, BookingCheckoutCartDTO $bookingCheckoutCartDTO, Reservation $reservation)
     {
         if ($reservation->paid) {
             abort('404', 'Cette action ne peut etre effectuee');
         }
 
-        $this->bookingCheckout->process($reservation);
+        $bookingCheckoutCartDTO->init($reservation);
+
+        $this->bookingCheckout->process($bookingCheckoutCartDTO);
     }
 
     /**

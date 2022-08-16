@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Identity\IdentityController;
+use App\Http\Controllers\Shop\ShopController;
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\ProfileController;
 use App\Http\Controllers\Site\UsersPostsController;
@@ -47,8 +48,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile/friend/invitation', [ProfileController::class, 'invitationSend']);
 
     Route::get('/notifications', [ProfileController::class, 'notifications'])->name('user.notifications');
-    Route::get('cancel-payment/{reservation}', [CheckoutController::class, 'paymentCancel'])->name('cancel.payment');
-    Route::get('payment-success/{reservation}', [CheckoutController::class, 'paymentSuccess'])->name('success.payment');
+
+    Route::get('booking/cancel-payment/{reservation}', [CheckoutController::class, 'paymentCancel'])->name('booking.cancel.payment');
+    Route::get('booking/payment-success/{reservation}', [CheckoutController::class, 'paymentSuccess'])->name('booking.success.payment');
+
+    Route::get('shop/cancel-payment/{order}', [ShopController::class, 'paymentCancel'])->name('shop.cancel.payment');
+    Route::get('shop/payment-success/{order}', [ShopController::class, 'paymentSuccess'])->name('shop.success.payment');
 
     Route::get('error', [CheckoutController::class, 'error'])->name('error');
     Route::get('merci', [CheckoutController::class, 'thank'])->name('success');

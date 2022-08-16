@@ -80,7 +80,7 @@ class BookingCheckout implements CheckoutInterface
      */
     public function buySuccess(Request $request, Reservation $reservation): bool
     {
-        $response = $this->provider->capturePaymentOrder($request['token']);
+        $response = $this->paypal->provider()->capturePaymentOrder($request['token']);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 

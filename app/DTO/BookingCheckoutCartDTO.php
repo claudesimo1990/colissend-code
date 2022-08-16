@@ -2,6 +2,8 @@
 
 namespace App\DTO;
 
+use App\Models\Reservation;
+
 /**
  * @author Claude Simo <jeanclaude.simo@abus-kransysteme.de>
  * @copyright ABUS Kransysteme GmbH
@@ -9,12 +11,12 @@ namespace App\DTO;
  */
 class BookingCheckoutCartDTO implements CheckoutCartDTOInterface
 {
-    private \App\Models\Reservation $reservation;
+    private Reservation $reservation;
 
     /**
-     * @param \App\Models\Reservation $reservation
+     * @param Reservation $reservation
      */
-    public function __construct(\App\Models\Reservation $reservation)
+    public function __construct(Reservation $reservation)
     {
         $this->reservation = $reservation;
     }
@@ -24,8 +26,8 @@ class BookingCheckoutCartDTO implements CheckoutCartDTOInterface
        return [
            "intent"=> "CAPTURE",
            "application_context" => [
-               "return_url" => route('success.payment', ['reservation' => $this->reservation]),
-               "cancel_url" => route('cancel.payment', ['reservation' => $this->reservation]),
+               "return_url" => route('booking.success.payment', ['reservation' => $this->reservation]),
+               "cancel_url" => route('booking.cancel.payment', ['reservation' => $this->reservation]),
            ],
            "purchase_units"=> [
                [
@@ -33,7 +35,7 @@ class BookingCheckoutCartDTO implements CheckoutCartDTOInterface
                        "currency_code"=> "EUR",
                        "value" => $this->totalPrice()
                    ],
-                   'description' => 'New Reservation'
+                   'description' => 'Payment de la reservation N°' . $this->reservation->id
                ]
            ],
        ];
@@ -49,11 +51,11 @@ class BookingCheckoutCartDTO implements CheckoutCartDTOInterface
 
     public function totalPrice(): float
     {
-        return $this->reservation->price;
+        return 1.00;
     }
 
     public function init($object)
     {
-        return $object;
+        $this->reservation = $object;
     }
 }
