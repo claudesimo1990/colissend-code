@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @mixin IdeHelperOrder
@@ -14,14 +16,19 @@ class Order extends Model
 
     protected $guarded = [];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)
             ->withPivot('price', 'quantity');
+    }
+
+    public function payments()
+    {
+        return $this->morphMany(Payment::class, 'paymentable');
     }
 }

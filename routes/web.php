@@ -7,10 +7,12 @@ use App\Http\Controllers\Auth\social\LoginController;
 use App\Http\Controllers\Pub\PubController;
 use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
+use App\Jobs\SendWelcomeEmailJob;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
 
 Route::get('/', [HomeController::class, 'home'])->name('welcome');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
@@ -52,13 +54,10 @@ Route::get('/facebook/callback', [LoginController::class, 'facebookCallBack'])->
 Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, 'confirmation'])->name('user.account.confirmation');
 
 Route::get('test', function () {
-//    try {
-//        Mail::raw('Hello World!', function($msg) {$msg->to('claudesimo1990@gmail.com')->subject('Test Email'); });
-//    }catch (Exeption $exeption) {
-//        dd($exeption->getMessage());
-//    }
 
+    $details['name'] = 'Simo';
+    $details['email'] = 'claudesimo1990@gmail.com';
 
-
+    dispatch(new SendWelcomeEmailJob($details));
 
 });

@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Post;
 use App\Models\Reservation;
-use http\Client\Curl\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;

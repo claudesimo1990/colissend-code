@@ -15,33 +15,26 @@
 
         <div class="row">
             @foreach($products as $product)
-                <div class="col-xs-12 col-sm-12 col-lg-4 mb-5">
-                    <div class="card h-100">
+                <div class="col-xs-12 col-sm-12 col-lg-3 mb-5 card-deck">
 
+                    <div class="card">
                         @php
                             $media = $product->getMedia('products')->first();
                             $img = $media('thumb')
                         @endphp
 
                         {{ $img }}
-
                         <div class="card-body">
-                            <p class="text-small my-2">{{ $product->description }}</p>
-                            <div class="text-center">
-                                <h5 class="fw-bolder">{{ $product->name }}</h5>
-                                <span class="fw-bold">{{ $product->formatted_price }}</span>
-                            </div>
+                            <h5 class="card-title">{{ $product->name }} - {{ $product->formatted_price }}</h5>
+                            <p class="card-text small">{{ Str::limit($product->description, 100, ' ...') }}</p>
                         </div>
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <form action="{{ route('shop.product.addToCart') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="product" value="{{  $product->id }}">
-                                    <button type="submit" class="btn btn-outline-dark mt-auto">Ajouter au panier</button>
-                                </form>
-                            </div>
+                        <div class="card-footer text-center">
+                            <form action="{{ route('shop.product.addToCart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product" value="{{  $product->id }}">
+                                <button type="submit" class="btn btn-success">Ajouter au panier</button>
+                            </form>
                         </div>
-                        {{-- <add-to-cart :product-id="{{ $product->id }}"></add-to-cart>--}}
                     </div>
                 </div>
             @endforeach

@@ -32,7 +32,7 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    public function getCountReservationsAttribute()
+    public function getCountReservationsAttribute(): int
     {
         return $this->reservations->count();
     }

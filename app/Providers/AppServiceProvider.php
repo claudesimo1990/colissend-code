@@ -9,6 +9,7 @@ use App\Models\Reservation;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Horizon\Horizon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,5 +41,9 @@ class AppServiceProvider extends ServiceProvider
 
         //force Site to https
         URL::forceScheme('https');
+
+        Horizon::auth(function ($request) {
+            return false;
+        });
     }
 }

@@ -13,7 +13,7 @@ use App\Checkout\Payment\paypal;
 use App\DTO\CheckoutCartDTOInterface;
 use App\Events\NewTransactionCompleted;
 use App\Models\Order;
-use App\Repository\TransactionRepository;
+use App\Repository\PaymentRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -24,18 +24,18 @@ class ShopCheckout implements CheckoutInterface
 {
     private Order $order;
     private paypal $paypal;
-    private TransactionRepository $transactionRepository;
+    private PaymentRepository $paymentRepository;
 
     /**
      * @param Order $order
      * @param paypal $paypal
-     * @param TransactionRepository $transactionRepository
+     * @param PaymentRepository $paymentRepository
      */
-    public function __construct(Order $order, paypal $paypal, TransactionRepository $transactionRepository)
+    public function __construct(Order $order, paypal $paypal, PaymentRepository $paymentRepository)
     {
         $this->order = $order;
         $this->paypal = $paypal;
-        $this->transactionRepository = $transactionRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /**
@@ -74,8 +74,8 @@ class ShopCheckout implements CheckoutInterface
         $response = $this->paypal->provider()->capturePaymentOrder($request['token']);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-//            $transaction = $this->transactionRepository->create($response, $order);
-//            event(new NewTransactionCompleted($transaction));
+            $transaction = $this->paymentRepository->create($response, $order);
+            event(new NewTransactionCompleted($transaction));
             return true;
 
         } else {

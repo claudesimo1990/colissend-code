@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @mixin IdeHelperReservation
@@ -26,8 +26,8 @@ class Reservation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function payments(): HasMany
+    public function payments(): MorphMany
     {
-        return $this->hasMany(Transaction::class,'reservations_id');
+        return $this->morphMany(Payment::class, 'paymentable');
     }
 }

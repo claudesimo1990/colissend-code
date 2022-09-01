@@ -55,8 +55,8 @@ class Product extends Model implements HasMedia
             ->sharpen(10);
 
         $this->addMediaConversion('thumb')
-            ->width(450)
-            ->height(300)
+            ->width(362)
+            ->height(180)
             ->withResponsiveImages()
             ->sharpen(10);
     }

@@ -43,6 +43,8 @@
 
         </div>
 
+        <x-whatsapp></x-whatsapp>
+
         @include('app.include.footer')
 
     </div>

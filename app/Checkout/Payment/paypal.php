@@ -9,11 +9,15 @@ namespace App\Checkout\Payment;
  */
 
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Throwable;
 
 class paypal
 {
     private PayPalClient $provider;
 
+    /**
+     * @throws Throwable
+     */
     public function __construct()
     {
         $provider = new PaypalClient();

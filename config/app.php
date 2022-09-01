@@ -177,6 +177,7 @@ return [
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         App\Providers\CartServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        \App\Providers\HorizonServiceProvider::class,
 
     ],
 
@@ -220,7 +221,7 @@ return [
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'RateLimiter' => Illuminate\Support\Facades\RateLimiter::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        // 'Redis' => Illuminate\Support\Facades\Redis::class,
+        'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,
