@@ -9,7 +9,7 @@
 @section('scripts')
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ env('GOOGLE_PLACES_KEY') }}">
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ env('GOOGLE_PLACES_KEY', 'AIzaSyD7wMuFt6bKsYUflmbP4HUwbkHOD22S-D4') }}">
     </script>
 
     <script src="{{ mix('js/appController.js') }}"></script>
