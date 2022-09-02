@@ -31,7 +31,7 @@ class BookingController extends Controller
     {
         $reservation = $re->store($request, $post);
 
-        Notification::send($post->user, new BookingNotification($reservation, $post));
+        Notification::send($post->user, new BookingNotification($reservation, $post, $this->totalToPay($reservation)));
 
         return new Response('Votre reservation á été soumise avec success!', 200);
     }
@@ -107,12 +107,17 @@ class BookingController extends Controller
         return redirect()->back()->with('success', 'La reservation à été supprimé');
     }
 
-    private function totalToPay(Reservation $reservation)
+    private function totalToPay(Reservation $reservation): float|int
     {
-        $objects = json_decode($reservation->objects);
         $total = 0;
-        if ($objects->courrier->status){$total += ($objects->courrier->number * ($objects->courrier->price/100));}
-        $total += $reservation->kilo * ($reservation->post->price/100);
-        $reservation->update(['price' => $total]);
+
+        if ($reservation->post->type ==  'TRAVEL') {
+            $objects = json_decode($reservation->objects);
+            if ($objects->courrier->status){$total += ($objects->courrier->number * ($objects->courrier->price/100));}
+            $total += $reservation->kilo * ($reservation->post->price/100);
+            return $total;
+        }
+
+        return $reservation->price;
     }
 }

@@ -90,9 +90,9 @@
                                     </div>
                                     <div>
                                         @if($post->type == 'TRAVEL')
-                                            <i class="bx bxs-plane-take-off" style="font-size: 25px;color: green;"></i>
+                                            Vente de kilos
                                         @else
-                                            <i class="bi bi-box-seam" style="font-size: 25px;color: green;"></i>
+                                            Envoi de Coli
                                         @endif
                                     </div>
                                     <div class="time">
@@ -107,12 +107,12 @@
                                 </div>
                                 <div class="d-flex justify-content-between text-center">
                                     <div>
-                                        <i class="bx bxs-plane-take-off home-icon"></i>
+                                        <i class="bi bi-geo-alt-fill"></i>
                                         <div class="">{{ $post->from }}</div>
                                         <div class="">{{ formatDate($post->dateFrom) }}</div>
                                     </div>
                                     <div>
-                                        <i class="bx bxs-plane-land home-icon"></i>
+                                        <i class="bi bi-geo-alt-fill"></i>
                                         <div class="">{{ $post->to }}</div>
                                         <div class="">{{ formatDate($post->dateTo) }}</div>
                                     </div>

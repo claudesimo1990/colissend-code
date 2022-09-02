@@ -18,10 +18,16 @@ class BookingNotification extends Notification
     public Post $post;
     private int $price;
 
-    public function __construct(Reservation $reservation, Post $post)
+    /**
+     * @param Reservation $reservation
+     * @param Post $post
+     * @param int $price
+     */
+    public function __construct(Reservation $reservation, Post $post, int $price)
     {
         $this->reservation = $reservation;
         $this->post = $post;
+        $this->price = $price;
     }
 
     public function via($notifiable): array
@@ -50,7 +56,7 @@ class BookingNotification extends Notification
                     'notifiable' => $notifiable,
                     'p' => $this->post,
                     'kilos' => $this->reservation->kilo,
-                    'total' => $total,
+                    'total' => $this->price,
                     'r' => $res,
                     'message' => $this->reservation->message,
                     'id' => $this->reservation->id,
@@ -63,6 +69,7 @@ class BookingNotification extends Notification
                 ->subject('Nouvelle proposition de transport')
                 ->markdown('mail.booking.coli', [
                     'notifiable' => $notifiable,
+                    'price' => $this->price,
                     'p' => $this->post,
                     'r' => $this->reservation
             ]);

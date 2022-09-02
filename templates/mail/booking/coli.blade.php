@@ -92,7 +92,7 @@
                 <tr>
                     <td bgcolor="#ffffff" align="center" valign="top"
                         style="padding: 30px 10px 10px 10px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 25px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                        <h1 style="font-size: 25px; font-weight: 400; margin: 2px; text-align: center">Nouvelle proposition de {{ $r->price }}&euro;!</h1>
+                        <h1 style="font-size: 25px; font-weight: 400; margin: 2px; text-align: center">Nouvelle proposition de {{ $price }}&euro;!</h1>
                     </td>
                 </tr>
             </table>
@@ -106,7 +106,7 @@
                         style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                         <p style="margin-bottom: 10px;">
                             {{ getSalution() }}  {{ $notifiable->name }},<br>
-                           Vous avez une proposition de {{ $r->price }}&euro; sur votre post de {{ $p->from }} pour {{ $p->to }} du {{ formatDate($p->dateFrom) }} au {{ formatDate($p->dateTo) }}
+                           Vous avez une proposition de {{ $price }}&euro; sur votre post de {{ $p->from }} pour {{ $p->to }} du {{ formatDate($p->dateFrom) }} au {{ formatDate($p->dateTo) }}
                         </p>
                         {!! $r->message !!}
                     </td>
