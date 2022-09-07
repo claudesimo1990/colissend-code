@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
-use App\Models\Country;
 use App\Models\Gallery;
-use App\Models\User;
 use App\Repository\PostRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -78,6 +76,7 @@ class HomeController extends Controller
            'email' => 'required',
            'subject' => 'required',
            'message' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
         $contact = Contact::create($validData);

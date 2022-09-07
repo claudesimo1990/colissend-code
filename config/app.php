@@ -178,6 +178,7 @@ return [
         App\Providers\CartServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         \App\Providers\HorizonServiceProvider::class,
+        AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
 
     ],
 

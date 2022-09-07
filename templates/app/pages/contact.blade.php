@@ -8,6 +8,8 @@
 
 @section('app')
 
+    {!! app('captcha')->render() !!}
+
     <x-header page="page-howItWork" img="" title="Nous somme a l'ecoute de vos preocupations"/>
 
     <section class="section contact my-5 container">
@@ -50,6 +52,11 @@
             </div>
 
             <div class="col-xl-6">
+                @error('g-recaptcha-response')
+                <div class="alert alert-danger is-invalid small text-danger" role="alert">
+                    <strong>{{ $message }}</strong>
+                </div>
+                @enderror
                 <div class="card p-4">
                     <form action="{{ route('contact') }}" method="post" class="php-email-form">
                         @csrf
