@@ -40,7 +40,7 @@ export default class TotalToPay extends Vue {
   }
 
   mounted() {
-    store.dispatch("cart/total");
+    store.dispatch("cart/fetchContent");
 
   }
 

@@ -103,7 +103,7 @@
                         </div>
                         <div class="card-body">
 
-                            @include('app.include.total')
+                            <total-to-pay></total-to-pay>
 
                             <button type="submit" class="btn btn-outline-success btn-lg btn-block w-100">
                                 payer avec paypal <i class="bx bxl-paypal"></i>
