@@ -27,4 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart/content', [CartController::class, 'content'])
         ->name('shop.cart.content');
 
+    Route::get('/cart/total', [CartController::class, 'total'])
+        ->name('shop.cart.total');
+
 });

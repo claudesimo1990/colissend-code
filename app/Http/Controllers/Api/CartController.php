@@ -42,6 +42,11 @@ class CartController extends Controller
         return $this->cartRepository->jsonOrderItems();
     }
 
+    public function total(): array
+    {
+        return $this->cartRepository->total();
+    }
+
     public function decreaseQuantity(int $id): bool|int
     {
         return  $this->cartRepository->decreaseQuantity($id);

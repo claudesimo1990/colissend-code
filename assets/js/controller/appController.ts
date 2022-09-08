@@ -11,6 +11,7 @@ import ChatComponent from "../components/app/chat/ChatComponent.vue";
 import MessagesComponent from "../components/app/user/Messages.vue";
 import CookieComponent from "../components/app/CookieComponent.vue";
 import ShoppingCart from "../components/app/shop/ShoppingCart.vue";
+import TotalToPay from "../components/app/shop/TotalToPay.vue";
 
 require("../../js/utilities/validator");
 
@@ -29,6 +30,7 @@ const app = new Vue({
         ChatComponent: ChatComponent,
         MessagesComponent: MessagesComponent,
         CookieComponent: CookieComponent,
-        ShoppingCart: ShoppingCart
+        ShoppingCart: ShoppingCart,
+        TotalToPay: TotalToPay
     }
 }).$mount('#app');

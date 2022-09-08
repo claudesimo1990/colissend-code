@@ -21,18 +21,18 @@
           <p class="small">{{ item.description }}</p>
           <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                   title="Remove item">
-            <i class="bx bx-trash"></i>
+            <i class="bi bi-trash" style="color: white"></i>
           </button>
           <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                   title="Move to the wish list">
-            <i class="bx bx-heart"></i>
+            <i class="bi bi-heart" style="color: white"></i>
           </button>
         </div>
 
         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
           <div class="d-flex mb-4 justify-content-between" style="max-width: 300px">
             <button class="btn btn-success px-3 me-2" @click="decrementQuantity(item.id)">
-              <i class="bx bx-minus"></i>
+              <span style="color: white">-</span>
             </button>
 
             <div class="form-outline">
@@ -40,7 +40,7 @@
             </div>
 
             <button class="btn btn-success px-3 ms-2" @click="incrementQuantity(item.id)">
-              <i class="bx bx-plus"></i>
+              <span style="color: white">+</span>
             </button>
           </div>
           <p class="text-start text-md-center">
@@ -78,23 +78,16 @@ export default class ShoppingCart extends Vue {
   }
 
   public incrementQuantity(id: number) {
-    store.dispatch("cart/increase", id).then(() => {
-      store.dispatch("cart/fetchContent");
-    });
+    store.dispatch("cart/increase", id).then(() => {});
   }
 
   public decrementQuantity(id: number) {
-    store.dispatch("cart/decrease", id).then(() => {
-      store.dispatch("cart/fetchContent");
-    });
+    store.dispatch("cart/decrease", id).then(() => {});
   }
 
   mounted() {
-
     this.product = this.$props.item
-
     store.dispatch("cart/fetchContent");
-
   }
 
 }

@@ -59,10 +59,15 @@ class CartRepository
             ->sum('quantity');
     }
 
-    public function total(): int
+    public function total(): array
     {
-        return \Cart::session(auth()->user()->id)
-            ->getTotal();
+        return [
+          'total' => \Cart::session(auth()->user()->id)
+              ->getTotal(),
+
+            'subTotal' => \Cart::session(auth()->user()->id)
+                ->getSubtotal()
+        ];
     }
 
     public function decreaseQuantity(int $rowId): bool|int

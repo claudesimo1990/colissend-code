@@ -39,7 +39,7 @@
                     </div>
                     <div class="card-body py-2">
 
-                        @include('app.include.total')
+                        <total-to-pay></total-to-pay>
 
                         <a href="{{ route('shop.cart.by') }}" type="button" class="btn btn-success btn-lg btn-block w-100">
                             Proceder au payment

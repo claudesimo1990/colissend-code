@@ -6,13 +6,21 @@ const cart = {
 
     state: () => ({
         cart: null,
-        content: {}
+        content: {},
+        total: Array
     }),
     mutations: {
+
         fetchContent: function (state: any) {
             axios.get('/shop/cart/content').then((response) => {
                 state.content = response.data;
             }).catch((error) => {
+                console.log(error)
+            });
+        },
+
+        total: function (state: any) {
+            axios.get('/shop/cart/total').then((response) => {state.total = response.data;}).catch((error) => {
                 console.log(error)
             });
         },
@@ -30,21 +38,35 @@ const cart = {
         },
     },
     actions: {
-        fetchContent ({ commit} : any, payload: any) {
+
+        fetchContent ({ commit} : any) {
             commit('fetchContent');
+        },
+
+        total ({ commit} : any) {
+            commit('total');
         },
 
         increase ({ commit} : any, payload: number) {
             commit('increase', payload);
+            commit('total');
+            commit('fetchContent');
         },
 
         decrease ({ commit} : any, payload: number) {
             commit('decrease', payload);
+            commit('total');
+            commit('fetchContent');
         },
     },
     getters: {
+
         getContent (state: any) {
             return state.content;
+        },
+
+        total (state: any) {
+            return state.total;
         },
     }
 }
