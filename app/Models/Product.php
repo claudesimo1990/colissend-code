@@ -46,6 +46,9 @@ class Product extends Model implements HasMedia
         return $media('thumb')->toHtml();
     }
 
+    /**
+     * @throws InvalidManipulation
+     */
     public function registerAllMediaConversions(): void
     {
         $this->addMediaConversion('details')

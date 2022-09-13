@@ -179,6 +179,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         \App\Providers\HorizonServiceProvider::class,
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -234,7 +235,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

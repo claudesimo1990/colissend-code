@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @mixin IdeHelperOrder
@@ -27,7 +28,7 @@ class Order extends Model
             ->withPivot('price', 'quantity');
     }
 
-    public function payments()
+    public function payments(): MorphMany
     {
         return $this->morphMany(Payment::class, 'paymentable');
     }

@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Transaction;
+use App\Models\Payment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,19 +15,15 @@ class NewTransactionCompleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * @var Transaction
-     */
-    public Transaction $transaction;
+    private Payment $payment;
+
 
     /**
-     * Create a new event instance.
-     *
-     * @param Transaction $transaction
+     * @param Payment $payment
      */
-    public function __construct(Transaction $transaction)
+    public function __construct(Payment $payment)
     {
-        $this->transaction = $transaction;
+        $this->payment = $payment;
     }
 
     /**

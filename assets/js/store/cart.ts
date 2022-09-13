@@ -41,6 +41,17 @@ const cart = {
                 console.log(error)
             });
         },
+
+        removeItem: function (state: any, payload: number) {
+            axios.delete('/shop/cart/remove/item/' + payload).then(() => {
+            axios.get('/shop/cart/content').then((response) => {state.content = response.data;}).catch((error) => {console.log(error)});
+            axios.get('/shop/cart/total').then((response) => {state.total = response.data;}).catch((error) => {
+                    console.log(error)
+                });
+            }).catch((error) => {
+                console.log(error)
+            });
+        },
     },
     actions: {
 
@@ -54,6 +65,10 @@ const cart = {
 
         decrease ({ commit} : any, payload: number) {
             commit('decrease', payload);
+        },
+
+        removeItem ({ commit} : any, payload: number) {
+            commit('removeItem', payload);
         },
     },
     getters: {

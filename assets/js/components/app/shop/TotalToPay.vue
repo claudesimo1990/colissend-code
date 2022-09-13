@@ -3,7 +3,7 @@
     <li
         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
       Produits
-      <span>{{ toPay.subTotal }}€</span>
+      <span>{{ toPay.subTotal !== undefined  ? Number((toPay.subTotal/100).toFixed(1)).toLocaleString() : '' }}€</span>
     </li>
     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
       Livraison
@@ -17,7 +17,7 @@
           <p class="mb-0">(TTC)</p>
         </strong>
       </div>
-      <span><strong>{{ toPay.total }}€</strong></span>
+      <span><strong>{{ toPay.total !== undefined  ? Number((toPay.total/100).toFixed(1)).toLocaleString() : '' }}€</strong></span>
     </li>
   </ul>
 
@@ -39,7 +39,7 @@ export default class TotalToPay extends Vue {
     return store.getters["cart/total"];
   }
 
-  mounted() {
+  created() {
     store.dispatch("cart/fetchContent");
 
   }

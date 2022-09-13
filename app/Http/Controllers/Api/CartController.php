@@ -56,4 +56,9 @@ class CartController extends Controller
     {
         return $this->cartRepository->increaseQuantity($id);
     }
+
+    public function removeItem(int $id): int
+    {
+        return $this->cartRepository->delete($id);
+    }
 }

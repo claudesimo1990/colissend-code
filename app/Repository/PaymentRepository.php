@@ -11,6 +11,7 @@ namespace App\Repository;
 
 use App\Models\Order;
 use App\Models\Payment;
+use Illuminate\Database\Eloquent\Model;
 
 class PaymentRepository
 {
@@ -36,17 +37,16 @@ class PaymentRepository
         return $this->payment->latest()->paginate(1);
     }
 
-    public function create($response, Order $order)
+    public function create($response, Order $order): Model
     {
         $shipping = $response['purchase_units'][0]['shipping'];
         $payer = $response["payer"];
         $payments = $response['purchase_units'][0]['payments']['captures'][0];
 
         $data = [
-            'paymentable_id' => $order->id,
             'payment_method' => 'PAYPAL',
             'amount' => $payments['seller_receivable_breakdown']['gross_amount']['value'],
-            'taxe' => 2000,
+            'taxe' => (($payments['seller_receivable_breakdown']['gross_amount']['value']) - ($payments['seller_receivable_breakdown']['net_amount']['value'])),
             'net_amount' => $payments['seller_receivable_breakdown']['net_amount']['value'],
             'client_email' => $payer["email_address"],
             'full_name' => $shipping['name']['full_name'],
@@ -57,7 +57,7 @@ class PaymentRepository
             'currency_code' => $payments['amount']['currency_code'],
         ];
 
-        return $this->order->payments()->create($data);
+        return $order->payments()->create($data);
 
     }
 

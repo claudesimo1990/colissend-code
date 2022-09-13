@@ -10,19 +10,27 @@
 namespace App\DTO;
 
 use App\Models\Order;
+use App\Repository\CartRepository;
+use Exception;
 
 class ShopCheckoutCartDTO implements CheckoutCartDTOInterface
 {
     private Order $order;
+    private CartRepository $cartRepository;
 
     /**
      * @param Order $order
+     * @param CartRepository $cartRepository
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, CartRepository $cartRepository)
     {
         $this->order = $order;
+        $this->cartRepository = $cartRepository;
     }
 
+    /**
+     * @throws Exception
+     */
     public function orders(): array
     {
         return [
@@ -46,14 +54,17 @@ class ShopCheckoutCartDTO implements CheckoutCartDTOInterface
     public function user(): array
     {
         return [
-            'firstname' => 'claude',
-            'lastname' => 'simo'
+            'firstname' => \Auth::user()->firstname,
+            'lastname' => \Auth::user()->lastname
         ];
     }
 
+    /**
+     * @throws Exception
+     */
     public function totalPrice(): float
     {
-        return 3.00;
+        return ($this->cartRepository->total()['total']/100);
     }
 
     public function init($object)

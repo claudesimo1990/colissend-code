@@ -9,6 +9,7 @@ use App\Http\Requests\Shop\OrderRequest;
 use App\Models\Order;
 use App\Models\Product;
 use App\Repository\CartRepository;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -61,8 +62,14 @@ class ShopController extends Controller
         return redirect()->back();
     }
 
-    public function buy(): Factory|View|Application
+    /**
+     * @throws Exception
+     */
+    public function buy(): View|Factory|Application|RedirectResponse
     {
+        if ($this->cartRepository->count() < 1) {
+            return redirect()->back()->with('error', 'Votre Panier est vide!');
+        }
         return view('app.shop.checkout');
     }
 

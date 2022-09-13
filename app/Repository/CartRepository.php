@@ -3,10 +3,14 @@
 namespace App\Repository;
 
 use App\Models\Product;
+use Exception;
 use Illuminate\Support\Collection;
 
 class CartRepository
 {
+    /**
+     * @throws Exception
+     */
     public function add(Product $product): int
     {
         \Cart::session(auth()->user()->id)
@@ -23,6 +27,9 @@ class CartRepository
         return $this->count();
     }
 
+    /**
+     * @throws Exception
+     */
     public function delete(string $rowId): int
     {
         \Cart::session(auth()->user()->id)->remove($rowId);
@@ -30,12 +37,18 @@ class CartRepository
         return $this->count();
     }
 
+    /**
+     * @throws Exception
+     */
     public function content(): Collection
     {
         return \Cart::session(auth()->user()->id)
             ->getContent();
     }
 
+    /**
+     * @throws Exception
+     */
     public function jsonOrderItems(): string
     {
         return $this
@@ -53,12 +66,18 @@ class CartRepository
             ->toJson();
     }
 
+    /**
+     * @throws Exception
+     */
     public function count(): int
     {
         return $this->content()
             ->sum('quantity');
     }
 
+    /**
+     * @throws Exception
+     */
     public function total(): array
     {
         return [
@@ -70,6 +89,9 @@ class CartRepository
         ];
     }
 
+    /**
+     * @throws Exception
+     */
     public function decreaseQuantity(int $rowId): bool|int
     {
         if ($this->getItem($rowId)->quantity === 1) {
@@ -84,6 +106,9 @@ class CartRepository
         return true;
     }
 
+    /**
+     * @throws Exception
+     */
     public function increaseQuantity(int $rowId): bool
     {
         \Cart::session(auth()->user()->id)
@@ -94,11 +119,17 @@ class CartRepository
         return true;
     }
 
-    public function clear()
+    /**
+     * @throws Exception
+     */
+    public function clear(): void
     {
         \Cart::session(auth()->user()->id)->clear();
     }
 
+    /**
+     * @throws Exception
+     */
     private function getItem(int $rowId)
     {
         return \Cart::session(auth()->user()->id)

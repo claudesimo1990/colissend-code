@@ -30,4 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart/total', [CartController::class, 'total'])
         ->name('shop.cart.total');
 
+    Route::delete('/cart/remove/item/{id}', [CartController::class, 'removeItem'])
+        ->name('shop.cart.remove.item');
+
 });

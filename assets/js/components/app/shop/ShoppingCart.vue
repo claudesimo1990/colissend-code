@@ -19,7 +19,7 @@
         <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
           <p><strong>{{ item.name }}</strong></p>
           <p class="small">{{ item.description }}</p>
-          <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+          <button @click="deleteItem(item.id)" type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                   title="Remove item">
             <i class="bi bi-trash" style="color: white"></i>
           </button>
@@ -75,6 +75,10 @@ export default class ShoppingCart extends Vue {
 
   get price () {
     return store.getters["cart/price"];
+  }
+
+  public deleteItem(id: number) {
+    store.dispatch("cart/removeItem", id).then(() => {});
   }
 
   public incrementQuantity(id: number) {

@@ -3,8 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\NewTransactionCompleted;
+use App\Mail\SuccessPayment;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
 class TransactionCompleted
 {
@@ -24,8 +27,12 @@ class TransactionCompleted
      * @param NewTransactionCompleted $event
      * @return void
      */
-    public function handle(NewTransactionCompleted $event)
+    public function handle(NewTransactionCompleted $event): void
     {
-       //TODO faire quelquechose apres le payment par le client
+       //TODO Generer la facture
+        $pdf = PDF::loadView('app.shop.PDF.invoice');
+       //TODO Attacher la facture a l email et l envoyer au client.
+        Mail::to(env('ADMIN_EMAIL'))
+            ->send(new SuccessPayment($pdf));
     }
 }

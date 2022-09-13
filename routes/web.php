@@ -4,11 +4,14 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\social\LoginController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Pub\PubController;
 use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
 use App\Jobs\SendWelcomeEmailJob;
+use App\Mail\SuccessPayment;
 use App\Mail\TestMail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -42,7 +45,7 @@ Route::post('admin/login', [AuthController::class, 'postLogin']);
 Route::post('admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 Auth::routes(['verify' => true]);
-Route::get('/email/verify/{hash}', [\App\Http\Controllers\Auth\VerificationController::class, 'resend']);
+Route::get('/email/verify/{hash}', [VerificationController::class, 'resend']);
 
 //SOCIAL LOGIN
 Route::get('/google/login', [LoginController::class, 'google'])->name('google');
@@ -55,9 +58,14 @@ Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, '
 
 Route::get('test', function () {
 
-    $details['name'] = 'Simo';
-    $details['email'] = 'claudesimo1990@gmail.com';
-
-    dispatch(new SendWelcomeEmailJob($details));
+//    $details['name'] = 'Simo';
+//    $details['email'] = 'claudesimo1990@gmail.com';
+//
+//    dispatch(new SendWelcomeEmailJob($details));
+    //TODO Generer la facture
+    $pdf = PDF::loadView('app.shop.PDF.invoice');
+    //TODO Attacher la facture a l email et l envoyer au client.
+    Mail::to(env('ADMIN_EMAIL'))
+        ->send(new SuccessPayment($pdf));
 
 });

@@ -8,6 +8,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "albertcht/invisible-recaptcha": "^1.9",
+        "barryvdh/laravel-dompdf": "^2.0",
         "beyondcode/laravel-websockets": "^1.12",
         "darryldecode/cart": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
