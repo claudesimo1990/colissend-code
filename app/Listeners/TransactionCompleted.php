@@ -30,7 +30,8 @@ class TransactionCompleted
     public function handle(NewTransactionCompleted $event): void
     {
        //TODO Generer la facture
-        $pdf = PDF::loadView('app.shop.pdf.invoice');
+        $pdf = PDF::loadView('pdf.invoice');
+
        //TODO Attacher la facture a l email et l envoyer au client.
         Mail::to(env('ADMIN_EMAIL'))
             ->send(new SuccessPayment($pdf));
