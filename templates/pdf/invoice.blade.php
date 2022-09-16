@@ -156,13 +156,13 @@
                 <div class="total-part">
                     <div class="total-left w-85 float-left" align="right">
                         <p>Total Hors Taxe</p>
-                        <p>Tax (18%)</p>
+                        <p>Tax</p>
                         <p>Total a Payer</p>
                     </div>
                     <div class="total-right w-15 float-left text-bold" align="right">
-                        <p>{{ $details['total']['subTotal'] }} &euro;</p>
+                        <p>{{ ($details['total']['subTotal'])/100 }} &euro;</p>
                         <p>0 &euro;</p>
-                        <p>{{ $details['total']['total'] }} &euro; &euro;</p>
+                        <p>{{ ($details['total']['total'])/100 }} &euro;</p>
                     </div>
                     <div style="clear: both;"></div>
                 </div>

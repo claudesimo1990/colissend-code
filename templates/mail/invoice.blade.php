@@ -105,15 +105,16 @@
                     <td bgcolor="#ffffff" align="left"
                         style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                         <p style="margin: 0;">
-                            {{ getSalution() }}  Simo,<br>
-                            Nous avons recu votre payment :)
+                            {{ getSalution() }}  Mme/Monsieur,<br>
+                            Nous vous remercions pour votre commande passée.
+                            En pieces jointes, vous y trouveriez un recapitulatif de votre commande.
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <td bgcolor="#ffffff" align="left"
                         style="padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                        <p style="margin: 0;">Merci de nous faire confiance!<br>Colissend Team</p></td>
+                        <p style="margin: 0;">Merci de toujours nous faire confiance!<br>Colissend Team</p></td>
                 </tr>
             </table>
         </td>

@@ -31,6 +31,7 @@ class SuccessPayment extends Mailable
      */
     public function build(): static
     {
+        $this->subject('Votre confirmation de commande');
         $this->attachData($this->PDF->output(), 'invoice.pdf');
 
         return $this->view('mail.invoice');
