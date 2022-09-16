@@ -32,8 +32,6 @@ class TransactionCompleted
      */
     public function handle(NewTransactionCompleted $event): void
     {
-        $order = $event['order'];
-
         $details = [
             'name' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
             'street' => Auth::user()->profile->street,
@@ -42,15 +40,14 @@ class TransactionCompleted
             'email' => Auth::user()->email,
 
             'invoice_number' =>  uniqid(),
-            'order_number' =>  $order->order_number,
-            'order_date' =>    formatDate($order->created_at),
-            'shipped_date' =>    formatDate($order->created_at->addDays(4)),
+            'order_number' =>  $event->order->order_number,
+            'order_date' =>    formatDate($event->order->created_at),
+            'shipped_date' =>    formatDate($event->order->created_at->addDays(4)),
 
-            'products' => $order->products,
+            'products' => $event->order->products,
 
             'total' => $this->cartRepository->total()
         ];
-
 
        //TODO Generer la facture
         $pdf = \PDF::loadView('pdf.invoice', compact('details'));

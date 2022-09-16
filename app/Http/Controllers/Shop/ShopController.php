@@ -97,7 +97,7 @@ class ShopController extends Controller
         );
 
         Auth::user()->profile()->updateOrCreate([
-            'city' => $orderRequest->get('city'),
+            'city' => $orderRequest->get('postal') . ' ' .$orderRequest->get('city'),
             'country' => Auth::user()->country,
             'street' => $orderRequest->get('street') . ' ' . $orderRequest->get('number'),
             'phone' => $orderRequest->get('phone')

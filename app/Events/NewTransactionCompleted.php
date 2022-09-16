@@ -16,8 +16,8 @@ class NewTransactionCompleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private Payment $payment;
-    private Order $order;
+    public Payment $payment;
+    public Order $order;
 
 
     /**
