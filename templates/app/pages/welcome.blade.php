@@ -185,27 +185,46 @@
 
     <section class="my-4 py-4 bg-success-light">
 
-        <div class="container">
+        <div class="container text-center">
 
             <div class="title text-center mb-5">
                 <h2>Comment ça marche ?</h2>
             </div>
 
-                <div class="row py-5">
-                    @foreach($howItWorks as $howItWork)
-                        <div class="col-sm-12 col-xs-12 col-lg-3">
-                            <div class="card text-center" style="height: 300px">
-                                <div class="card-title">
-                                    <h5 class="card-title">{{ $howItWork['title'] }}</h5>
-                                </div>
-                                <div class="card-body d-flex flex-column">
-                                    <div class="card-text small">{{ $howItWork['text'] }}</div>
-                                    <a href="{{ route($howItWork['link'], ['id' => $howItWork['id']]) }}" class="btn btn-success" style="position: absolute;bottom: 20px">En savoir plus</a>
-                                </div>
-                            </div>
+                <div class="row py-3">
+                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                        <div class="how-it-work-block">
+                            <i class="bi bi-people" style="font-size: 50px;color: green;"></i>
+                            <h3 class="fw-bold">Créer gratuitement votre compte</h3>
+                            <p class="text-justify">Pour créer son compte sur qui-go.com, rien de plus simple,que ce soit avec votre compte Facebook, Gmail ou via l'adresse mail de votre choix</p>
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                        <div class="how-it-work-block">
+                            <i class="bi bi-pencil-square" style="font-size: 50px;color: green;"></i>
+                            <h3 class="fw-bold">Placer votre annonce</h3>
+                            <p class="text-wrap">Pour publier une annonce de voyage veuillez clicquer sur le lien <a href="{{ route('posts.travel.create') }}">Proposer un trajet</a></p>
+                            <p class="text-wrap">Pour publier une annonce de transport de colis le lien est <a href="{{ route('posts.coli.create') }}">Expedier un colis</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                        <div class="how-it-work-block">
+                            <i class="bi bi-phone-vibrate" style="font-size: 50px;color: green;"></i>
+                            <h3 class="fw-bold">Recevoir des propositions</h3>
+                            <p class="text-wrap">Avec Colissend, lorsque vous publiez votre annonce, elle est visible par de potentiels expéditeurs qui pourront vous contacter directement.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                        <div class="how-it-work-block">
+                            <i class="bi bi-currency-exchange" style="font-size: 50px;color: green;"></i>
+                            <h3 class="fw-bold">Percevez votre commission</h3>
+                            <p class="text-wrap">Pour plus de tranquilité pour le voyageur et l'expéditeur,les fonds sont débloqués à reception du colis</p>
+                        </div>
+                    </div>
                 </div>
+
+                <a href="#" class="btn btn-success">En savoir plus</a>
+
             </div>
     </section>
 
