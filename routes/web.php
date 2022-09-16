@@ -8,10 +8,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Pub\PubController;
 use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
-use App\Jobs\SendWelcomeEmailJob;
 use App\Mail\SuccessPayment;
-use App\Mail\TestMail;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -63,7 +60,7 @@ Route::get('test', function () {
 //
 //    dispatch(new SendWelcomeEmailJob($details));
     //TODO Generer la facture
-    $pdf = PDF::loadView('pdf.invoice');
+    $pdf = \PDF::loadView('pdf.invoice');
     //TODO Attacher la facture a l email et l envoyer au client.
     Mail::to(env('ADMIN_EMAIL'))
         ->send(new SuccessPayment($pdf));
