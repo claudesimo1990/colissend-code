@@ -79,15 +79,15 @@
     }
 </style>
 <body>
-<span class="logo">COLISSEND</span>
 <div class="head-title">
-    <h1 class="text-center m-0 p-0">Votre facture</h1>
+    <h1 class="text-center m-0 p-0"><span class="logo">COLISSEND - </span>Votre facture</h1>
 </div>
 <div class="add-detail mt-10">
     <div class="w-50 float-left mt-10">
-        <p class="m-0 pt-5 text-bold w-100">N° de facture - <span class="gray-color">#6</span></p>
-        <p class="m-0 pt-5 text-bold w-100">N° de commande - <span class="gray-color">162695CDFS</span></p>
-        <p class="m-0 pt-5 text-bold w-100">Date de la commande - <span class="gray-color">03-06-2022</span></p>
+        <p class="m-0 pt-5 text-bold w-100">N° de facture - <span class="gray-color">#{{ $details['invoice_number'] }}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">N° de commande - <span class="gray-color">{{ $details['order_number'] }}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Date de la commande - <span class="gray-color">{{ $details['order_date'] }}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Date de livraison - <span class="gray-color">{{ $details['shipped_date'] }}</span></p>
     </div>
     <div class="w-50 float-left logo mt-10">
 
@@ -103,22 +103,19 @@
         <tr>
             <td>
                 <div class="box-text">
-                    <p>Gujarat</p>
-                    <p>360004</p>
-                    <p>Near Haveli Road,</p>
-                    <p>Lal Darvaja,</p>
-                    <p>India</p>
-                    <p>Contact : 1234567890</p>
+                    <p>Herreshagener Straße 6</p>
+                    <p>51643 Gummersbach</p>
+                    <p>team@colissend.com</p>
+                    <p>Contact : 015752804191</p>
                 </div>
             </td>
             <td>
                 <div class="box-text">
-                    <p>Rajkot</p>
-                    <p>360012</p>
-                    <p>Hanumanji Temple,</p>
-                    <p>Lati Ploat</p>
-                    <p>Gujarat</p>
-                    <p>Contact : 1234567890</p>
+                    <p>{{ $details['name'] }}</p>
+                    <p>{{ $details['street'] }}</p>
+                    <p>{{ $details['city'] }}</p>
+                    <p>{{ $details['email'] }}</p>
+                    <p>Contact : {{ $details['phone'] }}</p>
                 </div>
             </td>
         </tr>
@@ -144,24 +141,16 @@
             <th class="w-50">Qty</th>
             <th class="w-50">Total</th>
         </tr>
-        <tr align="center">
-            <td>Mobile</td>
-            <td>204.2</td>
-            <td>3</td>
-            <td>100.60</td>
-        </tr>
-        <tr align="center">
-            <td>Mobile</td>
-            <td>254.2</td>
-            <td>2</td>
-            <td>120.00</td>
-        </tr>
-        <tr align="center">
-            <td>Mobile</td>
-            <td>554.2</td>
-            <td>5</td>
-            <td>100.00</td>
-        </tr>
+        @foreach($details['products'] as $product)
+
+            <tr align="center">
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->formatted_price }}</td>
+                <td>{{ $product->pivot->quantity }}</td>
+                <td>{{ (($product->pivot->price/100) * $product->pivot->quantity) . '€' }}</td>
+            </tr>
+
+        @endforeach
         <tr>
             <td colspan="7">
                 <div class="total-part">
@@ -171,9 +160,9 @@
                         <p>Total a Payer</p>
                     </div>
                     <div class="total-right w-15 float-left text-bold" align="right">
-                        <p>20 &euro;</p>
-                        <p>20 &euro;</p>
-                        <p>330.00 &euro;</p>
+                        <p>{{ $details['total']['subTotal'] }} &euro;</p>
+                        <p>0 &euro;</p>
+                        <p>{{ $details['total']['total'] }} &euro; &euro;</p>
                     </div>
                     <div style="clear: both;"></div>
                 </div>

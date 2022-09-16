@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -16,14 +17,17 @@ class NewTransactionCompleted
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private Payment $payment;
+    private Order $order;
 
 
     /**
      * @param Payment $payment
+     * @param Order $order
      */
-    public function __construct(Payment $payment)
+    public function __construct(Payment $payment, Order $order)
     {
         $this->payment = $payment;
+        $this->order = $order;
     }
 
     /**

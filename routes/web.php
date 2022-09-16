@@ -53,16 +53,46 @@ Route::get('/facebook/callback', [LoginController::class, 'facebookCallBack'])->
 
 Route::get('/account/confirmation/{user}/{token}', [RegisterController::class, 'confirmation'])->name('user.account.confirmation');
 
-Route::get('test', function () {
+Route::get('test', function (\App\Repository\CartRepository $cartRepository) {
 
 //    $details['name'] = 'Simo';
 //    $details['email'] = 'claudesimo1990@gmail.com';
 //
 //    dispatch(new SendWelcomeEmailJob($details));
+
+
     //TODO Generer la facture
-    $pdf = \PDF::loadView('pdf.invoice');
-    //TODO Attacher la facture a l email et l envoyer au client.
-    Mail::to(env('ADMIN_EMAIL'))
-        ->send(new SuccessPayment($pdf));
+
+    $order = \App\Models\Order::find(103);
+
+    $details = [
+        'name' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
+        'street' => Auth::user()->profile->street,
+        'city' => Auth::user()->profile->city,
+        'phone' => Auth::user()->profile->phone,
+        'email' => Auth::user()->email,
+
+        'invoice_number' =>  uniqid(),
+        'order_number' =>  $order->order_number,
+        'order_date' =>    formatDate($order->created_at),
+        'shipped_date' =>    formatDate($order->created_at->addDays(4)),
+
+        'products' => $order->products,
+
+        'total' => $cartRepository->total()
+    ];
+
+    $pdf = \PDF::loadView('pdf.invoice', compact('details'));
+
+
+
+    return $pdf->outputHtml();
+
+
+
+
+//    //TODO Attacher la facture a l email et l envoyer au client.
+//    Mail::to(env('ADMIN_EMAIL'))
+//        ->send(new SuccessPayment($pdf));
 
 });

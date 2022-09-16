@@ -4,20 +4,23 @@ namespace App\Listeners;
 
 use App\Events\NewTransactionCompleted;
 use App\Mail\SuccessPayment;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Repository\CartRepository;
+use Auth;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 
 class TransactionCompleted
 {
+    private CartRepository $cartRepository;
+
     /**
      * Create the event listener.
      *
-     * @return void
+     * @param CartRepository $cartRepository
      */
-    public function __construct()
+    public function __construct(CartRepository $cartRepository)
     {
-        //
+        $this->cartRepository = $cartRepository;
     }
 
     /**
@@ -25,14 +28,35 @@ class TransactionCompleted
      *
      * @param NewTransactionCompleted $event
      * @return void
+     * @throws Exception
      */
     public function handle(NewTransactionCompleted $event): void
     {
+        $order = $event['order'];
+
+        $details = [
+            'name' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
+            'street' => Auth::user()->profile->street,
+            'city' => Auth::user()->profile->city,
+            'phone' => Auth::user()->profile->phone,
+            'email' => Auth::user()->email,
+
+            'invoice_number' =>  uniqid(),
+            'order_number' =>  $order->order_number,
+            'order_date' =>    formatDate($order->created_at),
+            'shipped_date' =>    formatDate($order->created_at->addDays(4)),
+
+            'products' => $order->products,
+
+            'total' => $this->cartRepository->total()
+        ];
+
+
        //TODO Generer la facture
-        $pdf = \PDF::loadView('pdf.invoice');
+        $pdf = \PDF::loadView('pdf.invoice', compact('details'));
 
        //TODO Attacher la facture a l email et l envoyer au client.
-        Mail::to(env('ADMIN_EMAIL'))
+        Mail::to(env('ADMIN_EMAIL'), Auth::user()->email)
             ->send(new SuccessPayment($pdf));
     }
 }

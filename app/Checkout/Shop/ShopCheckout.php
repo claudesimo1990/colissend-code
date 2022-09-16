@@ -75,7 +75,7 @@ class ShopCheckout implements CheckoutInterface
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             $transaction = $this->paymentRepository->create($response, $order);
-            event(new NewTransactionCompleted($transaction));
+            event(new NewTransactionCompleted($transaction, $order));
             return true;
 
         } else {
