@@ -55,5 +55,8 @@ class TransactionCompleted
        //TODO Attacher la facture a l email et l envoyer au client.
         Mail::to(env('ADMIN_EMAIL'), Auth::user()->email)
             ->send(new SuccessPayment($pdf));
+
+        //TODO Cart destroy
+        $this->cartRepository->clear();
     }
 }
