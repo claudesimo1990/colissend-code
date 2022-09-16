@@ -56,7 +56,7 @@ class TransactionCompleted
         Mail::to(env('ADMIN_EMAIL'), Auth::user()->email)
             ->send(new SuccessPayment($pdf));
 
-        //TODO Cart destroy
+        //TODO Cart destroy and redirect back
         $this->cartRepository->clear();
     }
 }
