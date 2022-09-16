@@ -227,6 +227,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $user_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
+ * @property-read int|null $payments_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @property-read \App\Models\User $user
@@ -243,6 +245,50 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUserId($value)
  */
 	class IdeHelperOrder {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Payment
+ *
+ * @property int $id
+ * @property int $paymentable_id
+ * @property string $paymentable_type
+ * @property string $payment_method
+ * @property int $amount
+ * @property int $net_amount
+ * @property int|null $taxe
+ * @property string|null $client_email
+ * @property string $full_name
+ * @property string $street
+ * @property string $city
+ * @property string $postal_code
+ * @property string $country_code
+ * @property string $currency_code
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $paymentable
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereClientEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCurrencyCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereFullName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereNetAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePaymentMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePaymentableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePaymentableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePostalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereStreet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereTaxe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
+ */
+	class IdeHelperPayment {}
 }
 
 namespace App\Models{
@@ -269,7 +315,7 @@ namespace App\Models{
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read mixed $count_reservations
+ * @property-read int $count_reservations
  * @property-read string $ticket
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
  * @property-read int|null $media_count
@@ -427,7 +473,7 @@ namespace App\Models{
  * @property string|null $objects
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $payments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
  * @property-read int|null $payments_count
  * @property-read \App\Models\Post $post
  * @property-read \App\Models\User $user

@@ -17,7 +17,7 @@ class UserRepository
     /**
      * @var User
      */
-    private $user;
+    private User $user;
 
     /**
      * @param User $user
@@ -32,12 +32,12 @@ class UserRepository
         return $this->user->find($id);
     }
 
-    public function updatePaypalAccount(array $data)
+    public function updatePaypalAccount(array $data): bool
     {
         return Auth::user()->update($data);
     }
 
-    public function updateBankAccount(array $data)
+    public function updateBankAccount(array $data): bool
     {
         return Auth::user()->update($data);
     }

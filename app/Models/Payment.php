@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * @mixin IdeHelperOrder
+ * @mixin IdeHelperPayment
  */
 class Payment extends Model
 {
