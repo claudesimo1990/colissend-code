@@ -22,6 +22,9 @@ Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact-us', [HomeController::class, 'sendMessage']);
 Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/how-it-works/{id}', [HomeController::class, 'howItWorks'])->name('howItWorks');
+Route::get('/now_more', [HomeController::class, 'more'])->name('more');
+Route::get('/how/post/travel', [HomeController::class, 'postTravel'])->name('how_post_travel');
+Route::get('/how/post/pack', [HomeController::class, 'postPack'])->name('how_post_pack');
 
 //Blog
 Route::get('blog', [BlogController::class, 'index'])->name('blog.index');

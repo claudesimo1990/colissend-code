@@ -34,13 +34,12 @@ class PostController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param PostRepository $postRepository
      * @return Response
      */
-    public function filter(Request $request, PostRepository $postRepository): Response
+    public function filter(PostRepository $postRepository): Response
     {
-        $posts = $postRepository->search($request);
+        $posts = $postRepository->search();
 
         return new Response($posts, 200);
     }

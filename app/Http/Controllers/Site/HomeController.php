@@ -87,6 +87,21 @@ class HomeController extends Controller
         return redirect()->back()->with(['success' => 'votre message à ete bien envoyer']);
     }
 
+    public function more(Request $request): Factory|View|Application
+    {
+        $id = request('key', 'travel');
+        $title = 'Comment poster un voyage';
+
+        if ($id == 'pack') {
+            $title = 'Comment poster un coli';
+        }
+
+        return view('app.pages.more', [
+            'id' => $id,
+            'title' => $title
+        ]);
+    }
+
     private function findSectionWithId(array $sections, int $id)
     {
         foreach ($sections as $section) {

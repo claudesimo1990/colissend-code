@@ -23,7 +23,7 @@
                     <a class="nav-link nav-item {{ (request()->routeIs('welcome')) ? 'active' : '' }}"
                        aria-current="page" href="{{ route('welcome') }}">
                         <i class="bi bi-house"></i>
-                        Accueil
+                        @lang('site.nav.home')
                     </a>
                 </li>
 
@@ -31,7 +31,7 @@
                     <a class="nav-link nav-item {{ (request()->routeIs('posts.index')) ? 'active' : '' }}"
                        aria-current="page" href="{{ route('posts.index') }}">
                         <i class="bi bi-search"></i>
-                        Voir les annonces
+                        @lang('site.nav.posts')
                     </a>
                 </li>
 
@@ -39,7 +39,7 @@
                     <a class="nav-link nav-item {{ (request()->routeIs('posts.travel.create')) ? 'active' : '' }}"
                        aria-current="page" href="{{ route('posts.travel.create') }}">
                         <i class="bi bi-pencil-square"></i>
-                        Proposer un trajet
+                        @lang('site.nav.travel')
                     </a>
                 </li>
 
@@ -47,7 +47,7 @@
                     <a class="nav-link nav-item {{ (request()->routeIs('posts.coli.create')) ? 'active' : '' }}"
                        aria-current="page" href="{{ route('posts.coli.create') }}">
                         <i class="bi bi-box-seam"></i>
-                        Expedier un colis
+                        @lang('site.nav.packs')
                     </a>
                 </li>
 
@@ -70,7 +70,7 @@
                     <a class="nav-link nav-item {{ (request()->routeIs('shop.index')) ? 'active' : '' }}"
                        aria-current="page" href="{{ route('shop.index') }}">
                         <i class="bi bi-shop"></i>
-                        Shop
+                        @lang('site.nav.shop')
                     </a>
                 </li>
 
@@ -80,7 +80,7 @@
                         <a class="nav-link nav-item {{ (request()->routeIs('register')) ? 'active' : '' }}"
                            aria-current="page" href="{{ route('register') }}">
                             <i class="bi bi-box-arrow-in-right"></i>
-                            S'inscrire
+                            @lang('site.nav.inscription')
                         </a>
                     </li>
 
@@ -88,7 +88,7 @@
                         <a class="nav-link nav-item {{ (request()->routeIs('login')) ? 'active' : '' }}"
                            aria-current="page" href="{{ route('login') }}">
                             <i class="bi bi-people"></i>
-                            Se connecter
+                            @lang('site.nav.connexion')
                         </a>
                     </li>
 
@@ -209,6 +209,16 @@
                     <x-shopping-cart></x-shopping-cart>
 
                 @endguest
+                <li class="nav-item dropdown pe-3">
+                    <div class="d-flex justify-content-center">
+                        <form action="">
+                            <select class="form-select form-select-sm" name="lang" onchange="this.form.submit()">
+                                <option @if(request()->get('lang') == 'fr')selected @endif value="fr"> 🇫🇷</option>
+                                <option @if(request()->get('lang') == 'en')selected @endif value="en"> 🇬🇧</option>
+                            </select>
+                        </form>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

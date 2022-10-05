@@ -15,7 +15,7 @@
         <div class="container">
 
             <div class="title text-center mb-5">
-                <h2>Pourquoi choisir Colissend ?</h2>
+                <h2>@lang('site.how_use_colissend')</h2>
             </div>
 
             <div class="row py-5">
@@ -223,7 +223,7 @@
                     </div>
                 </div>
 
-                <a href="#" class="btn btn-success">En savoir plus</a>
+                <a href="{{ route('more') }}" class="btn btn-success">En savoir plus</a>
 
             </div>
     </section>

@@ -2,16 +2,21 @@
 
 namespace App\Repository;
 
+use App\Filters\Post\DateFrom;
+use App\Filters\Post\DateTo;
+use App\Filters\Post\From;
+use App\Filters\Post\Status;
+use App\Filters\Post\To;
+use App\Filters\Post\Type;
 use App\Http\Requests\Site\PostRequest;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class PostRepository
 {
@@ -68,28 +73,21 @@ class PostRepository
         }
     }
 
-    public function search(Request $request): Collection
+    public function search(): Collection
     {
-        return Post::with('user')
-
-            ->where(function (Builder $query) use ($request) {
-
-                if ($request->get('type') && $request->get('type') != 'ALL') {
-                    $query->where('type', $request->get('type'));
-                }
-
-                if ($request->get('from')) {
-                    $query->where('from', 'LIKE', '%'. $request->get('from') .'%');
-                }
-
-                if ($request->get('to')) {
-                    $query->where('to', 'LIKE', '%'. $request->get('to') .'%');
-                }
-
-                if ($request->get('dateFrom')) {
-                    $query->where('dateFrom','<=', Carbon::parse($request->get('dateFrom')));
-                }
-            })->get();
+        return app(Pipeline::class)
+            ->send(Post::query())
+            ->through([
+                Status::class,
+                Type::class,
+                From::class,
+                To::class,
+                DateFrom::class,
+                DateTo::class,
+            ])
+            ->thenReturn()
+            ->with('user')
+            ->get();
     }
 
     public function getLastTreePosts()

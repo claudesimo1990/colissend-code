@@ -10,6 +10,9 @@ use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\Horizon;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function boot()
     {
         setlocale(LC_TIME, config('app.locale'));
@@ -45,5 +52,12 @@ class AppServiceProvider extends ServiceProvider
         Horizon::auth(function ($request) {
             return false;
         });
+
+        $lang = request()->get('lang', 'fr');
+
+        if(in_array($lang,['en','fr'])){
+            session(['locale'=> $lang]);
+        }
+        app()->setLocale(session('locale'));
     }
 }
