@@ -278,7 +278,7 @@
                 <div class="row py-5">
                     @foreach($blogs as $key => $blog)
                         <div class="col-xs-12 col-sm-12 col-lg-4 card-deck">
-                            <div class="card">
+                            <div class="card" style="max-height: 300px">
                                 <div class="card-body">
                                     <a href="{{ route('blog.show', ['blog' => $blog]) }}">
                                         <h1 class="card-title fw-bolder blog-title">{{ $blog->title }}</h1>
@@ -306,30 +306,28 @@
             @endif
 
 
-    @if(count($destinations) > 0)
-        <section class="text-center py-4 my-4">
-            <div class="container py-4 my-4">
-                <div class="row">
-                    <div class="offset-lg-2 col-lg-8 col-md-12 col-12 text-center d-flex align-items-center justify-content-between flex-column">
-                        <div>
-                            <span class="fs-4 text-success ls-md text-uppercase fw-bold">Colissend</span>
-                            <h2 class="display-3 mt-4 mb-3 fw-bold">Rejoigner notre newsletter</h2>
-                            <p class="lead px-lg-8 mb-6 fw-bold">Pour ne pas manquer les annonces en temps reel</p>
+    <section class="text-center py-4 my-4">
+        <div class="container py-4 my-4">
+            <div class="row">
+                <div class="offset-lg-2 col-lg-8 col-md-12 col-12 text-center d-flex align-items-center justify-content-between flex-column">
+                    <div>
+                        <span class="fs-4 text-success ls-md text-uppercase fw-bold">Colissend</span>
+                        <h2 class="display-3 mt-4 mb-3 fw-bold">Rejoigner notre newsletter</h2>
+                        <p class="lead px-lg-8 mb-6 fw-bold">Pour ne pas manquer les annonces en temps reel</p>
+                    </div>
+
+                    <form action="" class="d-flex align-items-center justify-content-between flex-column">
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control lead px-lg-8 mb-6" name="email" placeholder="Tapez votre adresse mail..">
                         </div>
 
-                        <form action="" class="d-flex align-items-center justify-content-between flex-column">
-                            <div class="form-group text-center">
-                                <input type="text" class="form-control lead px-lg-8 mb-6" name="email" placeholder="Tapez votre adresse mail..">
-                            </div>
-
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-success">Envoyer</a>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="mt-4">
+                            <a href="#" class="btn btn-success">Envoyer</a>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-    @endif
+        </div>
+    </section>
 
 @endsection
