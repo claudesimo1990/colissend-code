@@ -278,7 +278,7 @@
                 <div class="row py-5">
                     @foreach($blogs as $key => $blog)
                         <div class="col-xs-12 col-sm-12 col-lg-4 card-deck">
-                            <div class="card" style="max-height: 300px">
+                            <div class="card" style="min-height: 300px">
                                 <div class="card-body">
                                     <a href="{{ route('blog.show', ['blog' => $blog]) }}">
                                         <h1 class="card-title fw-bolder blog-title">{{ $blog->title }}</h1>
