@@ -229,7 +229,7 @@
     </section>
 
     @if(count($destinations) > 0)
-        <section class="text-center">
+        <section class="text-center py-4 my-4">
 
             <div class="container">
 
@@ -261,6 +261,72 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">suivant</span>
                     </button>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if($blogs->count())
+        <section class="my-4 py-4 bg-success-light">
+
+            <div class="container">
+
+                <div class="title text-center mb-5">
+                    <h2>Quelques dernieres informations de notre Blog</h2>
+                </div>
+
+                <div class="row py-5">
+                    @foreach($blogs as $key => $blog)
+                        <div class="col-xs-12 col-sm-12 col-lg-4 card-deck">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a href="{{ route('blog.show', ['blog' => $blog]) }}">
+                                        <h1 class="card-title fw-bolder blog-title">{{ $blog->title }}</h1>
+                                    </a>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <div class="date small text-dark text-muted">{{ formatDate($blog->created_at) }}</div>
+                                        <div class="autor small text-dark fw-bold">Auteur Simo Claude</div>
+                                    </div>
+
+                                    <div class="card-text">{{ Str::limit(nl2br($blog->content), 120) }}</div>
+
+                                </div>
+                                <div class="card-footer text-center">
+                                    <div class="pt-4">
+                                        <span class="text-muted position-absolute bottom-0"><i class="bi bi-chat text-dark mx-2"></i>{{ $key + 4 }} commentaires</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+            @endif
+
+
+    @if(count($destinations) > 0)
+        <section class="text-center py-4 my-4">
+            <div class="container py-4 my-4">
+                <div class="row">
+                    <div class="offset-lg-2 col-lg-8 col-md-12 col-12 text-center d-flex align-items-center justify-content-between flex-column">
+                        <div>
+                            <span class="fs-4 text-success ls-md text-uppercase fw-bold">Colissend</span>
+                            <h2 class="display-3 mt-4 mb-3 fw-bold">Rejoigner notre newsletter</h2>
+                            <p class="lead px-lg-8 mb-6 fw-bold">Pour ne pas manquer les annonces en temps reel</p>
+                        </div>
+
+                        <form action="" class="d-flex align-items-center justify-content-between flex-column">
+                            <div class="form-group text-center">
+                                <input type="text" class="form-control lead px-lg-8 mb-6" name="email" placeholder="Tapez votre adresse mail..">
+                            </div>
+
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-success">Envoyer</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

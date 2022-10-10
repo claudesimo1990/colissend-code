@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Gallery;
 use App\Repository\PostRepository;
@@ -18,6 +19,7 @@ class HomeController extends Controller
     public function home(PostRepository $postRepository): Factory|View|Application
     {
         $latestPosts = $postRepository->getLastTreePosts();
+        $blogs = Blog::latest()->limit(3)->get();
         $testimonials = config('users.testimonials');
         $howItWorks = config('users.howItWorks');
 
@@ -27,7 +29,8 @@ class HomeController extends Controller
             'posts' => $latestPosts,
             'testimonials' => $testimonials,
             'destinations' => $destinations,
-            'howItWorks' => $howItWorks
+            'howItWorks' => $howItWorks,
+            'blogs' => $blogs
         ]);
     }
 

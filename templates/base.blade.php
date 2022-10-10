@@ -4,6 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <meta name="keywords" content="@yield('meta_keywords','some default keywords')">
     <meta name="description" content="@yield('meta_description','Faciliter vous la vente de vos kilos Et l\'envoi de vos Colis en toute securité vers multiples destinations.')">
