@@ -27,8 +27,8 @@ const post = {
 
         searchPostWithKeys(state: any, payload: string) {
             axios.post('/api/posts', payload).then((response) => {
-                state.searchCount = response.data.data.length;
-                state.searchedPost = response.data.data;
+                state.searchCount = response.data.length;
+                state.searchedPost = response.data;
             }).catch((error) => {
                 console.log(error)
             });

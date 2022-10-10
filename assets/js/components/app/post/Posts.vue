@@ -66,7 +66,6 @@ export default class Posts extends Vue {
   getResults(page = 1) {
     axios.get('api/posts?page=' + page)
         .then(response => {
-          console.log(response)
           this.laravelData = response.data;
         });
   }

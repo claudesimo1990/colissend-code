@@ -2,10 +2,10 @@
   <div :class="branch === 'booking' ? 'card info-card sales-card' : ''" class="bg-success-light">
     <div class="card-body px-3 text-center py-1">
       <div class="d-flex text-center">
-        <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center">
-          <i v-if="type === 'TRAVEL'" class="bx bxs-plane" style="font-size: 2rem; color: green;"></i>
-          <i v-if="type === 'PACKS'" class="bx bi-box-seam" style="font-size: 2rem; color: green;"></i>
-        </div>
+<!--        <div class="card-icon-rounded rounded-circle d-flex align-items-center justify-content-center">-->
+<!--          <i v-if="type === 'TRAVEL'" class="bi bi-airplane-fill" style="font-size: 2rem; color: green;"></i>-->
+<!--          <i v-if="type === 'PACKS'" class="bx bi-box-seam" style="font-size: 2rem; color: green;"></i>-->
+<!--        </div>-->
         <div class="pt-3 px-3">
           <span class="text-muted small pt-2">Poster {{ created }}</span>
         </div>

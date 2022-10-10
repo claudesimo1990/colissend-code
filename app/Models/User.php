@@ -69,7 +69,7 @@ class User extends Authenticatable implements HasMedia
 
     public function getAvatarAttribute(): string
     {
-        return $this->getFirstMediaUrl('avatar', 'post') ?? '/images/colissend/default.svg';
+        return !empty($this->getFirstMediaUrl('avatar', 'post')) ? $this->getFirstMediaUrl('avatar', 'post') : '/images/colissend/default.svg';
     }
 
     public function getThumbAttribute(): string
@@ -94,7 +94,7 @@ class User extends Authenticatable implements HasMedia
 
     public function getMyAvatarAttribute()
     {
-        return $this->attributes['avatar'];
+        return $this->attributes['avatar'] ?? '/images/colissend/default.svg';
     }
 
     public function getTravelsAttribute(): Collection
